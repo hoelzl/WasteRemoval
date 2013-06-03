@@ -1,0 +1,13 @@
+*~
+.#*
+*#
+*.d*fsl
+*.fas
+*.fasl
+*.sse2f
+Readme.tex
+Readme.pdf
+Readme.html
+Junk/
+Patches/
+
