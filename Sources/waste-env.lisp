@@ -6,6 +6,7 @@
   robot-loc
   (waste-status 'at-source) ; on-robot at-source at-dest
   waste-source
+  waste-target
   fuel
   env)
 
@@ -14,6 +15,7 @@
    :robot-loc (clone (ws-robot-loc state))
    :waste-status (ws-waste-status state)
    :waste-source (clone (ws-waste-source state))
+   :waste-target (clone (ws-waste-target state))
    :fuel (ws-fuel state)
    :env (ws-env state)))
 
@@ -170,7 +172,6 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
   (if (move-action-p action)
       (let ((fuel (ws-fuel state))
             (fuel-prob (fuel-decrease-prob env)))
-        (format t "Fuel: ~A~%Prob: ~A~%" fuel fuel-prob)
         (sample-multinomial (list (max 0.0 (- fuel (fuel-amount env))) fuel)
                             fuel-prob (- 1.0 fuel-prob)))
       (ws-fuel state)))
@@ -207,7 +208,7 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
    :env env))
 
 (defun make-test-env-1 ()
-  (let ((world (make-array '(3 4) :initial-element 'road)))
+  (let ((world (make-array '(3 2) :initial-element 'road)))
     (make-instance '<waste-env> :world-map world)))
 
 (defun make-test-env-2 ()
