@@ -1,0 +1,7 @@
+Test Environment for the Waste Disposal Problem
+===============================================
+
+This is a test environment to demonstrate reinforcement learning with
+Poem/ALisp.  We will probably use this example during the AWASS summer
+school.
+
