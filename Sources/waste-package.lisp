@@ -35,6 +35,7 @@
 
    #:make-test-env-1
    #:make-test-env-2
+   #:make-test-env-3
 
    ;; States (Not sure whether this should really be exposed, but we need the functions
    ;; to define state accessors)

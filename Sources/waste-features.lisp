@@ -1,7 +1,7 @@
 (in-package #:waste-prog)
 
 (def-feature fuel-feature (state action)
-  (ws-fuel env-state))
+  (> (ws-fuel env-state) 1))
 
 (def-feature robot-dest (state action)
   (stack-var-val 'loc t t))
@@ -26,21 +26,27 @@
                                  (ws-waste-source env-state)
                                  (ws-waste-target env-state)))
 
+(def-feature act-dist (state action)
+  (grid-world:shortest-path-dist (ws-env env-state)
+                                 (ws-robot-loc env-state)
+                                 (ws-waste-target env-state)))
+
 
 (defparameter *waste-featurizer*
   (make-3partq-featurizer
    ()
    (navigate-choice
-    (:qr-depends fuel-feature loc choice)
-    (:qc-depends fuel-feature loc choice robot-dest)
+    (:qr-depends loc choice fuel-feature)
+    (:qc-depends loc choice robot-dest fuel-feature)
     (:qe-depends have-waste? dropping-waste? waste-dist))
    (navigate-to-waste
     (:qr-depends loc waste-source-feature)
     (:qe-depends waste-dist))
    (navigate-to-dropoff
     (:qr-depends loc waste-target-feature)
-    (:qc-depends have-waste?)
-    (:qe-depends have-waste? waste-dist))
+    (:qc-depends loc have-waste?)
+    (:qe-depends have-waste? act-dist))
    (choose-waste-removal-action
     (:qr-depends loc have-waste? waste-source-feature waste-target-feature choice)
-    (:qc-depends have-waste? waste-source-feature waste-target-feature choice))))
+    (:qc-depends have-waste? waste-source-feature waste-target-feature choice)
+    (:qe-dependes have-waste?))))

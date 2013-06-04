@@ -12,10 +12,10 @@
 
 (defmethod clone ((state waste-state))
   (make-waste-state
-   :robot-loc (clone (ws-robot-loc state))
+   :robot-loc (ws-robot-loc state)
    :waste-status (ws-waste-status state)
-   :waste-source (clone (ws-waste-source state))
-   :waste-target (clone (ws-waste-target state))
+   :waste-source (ws-waste-source state)
+   :waste-target (ws-waste-target state)
    :fuel (ws-fuel state)
    :env (ws-env state)))
 
@@ -69,20 +69,19 @@
               :initarg :init-fuel :initform 3.0
               :accessor init-fuel)
    (fuel-decrease-prob :type float
-                       :initarg :fuel-decrease-prob :initform 0.5
+                       :initarg :fuel-decrease-prob :initform 0.8
                        :accessor fuel-decrease-prob)
    (fuel-amount-per-step :type float
                          :initarg :fuel-amount-per-step :initform 1.0
                          :accessor fuel-amount-per-step)
    (no-fuel-cost :type float
-                 :initarg :no-fuel-cost :initform 5.0
+                 :initarg :no-fuel-cost :initform 1.0
                  :accessor no-fuel-cost)
-   #+(or)
-   (fuel-sources :type list
-                 :initarg :fuel-sources :initform '((0 0))
-                 :accessor fuel-sources)
+   (refuel-success-prob :type float
+                        :initarg :refuel-success-prob :initform 0.95
+                        :accessor refuel-success-prob)
    (move-success-prob :type float
-                      :initarg :move-success-prob :initform 0.9
+                      :initarg :move-success-prob :initform 0.95
                       :accessor move-success-prob)
    (wall-collision-cost :type float
                         :initarg :wall-collision-cost :initform 0.5
@@ -97,7 +96,7 @@
                   :initarg :waste-targets :initform '((0 0))
                   :accessor waste-targets)
    (waste-delivery-reward :type float
-                          :initarg :waste-delivery-reward :initform 1.5
+                          :initarg :waste-delivery-reward :initform 5.0
                           :accessor waste-delivery-reward))
   (:default-initargs :legality-test (lambda (val)
                                       (not (eq val 'wall)))))
@@ -192,9 +191,9 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
            (sample-multinomial (list (max 0.0 (- fuel (fuel-amount-per-step env))) fuel)
                                fuel-prob (- 1.0 fuel-prob))))
         ((eq action 'refuel)
-         (sample-multinomial (list (ws-fuel state) (init-fuel env))
-                             ;; TODO: The should be stored in env.
-                             0.5 0.5))
+         (let ((refuel-prob (refuel-success-prob env)))
+           (sample-multinomial (list (ws-fuel state) (init-fuel env))
+                               (- 1.0 refuel-prob) refuel-prob)))
         (t (ws-fuel state))))
 
 (defmethod sample-next ((env <waste-env>) state action)
@@ -235,6 +234,12 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
     (make-instance '<waste-env> :world-map world)))
 
 (defun make-test-env-2 ()
+  (let ((world (make-array '(5 5) :initial-element 'road)))
+    (setf (aref world 3 3) 'wall
+          (aref world 4 3) 'wall)
+    (make-instance '<waste-env> :world-map world)))
+
+(defun make-test-env-3 ()
   (let ((world (make-array '(5 5) :initial-element 'road)))
     (setf (aref world 2 1) 'wall
           (aref world 2 2) 'wall
