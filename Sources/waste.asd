@@ -10,4 +10,5 @@
   :components ((:file "waste-package")
                (:file "waste-env")
                (:file "waste-prog")
+               (:file "waste-features")
                (:file "waste-example")))

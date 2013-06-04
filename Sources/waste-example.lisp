@@ -11,18 +11,17 @@
 
 (defparameter *prog* #'waste-removal-prog)
 
-(defparameter *smdpq* (alisp-smdpq:make-smdpq-alg
-                       :hist-out-dir "Temp/"))
+(defparameter *smdpq* (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/"))
 (defparameter *hordq* (make-instance 'ahq:<hordq>))
 (defparameter *gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
-; (defparameter *hsa* (make-instance 'ahq:<hordq> :features *featurizer*))
+(defparameter *hsa* (make-instance 'ahq:<hordq> :features *waste-featurizer*))
 
 
-(defparameter *algorithms* (list *smdpq* *hordq* *gs*))
+(defparameter *algorithms* (list *smdpq* *hordq* *gs* *hsa*))
 
 (defun learn-behavior ()
-  (learn *prog* *env* 'random *algorithms* 10000
-   :hist-length 25))
+  (learn *prog* *env* 'random *algorithms* 1000
+   :hist-length 50))
 
 (defun evaluate-performance ()
   (let ((sq-rews (evaluate *prog* *env* (get-policy-hist *smdpq*)
@@ -30,15 +29,14 @@
         (hq-rews
           (evaluate *prog* *env* (get-policy-hist *hordq*)
                     :num-steps 25 :num-trials 5))
-        (gs-rews
-          (evaluate *prog* *env* (get-policy-hist *gs*)
-                    :num-steps 25 :num-trials 5))
-        #+(or)
         (hqs-rews
           (evaluate *prog* *env* (get-policy-hist *hsa*)
+                    :num-steps 25 :num-trials 5))
+        (gs-rews
+          (evaluate *prog* *env* (get-policy-hist *gs*)
                     :num-steps 25 :num-trials 5)))
     (format t "~%~%Learning curves for SMDPQ, HORDQ, HORDQ-SA, and GS are:~%")
-    (pprint (map 'vector #'list sq-rews hq-rews #+(or) hqs-rews gs-rews))))
+    (pprint (map 'vector #'list sq-rews hq-rews hqs-rews gs-rews))))
 
 (defun clean-up ()
   (reset *smdpq*))

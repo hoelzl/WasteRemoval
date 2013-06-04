@@ -24,6 +24,8 @@
    ;; Accessors for <waste-env>
    #:init-fuel
    #:fuel-decrease-prob
+   #:fuel-amount-per-step
+   #:no-fuel-cost
    #:move-success-prob
    #:wall-collision-cost
    #:cost-of-living
@@ -54,6 +56,7 @@
         ;; From ALisp
         #:utils
         #:alisp-prog
+        #:alisp-features
         #:alisp-user
         #:waste-env)
   (:export

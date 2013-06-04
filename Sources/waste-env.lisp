@@ -23,6 +23,7 @@
   (and (equal (ws-robot-loc s1) (ws-robot-loc s2))
        (eql (ws-waste-status s1) (ws-waste-status s2))
        (equal (ws-waste-source s1) (ws-waste-source s2))
+       (equal (ws-waste-target s1) (ws-waste-target s2))
        (= (ws-fuel s1) (ws-fuel s2))
        (eql (ws-env s1) (ws-env s2))))
 
@@ -30,8 +31,8 @@
   (list 'robot-loc (ws-robot-loc state)
         'waste-status (ws-waste-status state)
         'waste-source (ws-waste-source state)
-        'fuel (ws-fuel state)
-        'env (ws-env state)))
+        'waste-target (ws-waste-target state)
+        'fuel (ws-fuel state)))
 
 (defvar *print-graphically* nil)
 (defmethod print-object ((state waste-state) stream)
@@ -65,14 +66,18 @@
 
 (defclass <waste-env> (<fully-observable-env> <grid-world>)
   ((init-fuel :type fixnum
-              :initarg :init-fuel :initform 10
+              :initarg :init-fuel :initform 3.0
               :accessor init-fuel)
    (fuel-decrease-prob :type float
-                       :initarg :fuel-decrease-prob :initform 0.3
+                       :initarg :fuel-decrease-prob :initform 0.5
                        :accessor fuel-decrease-prob)
-   (fuel-amount :type float
-                :initarg :fuel-amount :initform 1.0
-                :accessor fuel-amount)
+   (fuel-amount-per-step :type float
+                         :initarg :fuel-amount-per-step :initform 1.0
+                         :accessor fuel-amount-per-step)
+   (no-fuel-cost :type float
+                 :initarg :no-fuel-cost :initform 5.0
+                 :accessor no-fuel-cost)
+   #+(or)
    (fuel-sources :type list
                  :initarg :fuel-sources :initform '((0 0))
                  :accessor fuel-sources)
@@ -107,6 +112,13 @@
       (setf (waste-sources env) sources)))
   (call-next-method))
 
+(defmethod print-object ((env <waste-env>) stream)
+  (if *print-readably*
+      (progn
+        (assert nil () "Who printed me?")
+        )
+      (print-unreadable-object (env stream :type t))))
+
 (defvar *available-actions* '(n e s w pickup drop refuel))
 
 (defmethod avail-actions ((env <waste-env>) state)
@@ -116,7 +128,8 @@
 (defmethod is-terminal-state ((env <waste-env>) state)
   "is-terminal-state WASTE-ENV STATE
 A state is terminal if we have unloaded the waste at one of the waste targets."
-  (eq (ws-waste-status state) 'at-dest))
+  (or (eq (ws-waste-status state) 'at-dest)
+      (zerop (ws-fuel state))))
 
 (defun reward (env state action new-state)
   (declare (ignore action))
@@ -125,12 +138,15 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
                            (waste-delivery-reward env)
                            0.0))
          (hit-wall? (eq (ws-robot-loc state) (ws-robot-loc new-state)))
-         (wall-cost (if hit-wall? (wall-collision-cost env) 0.0)))
+         (wall-cost (if hit-wall? (wall-collision-cost env) 0.0))
+         (no-fuel? (zerop (ws-fuel state)))
+         (no-fuel-cost (if no-fuel? (no-fuel-cost env) 0.0)))
     (if (is-terminal-state env state)
         0
         (- waste-reward
            (cost-of-living env)
-           wall-cost))))
+           wall-cost
+           no-fuel-cost))))
 
 (defun move-action-p (action)
   (case action
@@ -169,12 +185,16 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
        waste-status))))
 
 (defun compute-fuel (env state action)
-  (if (move-action-p action)
-      (let ((fuel (ws-fuel state))
-            (fuel-prob (fuel-decrease-prob env)))
-        (sample-multinomial (list (max 0.0 (- fuel (fuel-amount env))) fuel)
-                            fuel-prob (- 1.0 fuel-prob)))
-      (ws-fuel state)))
+  (cond ((move-action-p action)
+         (let ((fuel (ws-fuel state))
+               (fuel-prob (fuel-decrease-prob env)))
+           (sample-multinomial (list (max 0.0 (- fuel (fuel-amount-per-step env))) fuel)
+                               fuel-prob (- 1.0 fuel-prob))))
+        ((eq action 'refuel)
+         (sample-multinomial (list (ws-fuel state) (init-fuel env))
+                             ;; TODO: The should be stored in env.
+                             0.5 0.5))
+        (t (ws-fuel state))))
 
 (defmethod sample-next ((env <waste-env>) state action)
   (assert (member action (avail-actions env state)) (action)
@@ -186,6 +206,7 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
                      :robot-loc next-loc
                      :waste-status waste-status
                      :waste-source (ws-waste-source state)
+                     :waste-target (ws-waste-target state)
                      :fuel fuel
                      :env (ws-env state))))
     (values new-state (reward env state action new-state))))
@@ -204,11 +225,12 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
    :robot-loc (funcall (unif-grid-dist-sampler env))
    :waste-status 'at-source
    :waste-source (compute-intial-waste-source env)
+   :waste-target (first (waste-targets env))
    :fuel (init-fuel env)
    :env env))
 
 (defun make-test-env-1 ()
-  (let ((world (make-array '(3 2) :initial-element 'road)))
+  (let ((world (make-array '(3 4) :initial-element 'road)))
     (make-instance '<waste-env> :world-map world)))
 
 (defun make-test-env-2 ()
