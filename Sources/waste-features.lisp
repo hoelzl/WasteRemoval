@@ -32,7 +32,7 @@
    ()
    (navigate-choice
     (:qr-depends fuel-feature loc choice)
-    (:qc-depends loc choice robot-dest)
+    (:qc-depends fuel-feature loc choice robot-dest)
     (:qe-depends have-waste? dropping-waste? waste-dist))
    (navigate-to-waste
     (:qr-depends loc waste-source-feature)

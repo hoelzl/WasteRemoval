@@ -97,7 +97,7 @@
                   :initarg :waste-targets :initform '((0 0))
                   :accessor waste-targets)
    (waste-delivery-reward :type float
-                          :initarg :waste-delivery-reward :initform 0.5
+                          :initarg :waste-delivery-reward :initform 1.5
                           :accessor waste-delivery-reward))
   (:default-initargs :legality-test (lambda (val)
                                       (not (eq val 'wall)))))
@@ -178,7 +178,8 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
            'on-robot
            waste-status))
       ((drop)
-       (if (member (ws-robot-loc state) (waste-targets env) :test 'equal)
+       (if (and (eq (ws-waste-status state) 'on-robot)
+                (member (ws-robot-loc state) (waste-targets env) :test 'equal))
            'at-dest
            waste-status))
       (otherwise
