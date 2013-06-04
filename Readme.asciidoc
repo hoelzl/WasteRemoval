@@ -422,3 +422,445 @@ Learning curves are:
   (1.5 -0.11) (-1.88 0.04) (-1.98 -0.19) (0.94 -0.25) (-3.36 -0.06))
 ------------------------------------------------------------------------
 
+An Example for Exploring Policies
+---------------------------------
+
+------------------------------------------------------------------------
+WASTE-PROG> (learn-behavior)
+Learning
+Episode 0...............................
+Episode 500...............................
+Episode 1000................................
+Episode 1500................................
+...
+Episode 774500................................
+Episode 775000..........................
+NIL
+WASTE-PROG> (evaluate-performance)
+Evaluating policies....................................................................................................
+
+Learning curves are:
+
+#((-2.06) (-0.59) (-0.5) (-0.91) (-0.84) (-0.31) (-0.51) (-0.28) (-0.43)
+  (-0.31) (-0.33) (-0.81) (-0.29) (-0.48) (-0.4) (-0.06) (-0.44) (-0.57)
+  (-0.3) (-0.54) (-0.18) (-0.4) (-0.56) (-0.16) (-0.33) (-0.29) (-0.47)
+  (-0.33) (-0.27) (-0.25) (-0.68) (-0.52) (-0.5) (-0.51) (-0.43) (-0.35)
+  (-0.49) (-0.3) (-0.58) (-0.21) (-0.76) (-0.5) (-0.34) (-0.46) (-0.19)
+  (-0.5) (-0.57) (-0.32) (-0.19) (-0.3) (-0.27) (-0.56) (-0.56) (-0.56)
+  (-0.4) (-0.39) (-0.5) (-0.07) (-0.42) (-0.59) (-0.13) (-0.91) (-0.22)
+  (-0.52) (-0.26) (-0.46) (-0.31) (-0.49) (-0.42) (-0.42) (-0.51) (-0.58)
+  (-0.5) (-0.41) (-0.52) (-0.34) (-0.35) (-0.3) (-0.28) (-0.35) (-0.3)
+  (-0.26) (-0.43) (-0.51) (-0.43) (-0.28) (-0.26) (-0.4) (-0.55) (-0.38)
+  (-0.37) (-0.59) (-0.46) (-0.39) (-0.43) (-0.48) (-0.6) (-0.24) (-0.47)
+  (-0.38))
+; No value
+WASTE-PROG> (explore-policies t)
+Starting execution.
+
+Beginning new episode in state 
+
+XXXXXXXXXXXXXX
+XX          XX
+XX  rrWW    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0
+
+Currently at: 
+#<ALISP::JOINT-STATE choose-state, PC: CHOOSE-WASTE-REMOVAL-ACTION, choice-set: #(PICKUP-WASTE
+                                                                                  DROP-WASTE)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX  rrWW    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0
+Stack: ((TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is #(PICKUP-WASTE DROP-WASTE)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((PICKUP-WASTE (Q -0.26) (QR -0.25) (QC -0.02)
+                                           (QE 0.0))
+                             (DROP-WASTE (Q -0.4) (QR -0.32) (QC -0.07)
+                                         (QE 0.0)))
+Recommended choice is PICKUP-WASTE
+--------------------------------------------------
+Please enter choice, or nil to terminate. pickup-waste
+
+
+At state with label CHOOSE-WASTE-REMOVAL-ACTION, chose PICKUP-WASTE.
+
+Currently at: 
+#<ALISP::JOINT-STATE call-state, PC: NAVIGATE-TO-WASTE, choice-set: (NO-CHOICE)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX  rrWW    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0
+Stack: ((PICKUP-WASTE NAVIGATE-TO-WASTE NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (NO-CHOICE)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((NO-CHOICE (Q -0.28) (QR -0.11) (QC -0.13)
+                              (QE -0.05)))
+Recommended choice is NO-CHOICE
+--------------------------------------------------
+Please enter choice, or nil to terminate. no-choice
+
+
+At state with label NAVIGATE-TO-WASTE, chose NO-CHOICE.
+
+Currently at: 
+#<ALISP::JOINT-STATE with-choice-state, PC: NAVIGATE-CHOICE, choice-set: (N
+                                                                          E
+                                                                          S
+                                                                          W
+                                                                          REFUEL)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX  rrWW    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0
+Stack: ((NAVIGATE NAVIGATE-CHOICE ((LOC 1 2)))
+        (PICKUP-WASTE NAVIGATE-TO-WASTE NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (N E S W REFUEL)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((N (Q -0.37) (QR -0.1) (QC -0.18) (QE -0.09))
+                             (E (Q -0.2) (QR -0.1) (QC -0.01) (QE -0.09))
+                             (S (Q -0.37) (QR -0.1) (QC -0.18) (QE -0.09))
+                             (W (Q -0.38) (QR -0.1) (QC -0.19) (QE -0.09))
+                             (REFUEL (Q -0.8) (QR -0.6) (QC -0.11)
+                              (QE -0.09)))
+Recommended choice is E
+--------------------------------------------------
+Please enter choice, or nil to terminate. e
+
+
+At state with label NAVIGATE-CHOICE, chose E.
+
+At state with label NAVIGATE-MOVE, chose E.
+
+Action E was done in the environment, yielding reward -0.1.  New state is 
+
+XXXXXXXXXXXXXX
+XX          XX
+XX    rr    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0. 
+
+Leaving choice block.
+
+Leaving choice block.
+
+At state with label PICKUP-WASTE, chose PICKUP.
+
+Action PICKUP was done in the environment, yielding reward -0.6.  New state is 
+
+XXXXXXXXXXXXXX
+XX          XX
+XX    RR    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0. 
+
+Leaving choice block.
+
+Currently at: 
+#<ALISP::JOINT-STATE choose-state, PC: CHOOSE-WASTE-REMOVAL-ACTION, choice-set: #(PICKUP-WASTE
+                                                                                  DROP-WASTE)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX    RR    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0
+Stack: ((TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is #(PICKUP-WASTE DROP-WASTE)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((PICKUP-WASTE (Q -0.3) (QR -0.17) (QC -0.14)
+                                           (QE 0.0))
+                             (DROP-WASTE (Q -0.16) (QR -0.16) (QC 0.0)
+                                         (QE 0.0)))
+Recommended choice is DROP-WASTE
+--------------------------------------------------
+Please enter choice, or nil to terminate. drop-waste
+
+
+At state with label CHOOSE-WASTE-REMOVAL-ACTION, chose DROP-WASTE.
+
+Currently at: 
+#<ALISP::JOINT-STATE call-state, PC: NAVIGATE-TO-DROPOFF, choice-set: (NO-CHOICE)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX    RR    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0
+Stack: ((DROP-WASTE NAVIGATE-TO-DROPOFF NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (NO-CHOICE)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((NO-CHOICE (Q -0.22) (QR -0.27) (QC 0.05)
+                              (QE 0.0)))
+Recommended choice is NO-CHOICE
+--------------------------------------------------
+Please enter choice, or nil to terminate. no-choice
+
+
+At state with label NAVIGATE-TO-DROPOFF, chose NO-CHOICE.
+
+Currently at: 
+#<ALISP::JOINT-STATE with-choice-state, PC: NAVIGATE-CHOICE, choice-set: (N
+                                                                          E
+                                                                          S
+                                                                          W
+                                                                          REFUEL)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX    RR    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0
+Stack: ((NAVIGATE NAVIGATE-CHOICE ((LOC 0 0)))
+        (DROP-WASTE NAVIGATE-TO-DROPOFF NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (N E S W REFUEL)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((N (Q -0.27) (QR -0.1) (QC -0.2) (QE 0.03))
+                             (E (Q -0.32) (QR -0.1) (QC -0.25) (QE 0.03))
+                             (S (Q -0.31) (QR -0.1) (QC -0.24) (QE 0.03))
+                             (W (Q -0.26) (QR -0.1) (QC -0.19) (QE 0.03))
+                             (REFUEL (Q -0.85) (QR -0.6) (QC -0.28)
+                              (QE 0.03)))
+Recommended choice is W
+--------------------------------------------------
+Please enter choice, or nil to terminate. w
+
+
+At state with label NAVIGATE-CHOICE, chose W.
+
+At state with label NAVIGATE-MOVE, chose W.
+
+Action W was done in the environment, yielding reward -0.1.  New state is 
+
+XXXXXXXXXXXXXX
+XX          XX
+XX  RRww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 1.0. 
+
+Leaving choice block.
+
+Currently at: 
+#<ALISP::JOINT-STATE with-choice-state, PC: NAVIGATE-CHOICE, choice-set: (N
+                                                                          E
+                                                                          S
+                                                                          W
+                                                                          REFUEL)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX  RRww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 1.0
+Stack: ((NAVIGATE NAVIGATE-CHOICE ((LOC 0 0)))
+        (DROP-WASTE NAVIGATE-TO-DROPOFF NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (N E S W REFUEL)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((N (Q -0.09) (QR -0.1) (QC -0.02) (QE 0.03))
+                             (E (Q -0.09) (QR -0.1) (QC -0.02) (QE 0.03))
+                             (S (Q -0.08) (QR -0.1) (QC -0.01) (QE 0.03))
+                             (W (Q -0.09) (QR -0.1) (QC -0.02) (QE 0.03))
+                             (REFUEL (Q -0.78) (QR -0.6) (QC -0.21)
+                              (QE 0.03)))
+Recommended choice is S
+--------------------------------------------------
+Please enter choice, or nil to terminate. refuel
+
+
+At state with label NAVIGATE-CHOICE, chose REFUEL.
+
+At state with label NAVIGATE-MOVE, chose REFUEL.
+
+Action REFUEL was done in the environment, yielding reward -0.6.  New state is 
+
+XXXXXXXXXXXXXX
+XX          XX
+XX  RRww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0. 
+
+Leaving choice block.
+
+Currently at: 
+#<ALISP::JOINT-STATE with-choice-state, PC: NAVIGATE-CHOICE, choice-set: (N
+                                                                          E
+                                                                          S
+                                                                          W
+                                                                          REFUEL)
+Env state: 
+XXXXXXXXXXXXXX
+XX          XX
+XX  RRww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 3.0
+Stack: ((NAVIGATE NAVIGATE-CHOICE ((LOC 0 0)))
+        (DROP-WASTE NAVIGATE-TO-DROPOFF NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (N E S W REFUEL)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((N (Q -0.18) (QR -0.1) (QC -0.11) (QE 0.03))
+                             (E (Q -0.3) (QR -0.1) (QC -0.22) (QE 0.03))
+                             (S (Q -0.29) (QR -0.1) (QC -0.22) (QE 0.03))
+                             (W (Q -0.19) (QR -0.1) (QC -0.12) (QE 0.03))
+                             (REFUEL (Q -0.79) (QR -0.6) (QC -0.22)
+                              (QE 0.03)))
+Recommended choice is N
+--------------------------------------------------
+Please enter choice, or nil to terminate. n
+
+
+At state with label NAVIGATE-CHOICE, chose N.
+
+At state with label NAVIGATE-MOVE, chose N.
+
+Action N was done in the environment, yielding reward -0.1.  New state is 
+
+XXXXXXXXXXXXXX
+XX  RR      XX
+XX    ww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0. 
+
+Leaving choice block.
+
+Currently at: 
+#<ALISP::JOINT-STATE with-choice-state, PC: NAVIGATE-CHOICE, choice-set: (N
+                                                                          E
+                                                                          S
+                                                                          W
+                                                                          REFUEL)
+Env state: 
+XXXXXXXXXXXXXX
+XX  RR      XX
+XX    ww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 2.0
+Stack: ((NAVIGATE NAVIGATE-CHOICE ((LOC 0 0)))
+        (DROP-WASTE NAVIGATE-TO-DROPOFF NIL)
+        (TOP CHOOSE-WASTE-REMOVAL-ACTION NIL))>
+Set of available choices is (N E S W REFUEL)
+--------------------------------------------------
+Advisor 0: 
+Componentwise Q-values are #((N (Q -0.67) (QR -0.59) (QC -0.11) (QE 0.03))
+                             (E (Q -0.27) (QR -0.11) (QC -0.19) (QE 0.03))
+                             (S (Q -0.25) (QR -0.1) (QC -0.18) (QE 0.03))
+                             (W (Q -0.09) (QR -0.11) (QC -0.01) (QE 0.03))
+                             (REFUEL (Q -0.69) (QR -0.6) (QC -0.12)
+                              (QE 0.03)))
+Recommended choice is W
+--------------------------------------------------
+Please enter choice, or nil to terminate. w
+
+
+At state with label NAVIGATE-CHOICE, chose W.
+
+At state with label NAVIGATE-MOVE, chose W.
+
+Action W was done in the environment, yielding reward -0.1.  New state is 
+
+XXXXXXXXXXXXXX
+XXRR        XX
+XX    ww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 1.0. 
+
+Leaving choice block.
+
+Leaving choice block.
+
+At state with label DROP-WASTE, chose DROP.
+
+Action DROP was done in the environment, yielding reward 4.4.  New state is 
+
+XXXXXXXXXXXXXX
+XXrr        XX
+XX    ww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 1.0. The episode has terminated.
+
+Leaving choice block.
+
+The partial program has terminated at state #<JOINT-STATE internal-state, PC: INTERNAL, choice-set: NOT-AT-CHOICE
+Env state: 
+XXXXXXXXXXXXXX
+XXrr        XX
+XX    ww    XX
+XX          XX
+XX      XX  XX
+XX      XX  XX
+XXXXXXXXXXXXXX
+Waste Targets: ((0 0))  Fuel: 1.0
+Stack: ((TOP CHOOSE-WASTE-REMOVAL-ACTION-EXIT NIL))>.
+Start a new episode? (y or n) 
+------------------------------------------------------------------------
