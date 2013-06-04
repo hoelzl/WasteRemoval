@@ -10,20 +10,23 @@ An Example Interaction
 
 Here is an example for a manual interaction with the environment:
 
-------------------------------------------------------------------------
+........................................................................
 WASTE-PROG> (setf *use-large-environment* t)
 
 T
 WASTE-PROG> (explore-environment t)
 Welcome to the robotic waste collection example.
 
-This environment demonstrates a robot that moves around on a rectangular grid, picks up waste
-and delivers it to a drop-off zone.  X's on the map represent walls, blank spaces are roads.
-The robot is represented by 'r' as long as it does not carry waste, by 'R' as soon as it has
-picked up waste.  You can move by entering N, E, S, W; if the robot is on the same grid field as
-the waste you can pick it up by entering PICKUP, if you are in a drop-off zone you can drop the
-waste and thereby end the episode (and collect the reward) by entering DROP.  To quit the
-environment, enter NIL.  (All input can be in lower or upper case.)
+This environment demonstrates a robot that moves around on a
+rectangular grid, picks up waste and delivers it to a drop-off zone.
+X's on the map represent walls, blank spaces are roads.  The robot is
+represented by 'r' as long as it does not carry waste, by 'R' as soon
+as it has picked up waste.  You can move by entering N, E, S, W; if
+the robot is on the same grid field as the waste you can pick it up by
+entering PICKUP, if you are in a drop-off zone you can drop the waste
+and thereby end the episode (and collect the reward) by entering DROP.
+To quit the environment, enter NIL.  (All input can be in lower or
+upper case.)
 Last observation was 
 XXXXXXXXXXXXXX
 XX  rr      XX
@@ -362,7 +365,7 @@ XX      XX  XX
 XXXXXXXXXXXXXX
 Waste Targets: ((0 0))  Fuel: 3.0
 Action? nil
-------------------------------------------------------------------------
+........................................................................
 
 
 An Example for Featurization
@@ -383,7 +386,7 @@ faster and obtains much better consistency in its results.  (The
 average reward obtained in this case is -1.17 for gold-standard
 learning and -0.59 for HORDQ-A)
 
-------------------------------------------------------------------------
+........................................................................
 WASTE-PROG> (learn-behavior)
 Learning
 Episode 0................................
@@ -394,9 +397,9 @@ Episode 2000..................
 NIL
 WASTE-PROG> (evaluate-performance)
 Evaluating policies.....................................................
-...............................................
+    ...............................................
 Evaluating policies.....................................................
-...............................................
+    ...............................................
 
 Learning curves are:
 
@@ -420,12 +423,12 @@ Learning curves are:
   (0.54 -0.31) (1.2 -0.15) (-0.42 -0.02) (1.14 -0.28) (-0.6 -0.06)
   (-2.52 0.0) (0.38 -0.27) (-0.44 0.11) (1.2 -0.32) (-1.96 0.13)
   (1.5 -0.11) (-1.88 0.04) (-1.98 -0.19) (0.94 -0.25) (-3.36 -0.06))
-------------------------------------------------------------------------
+........................................................................
 
 An Example for Exploring Policies
 ---------------------------------
 
-------------------------------------------------------------------------
+........................................................................
 WASTE-PROG> (learn-behavior)
 Learning
 Episode 0...............................
@@ -437,7 +440,8 @@ Episode 774500................................
 Episode 775000..........................
 NIL
 WASTE-PROG> (evaluate-performance)
-Evaluating policies....................................................................................................
+Evaluating policies.....................................................
+    ...............................................
 
 Learning curves are:
 
@@ -863,4 +867,4 @@ XXXXXXXXXXXXXX
 Waste Targets: ((0 0))  Fuel: 1.0
 Stack: ((TOP CHOOSE-WASTE-REMOVAL-ACTION-EXIT NIL))>.
 Start a new episode? (y or n) 
-------------------------------------------------------------------------
+........................................................................
