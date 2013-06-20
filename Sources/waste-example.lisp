@@ -4,8 +4,8 @@
 
 (defun make-new-environment (&optional (largep *use-large-environment*))
   (if largep
-      (make-test-env-2)
-      (make-test-env-1)))
+      (make-test-env-2 :waste-delivery-reward 100.0)
+      (make-test-env-1 :waste-delivery-reward 100.0)))
 
 (defparameter *env*
   (make-new-environment))
@@ -22,6 +22,21 @@
 (defparameter *gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
 (defparameter *hsa* (make-instance 'ahq:<hordq> :features *waste-featurizer*))
 
+
+(defun algorithm-for (name)
+  (ecase name
+    ((smdpq) *smdpq*)
+    ((hordq) *hordq*)
+    ((gold-standard) *gs*)
+    ((hordq-a) *hsa*)))
+
+(defparameter *algorithms* (list 
+                            ;; 'smdpq
+                            ;; 'hordq
+                            ;; 'gold-standard
+                            'hordq-a))
+
+
 (defun explore-policies (&optional show-advice)
   (io-interface *prog* *env*
                 (if show-advice
@@ -29,39 +44,20 @@
                       (list (aref hist (1- (length hist)))))
                     '())))
 
-(defparameter *algorithms* (list 
-                            ;; *smdpq*
-                            ;; *hordq*
-                            ;; *gs*
-                            *hsa*))
-
 (defun learn-behavior ()
-  (learn *prog* *env* 'random *algorithms* 
-         (if *use-large-environment* (* 100 50000) 15000)
+  (learn *prog* *env* 'random
+         (mapcar 'algorithm-for *algorithms*) 
+         (if *use-large-environment* 500000 100000)
    :hist-length 100 :step-print-inc 100 :episode-print-inc 500))
 
-(defun evaluate-performance ()
-  (let (#+(or)
-        (sq-rews (evaluate *prog* *env* (get-policy-hist *smdpq*)
-                           :num-steps 25 :num-trials 5))
-        #+(or)
-        (hq-rews
-          (evaluate *prog* *env* (get-policy-hist *hordq*)
-                    :num-steps 25 :num-trials 5))
-        #+(or)
-        (gs-rews
-          (evaluate *prog* *env* (get-policy-hist *gs*)
-                    :num-steps 25 :num-trials 5))
-        #+(and)
-        (hqs-rews
-          (evaluate *prog* *env* (get-policy-hist *hsa*)
-                    :num-steps 25 :num-trials 100)))
-    (format t "~%~%Learning curves are:~%")
-    (pprint (map 'vector #'list 
-                 ;; sq-rews 
-                 ;; hq-rews 
-                 ;; gs-rews 
-                 hqs-rews))))
+(defun evaluation-for (name)
+  (evaluate *prog* *env* (get-policy-hist (algorithm-for name))
+            :num-steps 25 :num-trials 100))
+
+(defun evaluate-performance (&optional (algorithms *algorithms*))
+  (format t "~2&Learning curves for ~{~A~^, ~} are:~%" algorithms)
+  (pprint (map 'vector #'list 
+               (mapcar 'evaluation-for algorithms))))
 #+(or)
 (defun clean-up ()
   (reset *smdpq*))

@@ -229,24 +229,24 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
    :fuel (init-fuel env)
    :env env))
 
-(defun make-test-env-1 ()
+(defun make-test-env-1 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(3 4) :initial-element 'road)))
-    (make-instance '<waste-env> :world-map world)))
+    (apply #'make-instance '<waste-env> :world-map world initargs)))
 
-(defun make-test-env-2 ()
+(defun make-test-env-2 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(5 5) :initial-element 'road)))
     (setf (aref world 3 3) 'wall
           (aref world 4 3) 'wall)
-    (make-instance '<waste-env> :world-map world)))
+    (apply #'make-instance '<waste-env> :world-map world initargs)))
 
-(defun make-test-env-3 ()
+(defun make-test-env-3 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(5 5) :initial-element 'road)))
     (setf (aref world 2 1) 'wall
           (aref world 2 2) 'wall
           (aref world 2 3) 'wall
           (aref world 3 3) 'wall
           (aref world 4 3) 'wall)
-    (make-instance '<waste-env> :world-map world)))
+    (apply #'make-instance '<waste-env> :world-map world initargs)))
 
 #||
 (defparameter *test-env*
