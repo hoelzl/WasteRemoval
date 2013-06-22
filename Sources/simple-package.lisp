@@ -27,12 +27,17 @@
    #:source-loc
    #:target-loc
 
+   #:make-simple-env-0
    #:make-simple-env-1
    #:make-simple-env-2
    #:make-simple-env-3
+   #:make-simple-env-4
+   #:make-simple-env-5
+   #:make-simple-env-6
 
    ;; States (Not sure whether this should really be exposed, but we need the functions
    ;; to define state accessors)
+   #:simple-start-loc
    #:simple-robot-loc
    #:simple-env))
 

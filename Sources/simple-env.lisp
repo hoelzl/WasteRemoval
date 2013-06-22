@@ -4,20 +4,24 @@
 ;;; field.  Modeled loosely after the td-taxi world.
 
 (defstruct (simple-state (:conc-name #:simple-))
+  start-loc
   robot-loc
   env)
 
 (defmethod clone ((state simple-state))
   (make-simple-state
+   :start-loc (simple-start-loc state)
    :robot-loc (simple-robot-loc state)
    :env (simple-env state)))
 
 (defmethod same ((s1 simple-state) (s2 simple-state))
-  (and (equal (simple-robot-loc s1) (simple-robot-loc s2))
+  (and (equal (simple-start-loc s1) (simple-start-loc s2))
+       (equal (simple-robot-loc s1) (simple-robot-loc s2))
        (eql (simple-env s1) (simple-env s2))))
 
 (defmethod canonicalize ((state simple-state))
-  (list 'robot-loc (simple-robot-loc state)))
+  (list 'start-loc (simple-start-loc state)
+        'robot-loc (simple-robot-loc state)))
 
 (defvar *print-graphically* nil)
 (defmethod print-object ((state simple-state) stream)
@@ -53,9 +57,9 @@
    (cost-of-living :type float
                    :initarg :cost-of-living :initform 0.1
                    :accessor cost-of-living)
-   (source-loc :type list
-               :initarg :source-loc
-               :accessor source-loc)
+   (start-loc-sampler :type function
+                      :initarg :start-loc-sampler
+                      :accessor start-loc-sampler)
    (target-loc :type list
                :initarg :target-loc :initform '(0 0)
                :accessor target-loc)
@@ -65,15 +69,14 @@
   (:default-initargs :legality-test (lambda (val)
                                       (not (eq val 'wall)))))
 
-(defmethod initialize-instance ((env <simple-env>)
-                                &rest initargs &key source-loc world-map)
+(defmethod initialize-instance ((env <simple-env>) 
+                                &rest initargs &key start-loc-sampler)
   (declare (ignore initargs))
-  (unless source-loc
-    (let ((sources (make-instance '<prod-set>
-                     :sets (array-dimensions world-map)
-                     :alist-keys '(0 1))))
-      (setf (source-loc env) sources)))
-  (call-next-method))
+  (call-next-method)
+  (unless start-loc-sampler
+    (setf (start-loc-sampler env)
+          (unif-grid-dist-sampler env))))
+
 
 (defmethod print-object ((env <simple-env>) stream)
   (assert (not *print-readably*) ()
@@ -143,49 +146,85 @@ A state is terminal if the robot is at the target location."
           "Action ~A is not possible in state ~A." action state)
   (let* ((next-loc (compute-next-loc env state action))
          (new-state (make-simple-state
+                     :start-loc (simple-start-loc state)
                      :robot-loc next-loc
                      :env (simple-env state))))
     (values new-state (reward env state action new-state))))
 
-(defvar *max-initial-source-loc-tries* 100)
-
 (defun compute-intial-source-loc (env)
-  (loop for i from 0 to *max-initial-source-loc-tries*
-        do (let ((loc (mapcar #'cdr (sample-uniformly (source-loc env)))))
-             (when (is-legal-loc env loc)
-               (return-from compute-intial-source-loc loc))))
-  (error "Could not find an initial position in ~A." env))
+  (funcall (start-loc-sampler env)))
 
 (defmethod sample-init ((env <simple-env>))
-  (make-simple-state
-   :robot-loc (funcall (unif-grid-dist-sampler env))
-   :env env))
+  (let ((loc (compute-intial-source-loc env)))
+    (make-simple-state
+     :start-loc loc
+     :robot-loc loc
+     :env env)))
+
+(defun make-simple-env-0 (&rest initargs &key &allow-other-keys)
+  (let ((world (make-array '(3 4) :initial-element 'road)))
+    (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-1 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(3 4) :initial-element 'road)))
+    (setf (aref world 0 2) 'wall
+          (aref world 1 2) 'wall)
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-2 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(5 5) :initial-element 'road)))
+    #+ (or)
     (setf (aref world 0 2) 'wall
           (aref world 1 2) 'wall)
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-3 (&rest initargs &key &allow-other-keys)
   (let ((world (make-array '(5 5) :initial-element 'road)))
-    (setf (aref world 2 1) 'wall
-          (aref world 2 2) 'wall
+    (setf (aref world 2 0) 'wall
+          (aref world 2 1) 'wall
+          (aref world 0 3) 'wall
+          (aref world 1 3) 'wall
           (aref world 2 3) 'wall
-          (aref world 3 3) 'wall
-          (aref world 4 3) 'wall)
+          (aref world 3 3) 'wall)
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
-#||
-(defparameter *test-env*
-  (make-simple-env-2))
-(defparameter *s1* (sample-next *test-env* (get-state *test-env*) 's))
-(defparameter *s2* (sample-next *test-env* *s1* 's))
-||#
+(defun make-simple-env-4 (&rest initargs &key &allow-other-keys)
+  (let ((world (make-array '(10 10) :initial-element 'road)))
+    #+ (or)
+    (setf (aref world 2 0) 'wall
+          (aref world 2 1) 'wall
+          (aref world 0 3) 'wall
+          (aref world 1 3) 'wall
+          (aref world 2 3) 'wall
+          (aref world 3 3) 'wall)
+    (apply #'make-instance '<simple-env> :world-map world initargs)))
+
+(defun make-simple-env-5 (&rest initargs &key &allow-other-keys)
+  (let ((world (make-array '(10 10) :initial-element 'road)))
+    (setf (aref world 2 0) 'wall
+          (aref world 2 1) 'wall
+          (aref world 0 3) 'wall
+          (aref world 1 3) 'wall
+          (aref world 2 3) 'wall
+          (aref world 3 3) 'wall)
+    (apply #'make-instance '<simple-env> :world-map world initargs)))
+
+(defun make-simple-env-6 (&rest initargs &key &allow-other-keys)
+  (let ((world (make-array '(10 10) :initial-element 'road))
+        (walls '((0 3)
+                 (1 3) (1 4) (1 5) (1 6) (1 7) (1 9)
+                 (2 0) (2 1) (2 3) (2 5)
+                 (3 3) (3 5) (3 6) (3 7) (3 8)
+                 (4 1) (4 2) (4 3) (4 5)
+                 (5 5) (5 7) (5 8) (5 9)
+                 (6 0) (6 1) (6 2) (6 3) (6 5)
+                 (7 1) (7 5) (7 6)
+                 (8 1) (8 3) (8 5) (8 7)
+                 (9 3))))
+    (mapc (lambda (wall) (setf (aref world (first wall) (second wall))
+                               'wall))
+          walls)
+    (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun set-up-exploration ()
   (format t "~&Welcome to the simple robot example.

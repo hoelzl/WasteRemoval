@@ -1,45 +1,87 @@
 (in-package #:simple-prog)
 
-(defvar *use-large-environment* nil)
+(defvar *environment-size* :small)
+(defvar *environment-size-multiplier* 1)
+(defvar *use-complex-environment* nil)
 
-(defun make-new-environment (&optional (largep *use-large-environment*))
-  (if largep
-      (make-simple-env-2)
-      (make-simple-env-1)))
 
-(defparameter *env*
-  (make-new-environment))
+(defparameter *algorithms* (list 
+                            ;; 'smdpq
+                            ;; 'hordq
+                            'gold-standard
+                            'hordq-a-0
+                            'hordq-a-1
+                            'hordq-a-2
+                            'hordq-a-3))
+
+
+(defun make-new-environment (&optional (size *environment-size*)
+                                       (complexp *use-complex-environment*))
+  (ecase size
+    ((:small) (if complexp
+                  (make-simple-env-1)
+                  (make-simple-env-0)))
+    ((:medium) (if complexp
+                   (make-simple-env-3)
+                   (make-simple-env-2)))
+    ((:large) (if complexp
+                  (make-simple-env-5)
+                  (make-simple-env-4)))
+    ((:labyrinth) (make-simple-env-6))))
+
+(defun steps-for-environment ()
+  (let ((base-size
+          (ecase *environment-size*
+            ((:small) (if *use-complex-environment* 5000 2500))
+            ((:medium) (if *use-complex-environment* 20000 10000))
+            ((:large) (if *use-complex-environment* 500000 250000))
+            ((:labyrinth) 500000))))
+    (* base-size *environment-size-multiplier*)))
+
+(defvar *env*)
 
 (defun explore-environment (&optional (recreate nil))
-  (when recreate
+  (when (or (not (boundp '*env*)) recreate)
     (setf *env* (make-new-environment)))
   (env:io-interface *env*))
 
 (defparameter *prog* #'simple-robot-prog)
 
-(defparameter *smdpq* (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/"))
-(defparameter *hordq* (make-instance 'ahq:<hordq>))
-(defparameter *gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
-(defparameter *hsa* (make-instance 'ahq:<hordq> :features *simple-featurizer*))
+(defvar *smdpq*)
+(defvar *hordq*)
+(defvar *gs*)
+(defvar *hsa0*)
+(defvar *hsa1*)
+(defvar *hsa2*)
+(defvar *hsa3*)
 
+(defun initialize-environment ()
+  (setf *env* (make-new-environment)))
+
+(defun initialize-algorithms ()
+  (setf *smdpq* (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/")
+        *hordq* (make-instance 'ahq:<hordq>)
+        *gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg)
+        *hsa0* (make-instance 'ahq:<hordq> :features *simple-featurizer-0*)
+        *hsa1* (make-instance 'ahq:<hordq> :features *simple-featurizer-1*)
+        *hsa2* (make-instance 'ahq:<hordq> :features *simple-featurizer-2*)
+        *hsa3* (make-instance 'ahq:<hordq> :features *simple-featurizer-3*)))
 
 (defun algorithm-for (name)
   (ecase name
     ((smdpq) *smdpq*)
     ((hordq) *hordq*)
     ((gold-standard) *gs*)
-    ((hordq-a) *hsa*)))
-
-(defparameter *algorithms* (list 
-                            'smdpq
-                            'hordq
-                            'gold-standard
-                            'hordq-a))
-
+    ((hordq-a-0) *hsa0*)
+    ((hordq-a-1) *hsa1*)
+    ((hordq-a-2) *hsa2*)
+    ((hordq-a-3) *hsa3*)))
 (defun algorithms ()
   (mapcar #'algorithm-for *algorithms*))
 
-(defun explore-policies (&optional show-advice)
+(defun explore-policies (&optional (show-advice t))
+  (unless (boundp '*env*)
+    (initialize-environment))
   (set-up-exploration)
   (io-interface *prog* *env*
                 (if show-advice
@@ -52,10 +94,12 @@
                     '())))
 
 (defun learn-behavior ()
+  (initialize-environment)
+  (initialize-algorithms)
   (learn *prog* *env* 'random
          (mapcar 'algorithm-for *algorithms*) 
-         (if *use-large-environment* 25000 1000)
-   :hist-length 50 :step-print-inc 100 :episode-print-inc 50))
+         (steps-for-environment)
+         :hist-length 50 :step-print-inc 100 :episode-print-inc 50))
 
 (defun evaluation-for (name)
   (evaluate *prog* *env* (get-policy-hist (algorithm-for name))
