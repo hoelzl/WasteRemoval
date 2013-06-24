@@ -15,9 +15,15 @@ reaches LOC."
     (with-choice navigate-choice (dir '(N E S W))
       (action navigate-move dir))))
 
+#+ (or)
 (defun simple-robot-prog ()
   "simple-robot-prog
 Repeadedly pick up waste and drop it off."
   (loop
     (choose simple-robot-action
             (call (nav (target-loc (robot-env)))))))
+
+(defun simple-robot-prog ()
+  "simple-robot-prog
+Navigate to the target location."
+  (call (nav (target-loc (robot-env)))))

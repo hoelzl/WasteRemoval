@@ -52,6 +52,10 @@
    (simple-robot-action
     (:qr-depends)
     (:qc-depends)
+    (:qe-depends))
+   (nav
+    (:qr-depends)
+    (:qc-depends)
     (:qe-depends))))
 
 (defparameter *simple-featurizer-1*
@@ -62,6 +66,10 @@
     (:qc-depends)
     (:qe-depends))
    (simple-robot-action
+    (:qr-depends)
+    (:qc-depends)
+    (:qe-depends))
+   (nav
     (:qr-depends)
     (:qc-depends)
     (:qe-depends))))
@@ -76,6 +84,10 @@
    (simple-robot-action
     (:qr-depends)
     (:qc-depends)
+    (:qe-depends))
+   (nav
+    (:qr-depends)
+    (:qc-depends)
     (:qe-depends))))
 
 (defparameter *simple-featurizer-3*
@@ -86,6 +98,10 @@
     (:qc-depends loc choice)
     (:qe-depends start-loc))
    (simple-robot-action
+    (:qr-depends)
+    (:qc-depends)
+    (:qe-depends))
+   (nav
     (:qr-depends)
     (:qc-depends)
     (:qe-depends))))
