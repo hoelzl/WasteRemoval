@@ -664,7 +664,113 @@ steps, the policy is again close to the optimal one.
 \label{sec:diving-into-code}
 
 Let us now look at the code of the Simple-Waste example.  The system
-definition is in the file \texttt{Sources/waste.asd}.
+definition is in the file \texttt{Sources/waste.asd}.  The system
+definition contains some administrative information and then a list of
+the source files that give rise to the program.  The ones comprising
+the Simple-Waste example are the ones whose name starts with
+\texttt{simple-}; let us look at them in turn.
+
+\subsubsection{The File \texttt{simple-package.lisp}}
+\label{sec:file-simple-package.lisp} 
+
+This file contains few surprises: it defines two packages,
+\texttt{simple-env} for the definition of the environments, and
+\texttt{simple-prog} for the definition of the program and the example
+driver.  The code is split into two packages, since ALisp defines some
+names with incompatible definition in several packages so that we
+cannot import all required packages from ALisp into a single package.
+
+\subsubsection{The File \texttt{simple-env.lisp}}
+\label{sec:file-simple-env.lisp} 
+
+The file \texttt{simple-env.lisp} contains the definition of the
+environmen, i.e., the Markov Decision Process on which the partial
+program operates.  Although ALisp provides a more declarative way to
+define environments as a form of dynamic Bayesian networks (2TBNs),
+I have opted to implement the environment of the Simple-Waste example
+manually, so that its behavior is more immediately visible.
+
+In ALisp the environment is a class derived from \verb|<env>|, and if
+it is fully observable from the subclass
+\verb|<fully-observable-env>|.  The state of an environemnt is
+represented by a class whose instances are assumed to be immutable.
+Therefore we define a structure \texttt{simple-state} containing the
+state variables, and a class \verb|<simple-env>| that inherits from
+\verb|<fully-observable-env>| and provides the persistent information
+about the environment.  Since we operate on a grid world,
+\verb|<simple-env>| also inherits from \verb|<grid-world>| so that it
+can make of the useful functionality predefined in that class, e.g.,
+the computation of shortest paths according to Floyd's algorithm.
+
+The structure \emph{simple-state} contains three slots: the start
+location of the robot, the current location of the robot and a
+back-pointer to its environment.  It defines methods for cloning
+states (\texttt{clone}), for equality testing (\texttt{same}) and a
+canonical representation (\texttt{canonicalize}).  Furthermore its
+\texttt{print-object} method prints an ASCII-Representation of the
+grid-world when the variable \texttt{*print-graphically*} has a true
+value.
+
+The class \verb|<simple-env>| contains instance variables for the
+probability that a move succeeds (\texttt{move-success-prob}), for the
+cost of hitting a wall (\texttt{wall-collision-cost}), for the cost of
+each step irrespectively of the action (\texttt{cost-of-living}) for
+the target location (\texttt{target-loc}) and for the reward obtained
+when reaching the target location (\texttt{final-reward}).
+Additionally it contains a function that provides a randomly chosen,
+valid start location (\texttt{start-loc-sampler}) which, by default,
+is set to a function that uniformly choses from all valid locations.
+
+The function \texttt{reward} computes the reward obtained by
+performing a single step.  It uses the auxiliary functions
+\texttt{is-terminal-state} so that a zero reward is given for all
+steps taken after a process has entered a final state, and
+\texttt{move-would-hit-wall-p} to check whether a desired move would
+hit a wall.  Similarly, the function \texttt{compute-next-loc}
+computes the next location, given an environment, a state and an
+action, taking into account the possibility that the robot may slip
+perpendicular to its intended direction.
+
+The method \texttt{sample-next} combines the results of
+\texttt{compute-next-loc} and \texttt{reward}; this generic function
+is used to ``drive'' the MDP.  The function \texttt{sample-init}
+returns a randomly chosen initial state.  The functions
+\texttt{make-simple-env-}$n$ create environments that can be used for
+experiments.
+
+\subsubsection{The File \texttt{simple-prog.lisp}}
+\label{sec:file-simple-prog.lisp}
+
+The program is very simple.  It defines accessor functions
+\texttt{robot-loc} and \texttt{robot-env} for the location and
+environment of the robot, and a top-level function
+\texttt{simple-robot-prog} that simply calls the navigation strategy
+\texttt{nav}.  The partial program \texttt{nav} repetedly moves in one
+of the four allowed directions until it has reached the desired
+location.
+
+
+\subsubsection{The File \texttt{simple-features.lisp}}
+\label{sec:file-simple-features.lisp}
+
+This file defines several features that can be used for function
+approximations, and several ``3-part-Q'' featurizer that can be used
+to perform HORD-Q learning.  The first featurizer,
+\texttt{*simple-featurizer-0*} extracts only the current choice, so
+that function approximations using this featurizer cannot base
+decisions on the location of the robot or on the walls adjacent to the
+robot's location.  This featurizer almost always leads to very bad
+learning performance.
+
+\texttt{*simple-featurizer-1*} has slightly more information; in
+addition to the chosen action it can also access the valid target
+directions.  This featurizer generally performs well in arena without
+obstacles but degrades significantly as soon as only a few obstacles
+are in the arena.
+
+The third and fourth featurizer take the percise location of the robot
+into account; they work well in most cases, although they need
+significant training data.
 
 \end{document}
 
