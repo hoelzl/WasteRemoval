@@ -43,6 +43,7 @@
 
 (defpackage #:simple-prog
   (:use #:common-lisp
+        #:waste-utils
         ;; From ALisp
         #:utils
         #:alisp-prog

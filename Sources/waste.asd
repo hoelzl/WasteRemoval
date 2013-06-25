@@ -7,7 +7,9 @@
   :author "Matthias Hoelzl <tc@xantira.com>"
   :license "MIT, see file LICENSE"
   :depends-on (#:hrl)
-  :components ((:file "simple-package")
+  :components ((:file "utils-package")
+               (:file "epsilon-policy")
+               (:file "simple-package")
                (:file "simple-env")
                (:file "simple-prog")
                (:file "simple-features")

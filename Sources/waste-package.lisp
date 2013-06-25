@@ -54,6 +54,7 @@
 
 (defpackage #:waste-prog
   (:use #:common-lisp
+        #:waste-utils
         ;; From ALisp
         #:utils
         #:alisp-prog

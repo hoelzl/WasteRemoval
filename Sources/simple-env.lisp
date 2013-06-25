@@ -71,7 +71,7 @@
 
 (defmethod initialize-instance ((env <simple-env>) 
                                 &rest initargs &key start-loc-sampler)
-  (declare (ignore initargs))
+  (declare (ignorable initargs))
   (call-next-method)
   (unless start-loc-sampler
     (setf (start-loc-sampler env)
@@ -86,6 +86,7 @@
 (defvar *available-actions* '(n e s w))
 
 (defmethod avail-actions ((env <simple-env>) state)
+  (declare (ignore state))
   ;; All actions are possible in every state.
   *available-actions*)
 

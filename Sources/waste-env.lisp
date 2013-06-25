@@ -103,7 +103,7 @@
 
 (defmethod initialize-instance ((env <waste-env>)
                                 &rest initargs &key waste-sources world-map)
-  (declare (ignore initargs))
+  (declare (ignorable initargs))
   (unless waste-sources
     (let ((sources (make-instance '<prod-set>
                      :sets (array-dimensions world-map)
@@ -121,6 +121,7 @@
 (defvar *available-actions* '(n e s w pickup drop refuel))
 
 (defmethod avail-actions ((env <waste-env>) state)
+  (declare (ignore state))
   ;; All actions are possible in every state.
   *available-actions*)
 

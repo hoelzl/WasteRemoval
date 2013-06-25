@@ -3,18 +3,35 @@
 (defvar *environment-size* :small)
 (defvar *environment-size-multiplier* 1)
 (defvar *use-complex-environment* nil)
+(defvar *environment* nil)
 
+(defvar *program* #'simple-robot-prog)
+(defvar *exploration-strategy* :random)
+(defvar *current-exploration-strategy*)
 
-(defparameter *algorithms* (list 
-                            ;; 'smdpq
-                            ;; 'hordq
-                            ;; 'gold-standard
-                            ;; 'hordq-a-0
-                            ;; 'hordq-a-1
-                            'hordq-a-2
-                            ;;'hordq-a-3
-                            ))
+(defparameter *algorithm-names* (list 
+                                 ;; 'smdpq
+                                 ;; 'hordq
+                                 ;; 'gold-standard
+                                 ;; 'hordq-a-0
+                                 ;; 'hordq-a-1
+                                 'hordq-a-2
+                                 ;; 'hordq-a-3
+                                 ))
 
+(defun algorithm-index (algorithm)
+  (let ((index (position algorithm *algorithm-names*)))
+    (assert index (index) "Algorithm ~A not defined." algorithm)
+    index))
+
+(defvar *algorithms* (make-array (list (length *algorithm-names*))
+                                 :adjustable t :fill-pointer 0))
+
+(defun algorithm-for (name)
+  (aref *algorithms* (algorithm-index name)))
+
+(defun algorithms ()
+  *algorithms*)
 
 (defun make-new-environment (&optional (size *environment-size*)
                                        (complexp *use-complex-environment*))
@@ -28,7 +45,7 @@
     ((:large) (if complexp
                   (make-simple-env-5)
                   (make-simple-env-4)))
-    ((:labyrinth) (make-simple-env-6))))
+    ((:maze :labyrinth) (make-simple-env-6))))
 
 (defun steps-for-environment ()
   (let ((base-size
@@ -36,88 +53,41 @@
             ((:small) (if *use-complex-environment* 5000 2500))
             ((:medium) (if *use-complex-environment* 20000 10000))
             ((:large) (if *use-complex-environment* 500000 250000))
-            ((:labyrinth) 1000000))))
+            ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
+                                    1000000 500000)))))
     (* base-size *environment-size-multiplier*)))
 
-(defvar *env*)
+
+(defun initialize-environment (&optional (force t))
+  (when (or force (not *environment*))
+    (setf *environment* (make-new-environment))))
 
 (defun explore-environment (&optional (recreate nil))
-  (when (or (not (boundp '*env*)) recreate)
-    (setf *env* (make-new-environment)))
-  (env:io-interface *env*))
+  (initialize-environment (not recreate))
+  (env:io-interface *environment*))
 
-(defparameter *prog* #'simple-robot-prog)
-
-(defvar *smdpq*)
-(defvar *hordq*)
-(defvar *gs*)
-(defvar *hsa0*)
-(defvar *hsa1*)
-(defvar *hsa2*)
-(defvar *hsa3*)
-
-(defvar *random-smdpq*)
-(defvar *random-hordq*)
-(defvar *random-gs*)
-(defvar *random-hsa0*)
-(defvar *random-hsa1*)
-(defvar *random-hsa2*)
-(defvar *random-hsa3*)
-
-(defun initialize-environment ()
-  (setf *env* (make-new-environment)))
-
-(defun initialize-algorithms ()
-  (setf *smdpq* (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/")
-        *hordq* (make-instance 'ahq:<hordq>)
-        *gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg)
-        *hsa0* (make-instance 'ahq:<hordq> :features *simple-featurizer-0*)
-        *hsa1* (make-instance 'ahq:<hordq> :features *simple-featurizer-1*)
-        *hsa2* (make-instance 'ahq:<hordq> :features *simple-featurizer-2*)
-        *hsa3* (make-instance 'ahq:<hordq> :features *simple-featurizer-3*)))
-
-(defun initialize-random-algorithms ()
-  (setf *random-smdpq* (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/")
-        *random-hordq* (make-instance 'ahq:<hordq>)
-        *random-gs* (alisp-gold-standard:make-alisp-gold-standard-learning-alg)
-        *random-hsa0* (make-instance 'ahq:<hordq> :features *simple-featurizer-0*)
-        *random-hsa1* (make-instance 'ahq:<hordq> :features *simple-featurizer-1*)
-        *random-hsa2* (make-instance 'ahq:<hordq> :features *simple-featurizer-2*)
-        *random-hsa3* (make-instance 'ahq:<hordq> :features *simple-featurizer-3*)))
-
-(defun algorithm-for (name)
-  (ecase name
-    ((smdpq) *smdpq*)
-    ((hordq) *hordq*)
-    ((gold-standard) *gs*)
-    ((hordq-a-0) *hsa0*)
-    ((hordq-a-1) *hsa1*)
-    ((hordq-a-2) *hsa2*)
-    ((hordq-a-3) *hsa3*)))
-
-(defun random-algorithm-for (name)
-  (ecase name
-    ((smdpq) *random-smdpq*)
-    ((hordq) *random-hordq*)
-    ((gold-standard) *random-gs*)
-    ((hordq-a-0) *random-hsa0*)
-    ((hordq-a-1) *random-hsa1*)
-    ((hordq-a-2) *random-hsa2*)
-    ((hordq-a-3) *random-hsa3*)))
-
-(defun algorithms ()
-  (mapcar #'algorithm-for *algorithms*))
-
-(defun random-algorithms ()
-  (mapcar #'random-algorithm-for *algorithms*))
+(defun initialize-algorithms (&optional (algorithm-names *algorithm-names*))
+  (setf *algorithm-names* algorithm-names)
+  (setf (fill-pointer *algorithms*) 0)
+  (mapc (lambda (alg)
+          (when (member (first alg) algorithm-names)
+            (vector-push-extend (second alg) *algorithms*)))
+        (list
+         (list 'smdpq (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/"))
+         (list 'hordq (make-instance 'ahq:<hordq>))
+         (list 'gold-standard (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
+         (list 'hordq-a-0 (make-instance 'ahq:<hordq> :features *simple-featurizer-0*))
+         (list 'hordq-a-1 (make-instance 'ahq:<hordq> :features *simple-featurizer-1*))
+         (list 'hordq-a-2 (make-instance 'ahq:<hordq> :features *simple-featurizer-2*))
+         (list 'hordq-a-3 (make-instance 'ahq:<hordq> :features *simple-featurizer-3*))))
+  (values))
 
 (defun explore-policies (&optional (show-advice t))
-  (unless (boundp '*env*)
-    (initialize-environment))
+  (initialize-environment nil)
   (set-up-exploration)
-  (io-interface *prog* *env*
+  (io-interface *program* *environment*
                 (if show-advice
-                    (let ((hists (mapcar #'get-q-hist (algorithms))))
+                    (let ((hists (map 'list #'get-q-hist (algorithms))))
                       (mapcan (lambda (hist)
                                 (if (and (typep hist 'sequence) (> (length hist) 0))
                                     (list (aref hist (1- (length hist))))
@@ -125,69 +95,57 @@
                               hists))
                     '())))
 
-(defvar *exploration-strategy* :random)
-
 (defun pick-exploration-strategy (algorithm &optional (strategy *exploration-strategy*))
-  (ecase strategy
-    ((:random) 'random)
-    ((:greedy) (make-instance 'policy:<greedy-policy>
-                 :q-function (rl:get-q-fn algorithm
-                                          (rl:knowledge-state algorithm))))))
+  (let ((result (ecase strategy
+                  ((:random)
+                   'random)
+                  ((:epsilon)
+                   (make-instance '<epsilon-policy>
+                     :q-learning-alg algorithm))
+                  ((:boltzman)
+                   (make-instance 'exp-pol:<epsilon-boltzmann-exp-pol>
+                     :q-learning-alg algorithm
+                     ;; TODO: Make first parameter depend on number of trials
+                     :temp-fn (lambda (n) (/ 1000.0 (1+ n)))
+                     :epsilon-decay-fn (exp-pol:make-linear-epsilon-decay-fn 10000 0.01))))))
+    (setf *current-exploration-strategy* result)
+    result))
 
-
-(defvar *greedy-percentage* 0.3)
-
-(defun learn-behavior ()
-  (initialize-environment)
-  (initialize-algorithms)
-  (when (eq *exploration-strategy* :random-greedy)
-    (initialize-random-algorithms))
-  (case *exploration-strategy* 
+(defun learn-behavior (&key (program *program*)
+                            (environment *environment*)
+                            (exploration-strategy *exploration-strategy*)
+                            (algorithm-names *algorithm-names*))
+  (if environment
+      (setf *environment* environment)
+      (initialize-environment))
+  (initialize-algorithms algorithm-names)
+  (case exploration-strategy 
     ((:random)
-     (learn *prog* *env* 'random
-            (mapcar 'algorithm-for *algorithms*) 
+     (format t "~&Learning behavior using random exploration strategy~%")
+     (learn program *environment* 'random
+            (coerce (algorithms) 'list)
             (steps-for-environment)
             :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
-    ((:random-greedy)
-     (mapc (lambda (alg-name)
-             (learn *prog* *env*
-                    'random
-                    (algorithm-for alg-name)
-                    (floor (* (steps-for-environment) *greedy-percentage*))
-                    :hist-length 25 :step-print-inc 2500 :episode-print-inc 500)
-             (learn *prog* *env*
-                    (pick-exploration-strategy (algorithm-for alg-name) :greedy)
-                    (algorithm-for alg-name)
-                    (ceiling (* (steps-for-environment) (- 1.0 *greedy-percentage*)))
-                    :hist-length 25 :step-print-inc 2500 :episode-print-inc 500)
-             (learn *prog* *env*
-                    'random
-                    (random-algorithm-for alg-name) (steps-for-environment)
-                    :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
-           *algorithms*))
     (otherwise
-     (mapc (lambda (alg)
-             (learn *prog* *env* (pick-exploration-strategy alg)
-                    alg (steps-for-environment)
-                    :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
-           (mapcar 'algorithm-for *algorithms*)))))
+     (format t "~&Learning behavior using exploration strategy ~A~%"
+             exploration-strategy)
+     (map nil
+          (lambda (alg)
+            (learn program *environment*
+                   (pick-exploration-strategy alg exploration-strategy)
+                   alg (steps-for-environment)
+                   :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
+          (algorithms)))))
 
 (defun evaluation-for (name)
-  (evaluate *prog* *env* (get-policy-hist (algorithm-for name))
+  (evaluate *program* *environment* (get-policy-hist (algorithm-for name))
             :num-steps 50 :num-trials 100))
 
-(defun random-evaluation-for (name)
-  (evaluate *prog* *env* (get-policy-hist (random-algorithm-for name))
-            :num-steps 50 :num-trials 100))
-
-(defun evaluate-performance (&optional (algorithms *algorithms*))
+(defun evaluate-performance (&optional (algorithms *algorithm-names*))
   (format t "~2&Learning curves for ~{~A~^, ~} are:~%" algorithms)
   (pprint (map 'vector #'list 
-               (mapcar 'evaluation-for algorithms)))
-  (when (eq *exploration-strategy* :random-greedy)
-    (format t "~2&Random exploration learning curves for ~{~A~^, ~} are:~%" algorithms)
-    (pprint (map 'vector #'list 
-                 (mapcar 'random-evaluation-for algorithms)))))
+               (mapcar 'evaluation-for algorithms))))
+
 #+(or)
 (defun clean-up ()
   (reset *smdpq*))
