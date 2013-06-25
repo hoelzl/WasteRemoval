@@ -34,9 +34,11 @@
         do (loop
              for j from -1 to (second d)
              do (cond ((or (= i -1) (= i (first d)))
-                       (format stream "XX"))
+                       (if (or (= j -1) (= j (second d)))
+                           (format stream "XX")
+                           (format stream "~AX" j)))
                       ((or (= j -1) (= j (second d)))
-                       (format stream "XX"))
+                       (format stream "~AX" i))
                       ((eq (loc-value env (list i j)) 'wall) 
                        (format stream "XX"))
                       ((equal (simple-robot-loc state) (list i j))
@@ -76,12 +78,6 @@
   (unless start-loc-sampler
     (setf (start-loc-sampler env)
           (unif-grid-dist-sampler env))))
-
-
-(defmethod print-object ((env <simple-env>) stream)
-  (assert (not *print-readably*) ()
-          "Cannot print instances of <SIMPLE-ENV> readably.")
-  (print-unreadable-object (env stream :type t)))
 
 (defvar *available-actions* '(n e s w))
 
@@ -173,14 +169,11 @@ A state is terminal if the robot is at the target location."
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-2 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(5 5) :initial-element 'road)))
-    #+ (or)
-    (setf (aref world 0 2) 'wall
-          (aref world 1 2) 'wall)
+  (let ((world (make-array '(8 8) :initial-element 'road)))
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-3 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(5 5) :initial-element 'road)))
+  (let ((world (make-array '(8 8) :initial-element 'road)))
     (setf (aref world 2 0) 'wall
           (aref world 2 1) 'wall
           (aref world 0 3) 'wall
@@ -190,18 +183,11 @@ A state is terminal if the robot is at the target location."
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-4 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(10 10) :initial-element 'road)))
-    #+ (or)
-    (setf (aref world 2 0) 'wall
-          (aref world 2 1) 'wall
-          (aref world 0 3) 'wall
-          (aref world 1 3) 'wall
-          (aref world 2 3) 'wall
-          (aref world 3 3) 'wall)
+  (let ((world (make-array '(20 20) :initial-element 'road)))
     (apply #'make-instance '<simple-env> :world-map world initargs)))
 
 (defun make-simple-env-5 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(10 10) :initial-element 'road)))
+  (let ((world (make-array '(20 20) :initial-element 'road)))
     (setf (aref world 2 0) 'wall
           (aref world 2 1) 'wall
           (aref world 0 3) 'wall

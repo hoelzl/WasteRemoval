@@ -46,6 +46,7 @@
         #:waste-utils
         ;; From ALisp
         #:utils
+        #:grid-world
         #:alisp-prog
         #:alisp-features
         #:alisp-user

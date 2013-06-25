@@ -1,23 +1,24 @@
 (in-package #:simple-prog)
 
-(defvar *environment-size* :small)
-(defvar *environment-size-multiplier* 1)
+(defvar *environment-type* :small)
 (defvar *use-complex-environment* nil)
 (defvar *environment* nil)
 
 (defvar *program* #'simple-robot-prog)
 (defvar *exploration-strategy* :random)
-(defvar *current-exploration-strategy*)
 
 (defparameter *algorithm-names* (list 
                                  ;; 'smdpq
                                  ;; 'hordq
                                  ;; 'gold-standard
                                  ;; 'hordq-a-0
-                                 ;; 'hordq-a-1
+                                 'hordq-a-1
                                  'hordq-a-2
                                  ;; 'hordq-a-3
                                  ))
+
+(defvar *current-exploration-strategy*)
+(defvar *step-number-multiplier* 1)
 
 (defun algorithm-index (algorithm)
   (let ((index (position algorithm *algorithm-names*)))
@@ -33,9 +34,9 @@
 (defun algorithms ()
   *algorithms*)
 
-(defun make-new-environment (&optional (size *environment-size*)
+(defun make-new-environment (&optional (type *environment-type*)
                                        (complexp *use-complex-environment*))
-  (ecase size
+  (ecase type
     ((:small) (if complexp
                   (make-simple-env-1)
                   (make-simple-env-0)))
@@ -49,13 +50,13 @@
 
 (defun steps-for-environment ()
   (let ((base-size
-          (ecase *environment-size*
+          (ecase *environment-type*
             ((:small) (if *use-complex-environment* 5000 2500))
-            ((:medium) (if *use-complex-environment* 20000 10000))
-            ((:large) (if *use-complex-environment* 500000 250000))
+            ((:medium) (if *use-complex-environment* 100000 25000))
+            ((:large) (if *use-complex-environment* 2500000 1000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
                                     1000000 500000)))))
-    (* base-size *environment-size-multiplier*)))
+    (* base-size *step-number-multiplier*)))
 
 
 (defun initialize-environment (&optional (force t))
@@ -96,28 +97,32 @@
                     '())))
 
 (defun pick-exploration-strategy (algorithm &optional (strategy *exploration-strategy*))
-  (let ((result (ecase strategy
-                  ((:random)
-                   'random)
-                  ((:epsilon)
-                   (make-instance '<epsilon-policy>
-                     :q-learning-alg algorithm))
-                  ((:boltzman)
-                   (make-instance 'exp-pol:<epsilon-boltzmann-exp-pol>
-                     :q-learning-alg algorithm
-                     ;; TODO: Make first parameter depend on number of trials
-                     :temp-fn (lambda (n) (/ 1000.0 (1+ n)))
-                     :epsilon-decay-fn (exp-pol:make-linear-epsilon-decay-fn 10000 0.01))))))
+  (let ((result 
+          (ecase strategy
+            ((:random)
+             'random)
+            ((:epsilon)
+             (make-instance '<epsilon-policy>
+               :q-learning-alg algorithm))
+            ((:boltzman)
+             (make-instance 'exp-pol:<epsilon-boltzmann-exp-pol>
+               :q-learning-alg algorithm
+               ;; TODO: Make first parameter depend on number of trials
+               :temp-fn (lambda (n) (/ 1000.0 (1+ n)))
+               :epsilon-decay-fn (exp-pol:make-linear-epsilon-decay-fn 10000 0.01))))))
     (setf *current-exploration-strategy* result)
     result))
 
 (defun learn-behavior (&key (program *program*)
-                            (environment *environment*)
+                            environment-type
+                            (use-complex-environment nil use-complex-environment-p)
                             (exploration-strategy *exploration-strategy*)
                             (algorithm-names *algorithm-names*))
-  (if environment
-      (setf *environment* environment)
-      (initialize-environment))
+  (when environment-type
+    (setf *environment-type* environment-type))
+  (when use-complex-environment-p
+    (setf *use-complex-environment* use-complex-environment))
+  (initialize-environment)
   (initialize-algorithms algorithm-names)
   (case exploration-strategy 
     ((:random)
