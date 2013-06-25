@@ -1,0 +1,10 @@
+\newcommand{\prints}{\Rightarrow}
+\newcommand{\eval}{\rightsquigarrow}
+\newcommand{\lsq}{[} 
+\newcommand{\rsq}{]}
+
+\DefineVerbatimEnvironment{Code}{Verbatim}{%
+  gobble=2,%
+  commandchars=\\\[\],%
+  codes={\catcode`$=3\catcode`^=7\catcode`_=8}
+}

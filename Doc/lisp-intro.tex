@@ -1,0 +1,670 @@
+\documentclass[a4paper]{amsart}
+
+\usepackage{fancyvrb}
+\include{macros}
+
+\begin{document}
+\title{A Whirlwind Introduction to ALisp}
+\author{Matthias H\"olzl}
+
+\maketitle
+
+\section{Lisp}
+\label{sec:lisp}
+
+
+\subsection{Values}
+\label{sec:values}
+
+Lisp contains most of the usual kinds of values: numbers, strings,
+characters, etc.  Some literals are written differently than in other
+languages.  Fig.~\ref{fig:value-literals} shows some examples.
+
+The boolean values are written \texttt{nil} and \texttt{t}; in
+conditionals, values of an arbitrary type can appear, and every value
+different from \texttt{nil} counts as a true value.  Proper lists are
+either the empty list or a pair consisting of a first value (called
+the \texttt{car} of the list) and a second value which is itself a
+list (called the \texttt{cdr} and pronounced ``could-er'').  A
+peculiarity of Common Lisp is that the empty list \texttt{()} is
+identical to the false value \texttt{nil} (which is also a symbol).
+Furthermore, the empty list always evaluates to itself.  Therefore
+\texttt{()} and \texttt{nil} can be used interchangeably, but it is
+good style to write \texttt{()} when the value is used as list and
+\texttt{nil} to denote the boolean value.
+
+Common Lisp uses packages to partition the namespace.  Packages can
+export symbols, thereby making them visible to other packages.  There
+is always a notion of the ``current package'' which is the package
+that is used to intern symbols that do not include a package prefix.
+
+Symbols are similar to ``interned strings'' in Java or ``unique
+strings'' in other programming languages, except that symbols are
+interned in packages. Like strings, symbols consist of a sequence of
+characters; unlike strings, symbols are immutable and two symbols in
+the same package are identical whenever their lexical representation
+is the same.  To access an exported symbol in a package that is not
+directly visible from the current package it can be prefixed with the
+package name, i.e., to access the symbol \texttt{bar} in package
+\texttt{foo}, write \texttt{foo:bar}.  If a symbol is not exported, it
+can still be accessed by separating the symbol and package names with
+two colons: \texttt{foo::bar} accesses symbol \texttt{bar} in package
+\texttt{foo} even when it is not exported.  (This should only be used
+for debugging purposes).
+
+Typically, symbols are written without any delimiters; they can
+contain a wide range of characters: letters, number, \verb|-|,
+\verb|+|, \verb|*|, etc. However, if a symbol contains spaces (or
+other whitespace) it must be enclosed in vertical bars (\verb=|=)
+otherwise it would be interpreted as several consecutive symbols.
+Unless a symbol is enclosed in vertical bars, the Lisp reader converts
+all letters in the symbol to upper case; therefore Lisp behaves like a
+case insensitive language (even though it is in reality case
+sensitive).
+
+Symbols and lists play an important role in Common Lisp: In Lisp,
+programs are themselves represented as Lisp data, with symbols and
+lists serving as representations for variables and function calls,
+respectively.
+
+\begin{figure}[tp]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Type& Example Literals\\
+    \hline\hline
+    Boolean & \texttt{nil}, \texttt{t}\\
+    \hline
+    Number & \texttt{1}, \texttt{-123}, \texttt{1.23e2}\\
+    \hline
+    String & \verb|"This is a string"|\\
+    \hline
+    Symbol & \verb|print|, \verb|a-1|, \verb|*var*|, \verb=|Symbol with space|=\\
+    \hline
+    Symbol in Package \texttt{a} & \verb|a:my-symbol|, \verb|a::internal|\\
+    \hline
+    Keyword & \verb|:my-keyword|\\
+    \hline
+    Character & \verb|#\A|, \verb|#\Newline|\\
+    \hline
+    List & \verb|()|, \verb|(1 2 3)|, \verb|(print "Hello")|\\
+    \hline
+    Vector/Array & \verb|#(1 2 3)|, \verb|#((1 2) (3 4))|\\
+    \hline
+  \end{tabular}
+  \caption{Values}
+  \label{fig:value-literals}
+\end{figure}
+
+\subsection{Evaluation}
+\label{sec:evaluation}
+
+The source code of a Lisp program is stored in files, typically with
+the suffix \verb|.lisp| or \verb|.cl|.  When the Lisp system processes
+a file it first converts the textual representation into a Lisp data
+structure; this data structure is then evaluated according to the
+following rules:\footnote{These rules are not really correct, but they
+  should be precise enough to understand most programs.}
+\begin{itemize}
+\item All objects except lists and symbols evaluate to themselves.
+\item Symbols represent (global or local) variables and are looked up
+  in the variable environment.
+\item Lists represent function calls, macros or applications of
+  built-in operators (so-called \emph{special forms}).  Function calls
+  are evaluated in the following manner:
+  \begin{itemize}
+  \item Each element of the list is recursively evaluated.  If the
+    first element of the list is a symbol, its value is looked up in
+    the \emph{function environment}, all other symbols directly
+    appearing in the list are looked up in the \emph{variable
+      environment}.
+  \item When all elements of the list are evaluated, the value of the
+    first argument (a function) is applied to the other arguments.
+  \item The evaluation of a function call results in zero, one or more
+    values.
+  \end{itemize}
+\item Each special form has its own evaluation rules.  For example,
+  \texttt{lambda}-forms evaluate to functions.
+\end{itemize}
+
+To prevent a symbol or list from being evaluated it can be prefixed by
+an apostrophe (\verb|'|).  For example \verb|'x| evaluates to the
+symbol \texttt{x}, not to the value of the variable \texttt{x}.
+Similarly \verb|'(print "x")| evaluates to a list with two elements
+(the symbol \texttt{print} and the string \verb|"x"|), not to a
+function call.  As a rule, lists that are used as data structures must
+always be preceeded by an apostrophe: \verb|'(1 2 3)| evaluates to a
+list consisting of three integers, \verb|(1 2 3)| leads to an error
+message, since Lisp tries to evaluate this form as a function call and
+\texttt{1} is not a valid function name.
+
+\subsection{Global Variables and Functions}
+\label{sec:glob-vari-funct}
+
+Global variables are defined with the operators \texttt{defvar} and
+\texttt{defparameter}.  By convention, the names of global variables
+start and end with an asterisk (\verb|*|).  For example:
+\begin{Code}
+  (defvar *my-var* 123)
+  (defparameter *my-other-var* 234)
+  *my-var*                         $\eval$ 123
+  *my-other-var*                   $\eval$ 234
+\end{Code}
+The value of global variables can be changed with the \texttt{setf}
+operator:
+\begin{Code}
+  (setf *my-var 345)
+  (setf *my-other-var* 456)
+  *my-var*                         $\eval$ 345
+  *my-other-var*                   $\eval$ 456
+\end{Code}
+The difference between \texttt{defvar} and \texttt{defparameter} is
+that a \texttt{defvar}-form does not overwrite an existing value for
+the variable whereas \texttt{defparameter} does.  Thus, if we continue
+the example:
+\begin{Code}
+  (defvar *my-var* 123)
+  (defparameter *my-other-var* 234)
+  *my-var*                         $\eval$ 345
+  *my-other-var*                   $\eval$ 234  
+\end{Code}
+
+Local variables can be bound with \texttt{let} and \texttt{let*}
+forms.  The difference between these forms is that \texttt{let} binds
+all variables in parallel (so that none of the freshly introduced
+bindings is visible on the right hand sides) whereas \texttt{let*}
+binds the variables sequentially:
+\begin{Code}
+  (let ((x 1)
+        (y 2))
+    (list x y))                                   $\eval$ (1 2)
+
+  (let* ((x 1)
+         (y (+ x 1)) ; not possible with let
+    (list x y))                                   $\eval$ (1 2)
+\end{Code}
+This code also shows a comment; comments start after a semocolon
+(\verb|;|) and end at the end of the line.
+
+Functions are defined using the \texttt{defun} form:
+\begin{Code}
+  (defun my-fun (x)
+    (print x))
+\end{Code}
+This expression defines a function called \texttt{my-fun} (i.e., it
+binds the function variable \texttt{my-fun} to the corresponding
+function object), that takes one argument.  When this function is
+called it calls the \texttt{print} function to print the value of its
+argument:
+\begin{Code}
+  (my-fun 123)
+  $\prints$ 123
+  $\eval$ 123
+\end{Code}
+Each function returns the last value in its body; since the
+\texttt{print} function returns its argument after printing it, a call
+to \texttt{my-fun} also returns its argument.  The \texttt{values}
+special operator can be used to return zero, one or more values:
+\begin{Code}
+  (defun zero-values (x y)
+    (print x)
+    (print y)
+    (values))
+
+  (defun three-values (x y)
+    (print x)
+    (print y)
+    (values x y x))
+\end{Code}
+Calling \texttt{zero-values} with arguments \texttt{1} and \texttt{2},
+i.e., \texttt{(zero-values 1 2)}, prints \texttt{1} and \texttt{2} and
+returns no values, a call \texttt{(three-values 1 2)} prints
+\texttt{1} and \texttt{2} and returns the three values \texttt{1},
+\texttt{2} and \texttt{1}.  Multiple values can be bound with the form
+\texttt{multiple-value-bind}:
+\begin{Code}
+  (multiple-value-bind (a b c) (three-values 1 2)
+    (print a)
+    (print b)
+    (print c))
+\end{Code}
+This code will print 5 lines of output: \texttt{1}, \texttt{2},
+\texttt{1}, \texttt{2} and \texttt{1}.  The first two lines are from
+the call to \texttt{three-values}, the last three lines from the
+\texttt{print} statements in the body of \texttt{multiple-value-bind}.
+
+In addition to the required arguments, functions can take
+\texttt{optional}, \texttt{keyword} and \texttt{rest} arguments.
+Optional arguments need not be provided by the caller.  The function
+definition can specify a default value for optional elements that are
+not provided, if no default value is specified, \texttt{nil} is used:
+\begin{Code}
+  (defun opt-arg (x &optional (y 1) z)
+    (format t "~&~A, ~A, ~A" x y z))
+  (opt-arg 'a)             $\prints$ A, 1, NIL
+  (opt-arg 'a 'b)          $\prints$ A, B, NIL
+  (opt-arg 'a 'b 'c)       $\prints$ A, B, C
+\end{Code}
+The function \texttt{format} prints formatted output to a stream.
+Here the stream is specified as \texttt{t}, denoting the standard
+ output.  The format directive \verb|~&| is a (conditional) newline,
+\verb|~A| takes the next unprocessed argument and prints it.  In the
+first call to \texttt{opt-arg}, the call provides no values for the
+variables \texttt{y} and \texttt{z}, so their default values are
+used.  In the second call a value is provided for \texttt{y} but not
+,for \texttt{z}, in the last call, all variables are provided values
+by the caller.
+
+If a function takes many arguments, calls to the function can be
+rather confusing.  Keyword arguments can be used to clarify the roles
+of the arguments: like optional arguments keyword arguments need not
+be provided by the caller, but in calls, keyword arguments are
+explicitly named by a keyword and can therefore be provided in any
+order:
+\begin{Code}
+  (defun key-arg (x &key (y 1) z)
+    (format t "~&~A, ~A, ~A" x y z))
+  (key-arg 'a)                    $\prints$ A, 1, NIL
+  (key-arg 'a :y 'b)              $\prints$ A, B, NIL 
+  (key-arg 'a :y 'b :z 'c)        $\prints$ A, B, C 
+  (key-arg 'a :z 'c :y 'b)        $\prints$ A, B, C 
+\end{Code}
+
+\subsection{Structs and Classes}
+\label{sec:structs-classes}
+
+Common Lisp contains CLOS (Common Lisp Object System), an extremely
+powerful object system.  There are two different class-like data
+types: Structures (also called structure-classes) and classes.
+Structures as well as classes contain only data members; methods are
+defined outside of the user-defined data types.
+
+Structures have several restrictions that make them much less flexible
+than classes.  For example, classes can be redefined (and existing
+instances using the old class definition can be upgraded to the new
+class definition), classes support multiple inheritance, and the class
+of a class-instance can be changed dynamically.  Structures provide
+none of these features, but they can therefore be implemented more
+efficiently than classes.  Therefore it is advisable to use structure
+types only in situation where performance considerations are
+paramount.
+
+Unfortunately, for historic reasons, the syntactic for of class and
+structure definitions is quite different.  Structures are defined in
+the following way:
+\begin{Code}
+  (defstruct (simple-state (:conc-name #:simple-))
+    (start-loc '(0 0) :type list)
+    robot-loc
+    env)  
+\end{Code}
+This defines a structure-class \texttt{simple-state} with three
+instance variables that can be accessed usin functions called
+\texttt{simple-start-loc}, \texttt{simple-robot-loc} and
+\texttt{simple-env}.  The prefix of the instance accessors is defined
+by the \texttt{:conc-name} struct-option.  Instances are created using
+the constructor \texttt{make-simple-state} which takes a keyword
+argument for each instance variable.  The instance variable
+\texttt{start-loc} is additionally provided with a default value and
+restricted to values of type \texttt{list}.  The call
+\begin{Code}
+  (make-simple-state :start-loc '(1 2) :end-loc '(5 7) :env *my-env*)
+\end{Code}
+creates a new instance of type \texttt{simple-state} in which the
+instance variables (which are typically called \emph{slots} in Lisp)
+are initialized to the given values.
+
+A class definition has the following form:
+\begin{Code}
+  (defclass <simple-env> (<fully-observable-env> <grid-world>)
+    ((move-success-prob :type float
+                        :initarg :move-success-prob :initform 0.95
+                        :accessor move-success-prob)
+     (wall-collision-cost :initarg :wall-collision-cost :initform 0.5
+                          :accessor wall-collision-cost)))
+\end{Code}
+This defines a class \verb|<simple-env>| (the use of angle brackets
+around the class name is a convention that is used in ALisp and has no
+further significance).  This class inherits from two superclasses,
+\verb|<fully-observable-env>| and \verb|<grid-world>| and has two
+slots \texttt{move-success-prob} and \texttt{wall-collision-cost}.
+The name of the accessor functions and the keyword arguments for the
+constructor have to be explicitly specified using the
+\texttt{:accessor} and \texttt{:initarg} keyword arguments in the slot
+specification; furthermore each slot specifies a default value
+(\texttt{:initform}); the \texttt{move-success-prob} slot additionally
+specifies the type of values it can store.  The accessors of classes
+defined with \texttt{defclass} are used as specified, no prefix is
+appended.
+
+Instances of classes are created using the \texttt{make-instance}
+function, which takes the keywords specified in the class definition
+and the keywords inherited from superclasses.  For example:
+\begin{Code}
+  (make-instance '<simple-env> :move-success-prob 0.8)
+\end{Code}
+(Note that we pass the \emph{name} of the class as first argument to
+\texttt{make-instance}, i.e., the first argument to
+\texttt{make-instance} is typically quoted.)
+
+\subsection{Generic Functions and Methods}
+\label{sec:gener-funct-meth}
+
+Methods do not belong to classes, instead they are grouped into
+\emph{generic functions}.  A generic function can explicitly be
+defined with \texttt{defgeneric} or implicitly by a method definition.
+
+The code
+\begin{Code}
+  (defgeneric description (thing))
+\end{Code}
+defines a generic function \texttt{description} that takes a single
+argument.  Methods can be specialized on this argument:
+\begin{Code}
+  (defmethod description (thing)
+    (print "Some unspecified thing"))
+  (defmethod description ((l list))
+    (print "A list"))
+  (defmethod description ((n number))
+    (print "A number"))
+  (defmethod description ((st simple-state))
+    (print "Our very own state"))
+  (defmethod description ((env <simple-env>))
+    (print "A simple environment"))
+
+  (description "Foo")                        $\prints$ Some unspecified thing
+  (description '())                          $\prints$ A list
+  (description 123)                          $\prints$ A number
+  (description (make-simple-state))          $\prints$ Our very own state
+  (description (make-instance <simple-env>)) $\prints$ A simple environment
+\end{Code}
+Note that methods can be defined on ``primitive'' types (such as
+number), on structures and on classes.  It is even possible to define
+methods specialized on single objects:
+\begin{Code}
+  (defmethod description ((n (eql 0)))
+    (print "Naught"))
+  (description 0)                            $\prints$ Naught
+\end{Code}
+
+Generic functions support multi-dispatch, i.e., they can be specified
+on several arguments:
+\begin{Code}
+  (defmethod multi (x y)
+    (list x y))
+  (defmethod multi ((x number) (y number))
+    (+ x y))
+  (defmethod multi ((x string) (y string))
+    (concatenate 'string x y))
+  (multi  'a  'b)                               $\eval$ (A B)
+  (multi 'a   1)                                $\eval$ (A 1)
+  (multi  1   2)                                $\eval$ 3
+  (multi 'a  "b")                               $\eval$ (A "b")
+  (multi "a" 'b)                                $\eval$ ("a" B)
+  (multi "a" "b")                               $\eval$ "ab"
+\end{Code}
+
+\section{The Simple-Waste Example}
+\label{sec:simple-waste}
+
+The Simple-Waste example is meant to introduce ALisp using the simple
+scenario of a robot moving toward a target in an arena in which there
+may be some obstacles.  The following sections assume that your Lisp
+environment is already correctly set up.
+
+\subsection{Running the Simple-Waste Example}
+\label{sec:running-simple-waste}
+
+In the Lisp listener (REPL), evaluate the following forms:
+\begin{Code}
+  CL-USER> (asdf:load-system :waste)
+  \lsq...\rsq
+  CL-USER> (in-package :simple-prog)
+  #<PACKAGE "SIMPLE-PROG">
+  SIMPLE-PROG> (explore-environment)
+  Welcome to the simple robot example.
+
+  This environment demonstrates a robot that moves around on a
+  rectangular grid, until it reaches a target area.  X's on the map
+  represent walls, blank spaces are roads.  The robot is represented
+  by 'r'.  You can move by entering N, E, S, W.  To quit the
+  environment, enter NIL.  (All input can be in lower or upper case.)
+
+  Last observation was 
+  XX0X1X2X3XXX
+  0X        0X
+  1X  rr    1X
+  2X        2X
+  XX0X1X2X3XXX
+  Target: (0 0)
+  Action?
+\end{Code}
+The \texttt{load-system} form loads the \texttt{:waste} system
+definition which contains, among others, the code for the Simple-Waste
+example.  The \texttt{explore-environment} runs a function that allows
+you to interactively explore the environment.  The start position of
+the robot is randomly generated and may be different for each
+execution.  After completing an episode or entering \texttt{nil} at
+the prompt, you can start the reinforcement learner by calling
+\texttt{learn-behavior}:
+\begin{Code}
+  SIMPLE-PROG> (learn-behavior)
+  Learning behavior using random exploration strategy
+  Learning
+  Episode 0.
+  NIL
+\end{Code}
+The \texttt{learn-behavior} function calls the primitive
+\texttt{learn} function with parameters that are controlled by its
+keyword arguments and some global variables.  After learning is
+completed, you can evaluate the performance of the learned policy
+against environments with randomly genereated robot start positions:
+\begin{Code}
+  SIMPLE-PROG> (evaluate-performance)
+
+  Learning curves for HORDQ-A-1, HORDQ-A-2 are:
+  Evaluating policies..................................................
+  Evaluating policies..................................................
+  #((#(-2.36 4.71 4.71 4.72 4.73 4.7 4.7
+       4.73 4.72 4.72 4.71 4.73 4.73 4.71
+       4.71 4.72 4.69 4.72 4.71 4.69 4.7
+       4.71 4.72 4.71 4.68 4.71 4.7 4.7
+       4.72 4.72 4.71 4.73 4.72 4.72 4.73
+       4.69 4.71 -9.66 -8.93 -8.96 4.72
+       4.71 4.72 4.71 4.74 4.7 4.72 4.71 4.71 4.71))
+    (#(-3.52 1.31 3.66 4.53 2.06 0.86 1.27
+       2.62 4.74 4.72 4.72 4.71 4.69
+       4.72 4.7 4.69 4.65 4.72 4.67 4.68
+       4.67 4.68 4.68 4.69 4.72 4.7 4.71
+       4.7 4.72 4.73 4.73 4.72 4.72 4.69
+       4.71 4.72 4.71 4.71 4.69 4.72 4.73
+       4.72 4.72 4.71 4.69 4.69 4.72 4.72 4.71 4.71)))
+  ; No value
+\end{Code}
+The function \texttt{learn-behavior} stores copies of the policies
+learned after having completed $2\%$, $4\%$, \dots, $100\%$ of the
+steps in the training run.  \texttt{evaluate-performance} runs each of
+these policies against randomly generated examples and returns a
+vector of the resulting scores.  In the example, the reward for
+reaching the target field is $5.0$ and the cost for each step is
+$0.1$.  The cost for bumping into a wall is $0.5$.  To complicate the
+problem, the robot only moves into the desired direction with $90\%$
+probability, and perpendicular to this direction otherwise.  Hence,
+the best expected score in the environment is $\approx4.7$, which
+both algorithms achieve frequently.  Not that the first algorithm
+rapidly achieves this score for most of the runs, but several runs
+toward the end of the learning curve show severely degraded
+performance.  The second algorithm converges less rapidly, but
+consistently stays near the maximum performance after about a quarter
+of all tries.  We will see why the algorithms exhibit this behavior
+when we look at their implementation.
+
+Let's try a slightly more involved example:
+\begin{Code}
+  SIMPLE-PROG> (learn-behavior :environment-type :medium
+                               :use-complex-environment t)
+  Learning behavior using random exploration strategy
+  Learning
+  Episode 0........................................
+  NIL
+
+  SIMPLE-PROG> (evaluate-performance)
+  Learning curves for HORDQ-A-1, HORDQ-A-2 are:
+  Evaluating policies..................................................
+  Evaluating policies..................................................
+  #((#(-6.85 -21.16 -3.87 -3.01 -3.48 -4.41
+       -3.73 -21.15 -4.03 -21.56 -4.09
+       -4.51 -3.82 -23.64 -24.11 -4.12 -3.19
+       -4.31 -3.65 -3.09 -3.83 -2.48
+       -2.56 -3.94 -2.68 -3.86 -2.29 -21.24
+       -4.26 -4.21 -4.51 -4.51 -3.49
+       -21.61 -3.23 -2.07 -2.98 -2.04 -2.33
+       -2.46 -2.03 -2.93 -2.41 -4.12
+       -4.35 -3.94 -4.61 -2.89 -4.6 -4.12))
+    (#(-6.56 -6.23 -4.18 -4.44 -4.35 -4.28
+       -4.07 -4.02 -4.12 -4.32 -4.02
+       -3.73 -4.04 -0.16 -0.54 0.04 -0.47
+       0.42 -0.37 1.08 1.1 1.39 0.26 0.7
+       0.35 -0.66 0.49 1.07 2.91 3.95 2.96
+       2.61 2.5 3.67 3.1 3.05 3.36 3.57
+       3.49 3.99 2.84 3.82 3.69 3.9 3.58
+       3.97 3.98 4.08 3.97 4.02)))
+  ; No value
+
+  SIMPLE-PROG> (explore-environment)
+  Welcome to the simple robot example.
+  
+  This environment demonstrates a robot that moves around on a
+  rectangular grid, until it reaches a target area.  X's on the map
+  represent walls, blank spaces are roads.  The robot is represented
+  by 'r'.  You can move by entering N, E, S, W.  To quit the
+  environment, enter NIL.  (All input can be in lower or upper case.)
+  Last observation was 
+  XX0X1X2X3X4X5X6X7XXX
+  0X      XX        0X
+  1X      XX        1X
+  2XXXXX  XX        2X
+  3X      XX        3X
+  4X        rr      4X
+  5X                5X
+  6X                6X
+  7X                7X
+  XX0X1X2X3X4X5X6X7XXX
+  Target: (0 0)
+  Action? nil
+\end{Code}
+Here we explore a medium-sized environment with a slightly more
+complex structure, with the same reward structure as before.  To
+compensate for this increased complexity, \texttt{learn-behavior} runs
+the experiment with a larger number of steps, as can be seen from its
+output (a dot is printed for every $2500$ steps).  The evaluation
+shows that in this case the first algorithm does not learn a useful
+behavior, whereas the second algorithm again converges to a nearly
+optimal policy (taking into account the increased size of the arena
+and the additional movement steps necessary to drive around the wall
+when starting in the upper right quadrant).  To investigate the
+behaviors of policies it is sometimes useful to observe them in
+action.  This can be done by calling \texttt{(explore-policies)}:
+\begin{Code}
+  SIMPLE-PROG> (explore-policies)
+  Welcome to the simple robot example.
+  \lsq...\rsq
+  Env state: 
+  XX0X1X2X3X4X5X6X7XXX
+  0X      XX        0X
+  1X      XX        1X
+  2XXXXX  XXrr      2X
+  3X      XX        3X
+  4X                4X
+  5X                5X
+  6X                6X
+  7X                7X
+  XX0X1X2X3X4X5X6X7XXX
+  Target: (0 0)
+  Stack: ((NAV NAVIGATE-CHOICE ((LOC 0 0))) (TOP NAV NIL))>
+  Set of available choices is (N E S W)
+  --------------------------------------------------
+  Advisor 0: 
+  Componentwise Q-values are
+    #((N (Q -74.13) (QR -0.2) (QC -73.93) (QE 0.0))
+      (E (Q -74.1) (QR -0.17) (QC -73.93) (QE 0.0))
+      (S (Q -74.03) (QR -0.11) (QC -73.93)(QE 0.0))
+      (W (Q -74.03) (QR -0.1) (QC -73.93) (QE 0.0)))
+  Recommended choice is W
+  --------------------------------------------------
+  Advisor 1: 
+  Componentwise Q-values are
+    #((N (Q -0.79) (QR -0.1) (QC -0.69) (QE 0.0))
+      (E (Q -0.79) (QR -0.1) (QC -0.69) (QE 0.0))
+      (S (Q -0.61) (QR -0.1) (QC -0.51) (QE 0.0))
+      (W (Q -0.71) (QR -0.1) (QC -0.61) (QE 0.0)))
+  Recommended choice is S
+  --------------------------------------------------
+  Please enter choice, or nil to terminate. 
+\end{Code}
+Like \texttt{explore-environment}, the function
+\texttt{explore-policies} allows us to interact with the environments.
+In addition it shows the $Q$-functions computed by the different
+learning algorithms and their choice.  After following the advice of
+the first algorithm for a few steps we see why it performs badly on
+many examples: even though the robot bumps into the wall when moving
+west, the algorithm repeatedly suggests this move.  The second
+algorithm, in contrast, correctly suggests moving south.  (When
+looking at the code we will see that the first algorithm operates
+without knowing the robot's position on the board or the walls
+adjacent to the robot's position so that it cannot develop a strategy
+that behaves sensibly if there are obstacles in the arena.)  As a
+final example, let us try the second algorithm on a maze-like example:
+\begin{Code}
+  SIMPLE-PROG> (learn-behavior :environment-type :maze :algorithm-names '(hordq-a-2))
+  Learning behavior using random exploration strategy
+  Learning
+  Episode
+  0...........................................................
+   ...........................................................
+   ...........................................................
+   ...........................................................
+   ...........................................................
+   ...........................................................
+   ..............................................
+  NIL
+
+  SIMPLE-PROG> (evaluate-performance)  
+  Learning curves for HORDQ-A-2 are:
+  Evaluating policies..................................................
+  #((#(-7.63 -7.08 -4.17 -4.15 -2.31 -1.45
+       -1.17 -0.27 0.75 0.82 1.61 2.89
+       2.26 2.79 2.45 3.01 2.78 2.78 2.96
+       2.94 2.78 2.8 2.9 2.89 2.77 2.66
+       3.01 2.92 2.68 2.96 2.82 2.83 2.87
+       2.87 2.92 2.64 2.77 2.87 2.59 2.75
+       2.95 2.82 3.13 2.7 3.07 2.65 2.87 3.02 2.73 2.77)))
+  ; No value
+
+  SIMPLE-PROG> (explore-policies)
+  \lsq...\rsq
+  XX0X1X2X3X4X5X6X7X8X9XXX
+  0X      XX            0X
+  1X      XXXXXXXXXX  XX1X
+  2XXXXX  XX  XX        2X
+  3X      XX  XXXXXXXX  3X
+  4X  XXXXXX  XX        4X
+  5X          XX  XXXXXX5X
+  6XXXXXXXXX  XX    rr  6X
+  7X  XX      XXXX      7X
+  8X  XX  XX  XX  XX    8X
+  9X      XX            9X
+  XX0X1X2X3X4X5X6X7X8X9XXX
+  Target: (0 0)
+\end{Code}
+Since the average path length in this environment is $\approx 14$
+steps, the policy is again close to the optimal one.
+
+\subsection{Diving into the Code}
+\label{sec:diving-into-code}
+
+Let us now look at the code of the Simple-Waste example.  The system
+definition is in the file \texttt{Sources/waste.asd}.
+
+\end{document}
+
