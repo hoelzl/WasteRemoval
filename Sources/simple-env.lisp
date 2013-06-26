@@ -4,24 +4,20 @@
 ;;; field.  Modeled loosely after the td-taxi world.
 
 (defstruct (simple-state (:conc-name #:simple-))
-  start-loc
   robot-loc
   env)
 
 (defmethod clone ((state simple-state))
   (make-simple-state
-   :start-loc (simple-start-loc state)
    :robot-loc (simple-robot-loc state)
    :env (simple-env state)))
 
 (defmethod same ((s1 simple-state) (s2 simple-state))
-  (and (equal (simple-start-loc s1) (simple-start-loc s2))
-       (equal (simple-robot-loc s1) (simple-robot-loc s2))
+  (and (equal (simple-robot-loc s1) (simple-robot-loc s2))
        (eql (simple-env s1) (simple-env s2))))
 
 (defmethod canonicalize ((state simple-state))
-  (list 'start-loc (simple-start-loc state)
-        'robot-loc (simple-robot-loc state)))
+  (list 'robot-loc (simple-robot-loc state)))
 
 (defvar *print-graphically* nil)
 (defmethod print-object ((state simple-state) stream)
@@ -143,7 +139,6 @@ A state is terminal if the robot is at the target location."
           "Action ~A is not possible in state ~A." action state)
   (let* ((next-loc (compute-next-loc env state action))
          (new-state (make-simple-state
-                     :start-loc (simple-start-loc state)
                      :robot-loc next-loc
                      :env (simple-env state))))
     (values new-state (reward env state action new-state))))
@@ -154,7 +149,6 @@ A state is terminal if the robot is at the target location."
 (defmethod sample-init ((env <simple-env>))
   (let ((loc (compute-intial-source-loc env)))
     (make-simple-state
-     :start-loc loc
      :robot-loc loc
      :env env)))
 

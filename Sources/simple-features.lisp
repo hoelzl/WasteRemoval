@@ -3,9 +3,6 @@
 (def-feature loc (state action)
   (simple-robot-loc env-state))
 
-(def-feature start-loc (state action)
-  (simple-start-loc env-state))
-
 (defvar *quantize-target-dist* nil)
 
 (def-feature target-dist (state action)
@@ -78,7 +75,7 @@
   (make-3partq-featurizer
    ()
    (navigate-choice
-    (:qr-depends loc target-direction-valid-p choice)
+    (:qr-depends target-direction-valid-p choice)
     (:qc-depends loc choice)
     (:qe-depends))
    (simple-robot-action
@@ -96,7 +93,7 @@
    (navigate-choice
     (:qr-depends loc target-direction-valid-p choice)
     (:qc-depends loc choice)
-    (:qe-depends start-loc))
+    (:qe-depends))
    (simple-robot-action
     (:qr-depends)
     (:qc-depends)
@@ -105,6 +102,7 @@
     (:qr-depends)
     (:qc-depends)
     (:qe-depends))))
+
 #+ (or)
 (defparameter *simple-featurizer-4*
   (make-3partq-featurizer
