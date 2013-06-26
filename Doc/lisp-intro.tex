@@ -4,7 +4,7 @@
 \include{macros}
 
 \begin{document}
-\title{A Whirlwind Introduction to ALisp}
+\title{A Whirlwind Introduction to ALisp/Poem}
 \author{Matthias H\"olzl}
 
 \maketitle
@@ -12,6 +12,8 @@
 \section{Lisp}
 \label{sec:lisp}
 
+Most of the code in ALisp/Poem is normal Common Lisp code, so we start
+with a very short introduction to some features of the base language.
 
 \subsection{Values}
 \label{sec:values}
@@ -33,24 +35,26 @@ Furthermore, the empty list always evaluates to itself.  Therefore
 good style to write \texttt{()} when the value is used as list and
 \texttt{nil} to denote the boolean value.
 
-Common Lisp uses packages to partition the namespace.  Packages can
-export symbols, thereby making them visible to other packages.  There
-is always a notion of the ``current package'' which is the package
-that is used to intern symbols that do not include a package prefix.
+Common Lisp uses packages to partition the namespace.  \emph{Packages}
+can export symbols, thereby making them visible to other packages.
+There is always a notion of the ``current package'' which is the
+package that is used to intern symbols that do not include a package
+prefix.
 
-Symbols are similar to ``interned strings'' in Java or ``unique
-strings'' in other programming languages, except that symbols are
-interned in packages. Like strings, symbols consist of a sequence of
-characters; unlike strings, symbols are immutable and two symbols in
-the same package are identical whenever their lexical representation
-is the same.  To access an exported symbol in a package that is not
-directly visible from the current package it can be prefixed with the
-package name, i.e., to access the symbol \texttt{bar} in package
-\texttt{foo}, write \texttt{foo:bar}.  If a symbol is not exported, it
-can still be accessed by separating the symbol and package names with
-two colons: \texttt{foo::bar} accesses symbol \texttt{bar} in package
-\texttt{foo} even when it is not exported.  (This should only be used
-for debugging purposes).
+\emph{Symbols} are similar to ``interned strings'' in Java or ``unique
+strings'' in other programming languages, except that symbols ``belong
+to'' packages (i.e., each symbol is interned in a particular package).
+Like strings, symbols consist of a sequence of characters; unlike
+strings, symbols are immutable and two symbols in the same package are
+identical whenever their lexical representation is the same.  To
+access an exported symbol in a package that is not directly visible
+from the current package it can be prefixed with the package name,
+i.e., to access the symbol \texttt{bar} in package \texttt{foo}, write
+\texttt{foo:bar}.  If a symbol is not exported, it can still be
+accessed by separating the symbol and package names with two colons:
+\texttt{foo::bar} accesses symbol \texttt{bar} in package \texttt{foo}
+even when it is not exported.  (This should only be used for debugging
+purposes).  
 
 Typically, symbols are written without any delimiters; they can
 contain a wide range of characters: letters, number, \verb|-|,
@@ -61,6 +65,31 @@ Unless a symbol is enclosed in vertical bars, the Lisp reader converts
 all letters in the symbol to upper case; therefore Lisp behaves like a
 case insensitive language (even though it is in reality case
 sensitive).
+
+\emph{Keywords} are symbols with some special features: they are
+interned in the \texttt{keyword} package and can be written in the
+form \texttt{:my-keyword}, i.e., starting with a colon.  In contrast
+to other symbols, keywords are self evaluating, i.e., they don't have
+to be quoted, and they cannot be used as names of variables or
+functions.  Keywords are often used as data objects since they don't
+have to be quoted and avoid some complications with packages; they
+can also serve as names for named function arguments (see below).
+
+\emph{Uninterned symbols} are yet another special kind of symbol (they
+don't call Lisp a symbolic programming language for nothing\dots).  An
+uninterned symbol is, as the name implies, a symbol that is not
+interned in any package.  Uninterned symbols can be written in the
+form \verb|#:my-symbol|; each occurence of \verb|#:my-symbol| gives
+rise to a fresh symbol that is not equal to anyting else, i.e.,
+\begin{Code}
+  (eq 'my-symbol 'my-symbol)      $\eval$ t
+  (eq :my-symbol :my-symbol)      $\eval$ t  
+  (eq 'my-symbol :my-symbol)      $\eval$ nil  
+  (eq #:my-symbol #:my-symbol)    $\eval$ nil 
+\end{Code}
+Uninterned symbols are most commonly used to avoid lexical capture of
+introduced names in macros, and in package declarations since they
+don't pollute the namespace in which the package is defined.
 
 Symbols and lists play an important role in Common Lisp: In Lisp,
 programs are themselves represented as Lisp data, with symbols and
@@ -403,6 +432,118 @@ on several arguments:
   (multi "a" 'b)                                $\eval$ ("a" B)
   (multi "a" "b")                               $\eval$ "ab"
 \end{Code}
+
+\begin{figure}[tp]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Command & Meaning \\
+    \hline\hline
+    \texttt{C-x C-f} & Find file (also used to create a new file)\\
+    \hline
+    \texttt{C-x C-s} & Save current buffer\\
+    \hline\hline
+    \texttt{C-x o} & Switch to other buffer\\
+    \hline
+    \texttt{C-x 1} & Hide other buffers\\
+    \hline
+    \texttt{C-x 0} & Hide this buffer\\
+    \hline\hline
+    \texttt{C-c C-k} & Compile buffer\\
+    \hline
+    \texttt{C-c C-c} & Compile current definition\\
+    \hline
+    \texttt{C-c C-z} & Switch to Lisp interaction buffer\\
+    \hline
+    \texttt{C-M-i} & Complete current input\\
+    \hline
+    \texttt{M-.} & Go to definition\\
+    \hline
+    \texttt{C-c i} & Inspect element (non-standard)\\
+    \hline
+  \end{tabular}
+  \caption{Some Emacs commands}
+  \label{fig:emacs-commands}
+\end{figure}
+
+\section{Intermezzo: Some Useful Emacs Commands }
+\label{sec:emacs}
+
+Emacs with the Slime mode for Lisp development offers many features to
+navigate through source code and to interact with a running Lisp
+process.  Some of the most useful are given in
+Fig.~\ref{fig:emacs-commands}.  Some commands that are only valid in
+the interaction buffer are given in Fig.~\ref{fig:emacs-interaction}.
+
+\begin{figure}[tp]
+  \centering
+  \begin{tabular}{|l|l|}
+    \hline
+    Command & Meaning \\
+    \hline\hline
+    \texttt{M-p} & Previous command\\
+    \hline
+    \texttt{M-n} & Next command\\
+    \hline
+    \texttt{,in} & Change package\\
+    \hline
+    \texttt{,compile-system} & Compile an ASDF system\\
+    \hline
+    \texttt{,load-system} & Load an ASDF system\\
+    \hline
+    \texttt{,force-compile-system} & Force compilation of a system\\
+    \hline
+    \texttt{,force-load-system} & Force (re)loading of a system\\
+    \hline
+  \end{tabular}
+  \caption{Some Emacs commands in the interaction buffer}
+  \label{fig:emacs-interaction}
+\end{figure}
+
+\section{ALisp Extensions}
+\label{sec:alisp-extensions}
+
+ALisp adds several new operators to Common Lisp that allow the
+learning mechanism to work.  Programs that contain any of these
+operators are called \emph{partial programs}.
+
+The most important ones are the following:
+\begin{description}
+\item[action] Performs an action on the environment.  A label has to
+  be provided before the action name.
+\item[call] Calls a partial program with arguments.  Can optionally
+  have a label that is used by the learning algorithms to determine
+  which call sites should be learned together; if no label is
+  provided, the name of the function is used.
+  \begin{Code}
+    (call (nav some-location))
+  \end{Code}
+\item[with-choice] Selects a value from a set of values.  A label is
+  mandatory to allow the learning algorithms to determine how the
+  choice should be learned.  E.g., choose among the action values
+  \texttt{N}, \texttt{E}, \texttt{S}, \texttt{W} and then perform the
+  corresponding action:
+  \begin{Code}
+    (with-choice navigate-choice (dir '(N E S W))
+      (action navigate-move dir))
+  \end{Code}
+\item[choose] Chose (non-deterministically, i.e., learn to choose)
+  between several different actions or partial programs.  As usual, a
+  label has to be provided.  For example
+  \begin{Code}
+    (choose choose-waste-removal-action
+            (call (pickup-waste))
+            (call (drop-waste)))
+  \end{Code}
+  (The difference between \texttt{with-choice} and \texttt{choose} is
+  that the first one chooses \emph{values} whereas the second one
+  chooses \emph{behaviors} to perform.  Of course, since behaviors are
+  first-class values, \texttt{with-choice} and \texttt{choose} can be
+  used somewhat interchangeably.  For example, the previous action
+  choice could also be represented using the \texttt{choose} operator
+  with four actions in the body.)
+\end{description}
+
 
 \section{The Simple-Waste Example}
 \label{sec:simple-waste}
@@ -771,6 +912,64 @@ are in the arena.
 The third and fourth featurizer take the percise location of the robot
 into account; they work well in most cases, although they need
 significant training data.
+
+\subsubsection{The File \texttt{simple-example.lisp}}
+\label{sec:file-simple-example.lisp}
+
+This file contains definitions of variables and constants that
+(hopefully) simplify the interaction with the reinforcement learning
+system.
+
+\subsection{Tasks}
+\label{sec:tasks}
+
+The Simple-Waste example can be enhanced in many ways.  Some useful
+tasks to try are the following:
+
+\begin{enumerate}
+\item Experiment with the predefined featurizers in the different
+  environments.  Why do some featurizers work well in open
+  environments and not in ones with obstacles?
+\item \label{task:featurizer}Explore additional featurizers.  For
+  example, the \texttt{grid-world} package provides a
+  \texttt{shortest-path} function that can be used to (efficiently,
+  i.e., in $O(n^3)$) compute shortest paths using Floyd's algorithm.
+  Can this information be used to build a better featurizer?
+\item Allow the target location to vary stochastically.  Extend the
+  environment model (and possibly the program and featurizers) to cope
+  with this situation.  Can the extensions from
+  (\ref{task:featurizer}) be useful in this case?
+\item Have several different target locations, possibly with different
+  rewards.  See whether the \texttt{shortest-path-dist} function from
+  the \texttt{grid-world} package can be useful for featurizers in
+  this case.
+\item Introduce fields with different costs:  Moving along the main
+  hallway should be less expensive than moving inside stalls.
+\item Introduce slanted or windy fields that cause the robot to
+  deviate from its path with a high probability.  What effect do these
+  fields have on the performance of (\ref{task:featurizer}), what
+  additional ``sensors'' could be used by a featurizer to cope with
+  this behavior.
+\item Provide the robot with a limited amount of fuel that is used up
+  by performing the various actions; give a large negative reward for
+  running out of fuel.
+\item \label{task:waste}Introduce waste items into the environment and
+  base the reward for the robot on the number of waste item it has
+  picked up and carried to a target area.  Initially introduce a
+  single waste item at a random position when the environment is
+  created.  (A hierarchical program structure with multiple choice
+  nodes is very useful for this case.)
+\item \label{task:continuous-waste}Extend the environment of
+  (\ref{task:waste}) so that new waste is dropped in the environment
+  while the robot is operating.  
+\item Extend the environment from (\ref{task:continuous-waste}) so
+  that the reward is partially based on the level of cleanliness of
+  the environment.  Introduce an action that allows the robot to sleep
+  for a predetermined time without incurring any cost of living.  What
+  information would a featurizer have to provide so that the robot can
+  learn a good strategy for sleeping?
+\item Extend the example to multiple robots.
+\end{enumerate}
 
 \end{document}
 
