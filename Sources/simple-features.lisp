@@ -75,7 +75,7 @@
   (make-3partq-featurizer
    ()
    (navigate-choice
-    (:qr-depends target-direction-valid-p choice)
+    (:qr-depends loc target-direction-valid-p choice)
     (:qc-depends loc choice)
     (:qe-depends))
    (simple-robot-action
