@@ -1,6 +1,8 @@
 (in-package #:waste-env)
 
-;;; A waste disposal environment.  Modeled loosely after the td-taxi world.
+;;; A grid environment in which a robot should move from a source field to the location of a
+;;; waste item, collect the waste and then drop it in a target area.  Modeled loosely after the
+;;; td-taxi world.
 
 (defstruct (waste-state (:conc-name #:ws-))
   robot-loc
@@ -45,9 +47,11 @@
         do (loop
              for j from -1 to (second d)
              do (cond ((or (= i -1) (= i (first d)))
-                       (format stream "XX"))
+                       (if (or (= j -1) (= j (second d)))
+                           (format stream "XX")
+                           (format stream "~AX" j)))
                       ((or (= j -1) (= j (second d)))
-                       (format stream "XX"))
+                       (format stream "~AX" i))
                       ((eq (loc-value env (list i j)) 'wall) 
                        (format stream "XX"))
                       ((equal (ws-robot-loc state) (list i j))
@@ -65,7 +69,16 @@
 
 
 (defclass <waste-env> (<fully-observable-env> <grid-world>)
-  ((init-fuel :type fixnum
+  ((move-success-prob :type float
+                      :initarg :move-success-prob :initform 0.95
+                      :accessor move-success-prob)
+   (wall-collision-cost :type float
+                        :initarg :wall-collision-cost :initform 0.5
+                        :accessor wall-collision-cost)
+   (cost-of-living :type float
+                   :initarg :cost-of-living :initform 0.1
+                   :accessor cost-of-living)
+   (init-fuel :type fixnum
               :initarg :init-fuel :initform 3.0
               :accessor init-fuel)
    (fuel-decrease-prob :type float
@@ -80,15 +93,6 @@
    (refuel-success-prob :type float
                         :initarg :refuel-success-prob :initform 0.95
                         :accessor refuel-success-prob)
-   (move-success-prob :type float
-                      :initarg :move-success-prob :initform 0.95
-                      :accessor move-success-prob)
-   (wall-collision-cost :type float
-                        :initarg :wall-collision-cost :initform 0.5
-                        :accessor wall-collision-cost)
-   (cost-of-living :type float
-                   :initarg :cost-of-living :initform 0.1
-                   :accessor cost-of-living)
    (waste-sources :type list
                   :initarg :waste-sources
                   :accessor waste-sources)
@@ -96,7 +100,7 @@
                   :initarg :waste-targets :initform '((0 0))
                   :accessor waste-targets)
    (waste-delivery-reward :type float
-                          :initarg :waste-delivery-reward :initform 5.0
+                          :initarg :waste-delivery-reward :initform 50.0
                           :accessor waste-delivery-reward))
   (:default-initargs :legality-test (lambda (val)
                                       (not (eq val 'wall)))))
@@ -104,19 +108,15 @@
 (defmethod initialize-instance ((env <waste-env>)
                                 &rest initargs &key waste-sources world-map)
   (declare (ignorable initargs))
+  ;; TODO: We have to try repeatedly to find an initial waste source because we don't take into
+  ;; account inaccessible grid fields here.  Maybe we should just generate a list of valid
+  ;; fields and sample from this list?
   (unless waste-sources
     (let ((sources (make-instance '<prod-set>
                      :sets (array-dimensions world-map)
                      :alist-keys '(0 1))))
       (setf (waste-sources env) sources)))
   (call-next-method))
-
-(defmethod print-object ((env <waste-env>) stream)
-  (if *print-readably*
-      (progn
-        (assert nil () "Who printed me?")
-        )
-      (print-unreadable-object (env stream :type t))))
 
 (defvar *available-actions* '(n e s w pickup drop refuel))
 
@@ -127,17 +127,29 @@
 
 (defmethod is-terminal-state ((env <waste-env>) state)
   "is-terminal-state WASTE-ENV STATE
-A state is terminal if we have unloaded the waste at one of the waste targets."
+A state is terminal if we have unloaded the waste at one of the waste targets or if the robot
+has run out of fuel."
   (or (eq (ws-waste-status state) 'at-dest)
       (zerop (ws-fuel state))))
 
+(defun move-would-hit-wall-p (env state action)
+  (destructuring-bind (robot-x robot-y) (ws-robot-loc state)
+    (case action
+      ((n) (= robot-x 0))
+      ((w) (= robot-y 0))
+      ((s) (destructuring-bind (dim-x dim-y) (dimensions env)
+             (declare (ignore dim-y))
+             (= (1+ robot-x) dim-x)))
+      ((e) (destructuring-bind (dim-x dim-y) (dimensions env)
+             (declare (ignore dim-x))
+             (= (1+ robot-y) dim-y))))))
+
 (defun reward (env state action new-state)
-  (declare (ignore action))
   (let* ((waste-at-dest? (eq (ws-waste-status new-state) 'at-dest))
          (waste-reward (if waste-at-dest?
                            (waste-delivery-reward env)
                            0.0))
-         (hit-wall? (eq (ws-robot-loc state) (ws-robot-loc new-state)))
+         (hit-wall? (move-would-hit-wall-p env state action))
          (wall-cost (if hit-wall? (wall-collision-cost env) 0.0))
          (no-fuel? (zerop (ws-fuel state)))
          (no-fuel-cost (if no-fuel? (no-fuel-cost env) 0.0)))
@@ -230,33 +242,7 @@ A state is terminal if we have unloaded the waste at one of the waste targets."
    :fuel (init-fuel env)
    :env env))
 
-(defun make-test-env-1 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(3 4) :initial-element 'road)))
-    (apply #'make-instance '<waste-env> :world-map world initargs)))
-
-(defun make-test-env-2 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(5 5) :initial-element 'road)))
-    (setf (aref world 3 3) 'wall
-          (aref world 4 3) 'wall)
-    (apply #'make-instance '<waste-env> :world-map world initargs)))
-
-(defun make-test-env-3 (&rest initargs &key &allow-other-keys)
-  (let ((world (make-array '(5 5) :initial-element 'road)))
-    (setf (aref world 2 1) 'wall
-          (aref world 2 2) 'wall
-          (aref world 2 3) 'wall
-          (aref world 3 3) 'wall
-          (aref world 4 3) 'wall)
-    (apply #'make-instance '<waste-env> :world-map world initargs)))
-
-#||
-(defparameter *test-env*
-  (make-test-env-2))
-(defparameter *s1* (sample-next *test-env* (get-state *test-env*) 's))
-(defparameter *s2* (sample-next *test-env* *s1* 's))
-||#
-
-(defmethod io-interface :before ((env <waste-env>))
+(defun set-up-exploration ()
   (format t "~&Welcome to the robotic waste collection example.
 
 This environment demonstrates a robot that moves around on a rectangular grid, picks up waste
@@ -267,3 +253,6 @@ the waste you can pick it up by entering PICKUP, if you are in a drop-off zone y
 waste and thereby end the episode (and collect the reward) by entering DROP.  To quit the
 environment, enter NIL.  (All input can be in lower or upper case.)")
   (setf *print-graphically* t))
+
+(defmethod io-interface :before ((env <waste-env>))
+  (set-up-exploration))

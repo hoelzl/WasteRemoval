@@ -32,7 +32,7 @@
                                  (ws-waste-target env-state)))
 
 
-(defparameter *waste-featurizer*
+(defparameter *waste-featurizer-0*
   (make-3partq-featurizer
    ()
    (navigate-choice
@@ -40,7 +40,68 @@
     (:qc-depends loc choice robot-dest fuel-feature)
     (:qe-depends have-waste? dropping-waste? waste-dist))
    (navigate-to-waste
-    (:qr-depends loc waste-source-feature)
+    (:qr-depends loc choice waste-source-feature)
+    (:qc-depends loc choice)
+    (:qe-depends waste-dist))
+   (navigate-to-dropoff
+    (:qr-depends loc waste-target-feature)
+    (:qc-depends loc have-waste?)
+    (:qe-depends have-waste? act-dist))
+   (choose-waste-removal-action
+    (:qr-depends loc have-waste? waste-source-feature waste-target-feature choice)
+    (:qc-depends have-waste? waste-source-feature waste-target-feature choice)
+    (:qe-dependes have-waste?))))
+
+(defparameter *waste-featurizer-1*
+  (make-3partq-featurizer
+   ()
+   (navigate-choice
+    (:qr-depends loc choice fuel-feature)
+    (:qc-depends loc choice robot-dest fuel-feature)
+    (:qe-depends have-waste? dropping-waste? waste-dist))
+   (navigate-to-waste
+    (:qr-depends loc choice waste-source-feature)
+    (:qc-depends loc choice)
+    (:qe-depends waste-dist))
+   (navigate-to-dropoff
+    (:qr-depends loc waste-target-feature)
+    (:qc-depends loc have-waste?)
+    (:qe-depends have-waste? act-dist))
+   (choose-waste-removal-action
+    (:qr-depends loc have-waste? waste-source-feature waste-target-feature choice)
+    (:qc-depends have-waste? waste-source-feature waste-target-feature choice)
+    (:qe-dependes have-waste?))))
+
+(defparameter *waste-featurizer-2*
+  (make-3partq-featurizer
+   ()
+   (navigate-choice
+    (:qr-depends loc choice fuel-feature)
+    (:qc-depends loc choice robot-dest fuel-feature)
+    (:qe-depends have-waste? dropping-waste? waste-dist))
+   (navigate-to-waste
+    (:qr-depends loc choice waste-source-feature)
+    (:qc-depends loc choice)
+    (:qe-depends waste-dist))
+   (navigate-to-dropoff
+    (:qr-depends loc waste-target-feature)
+    (:qc-depends loc have-waste?)
+    (:qe-depends have-waste? act-dist))
+   (choose-waste-removal-action
+    (:qr-depends loc have-waste? waste-source-feature waste-target-feature choice)
+    (:qc-depends have-waste? waste-source-feature waste-target-feature choice)
+    (:qe-dependes have-waste?))))
+
+(defparameter *waste-featurizer-3*
+  (make-3partq-featurizer
+   ()
+   (navigate-choice
+    (:qr-depends loc choice fuel-feature)
+    (:qc-depends loc choice robot-dest fuel-feature)
+    (:qe-depends have-waste? dropping-waste? waste-dist))
+   (navigate-to-waste
+    (:qr-depends loc choice waste-source-feature)
+    (:qc-depends loc choice)
     (:qe-depends waste-dist))
    (navigate-to-dropoff
     (:qr-depends loc waste-target-feature)

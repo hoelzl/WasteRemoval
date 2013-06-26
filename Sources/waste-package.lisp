@@ -11,6 +11,8 @@
   (:export 
    ;; The Environment
    #:<waste-env>
+   #:*print-graphically*
+   #:set-up-exploration
    
    ;; Actions
    #:N
@@ -33,9 +35,13 @@
    #:waste-targets
    #:waste-delivery-reward
 
-   #:make-test-env-1
-   #:make-test-env-2
-   #:make-test-env-3
+   #:make-waste-env-0
+   #:make-waste-env-1
+   #:make-waste-env-2
+   #:make-waste-env-3
+   #:make-waste-env-4
+   #:make-waste-env-5
+   #:make-waste-env-6
 
    ;; States (Not sure whether this should really be exposed, but we need the functions
    ;; to define state accessors)
@@ -63,7 +69,7 @@
         #:waste-env)
   (:export
    ;; The Top-Level Program
-   #:waste-removal-prog
+   #:waste-robot-prog
    
    ;; Partial Programs
    #:navigate

@@ -53,8 +53,8 @@ Navigate to the dropoff location and drop off the waste."
   (call navigate-to-dropoff (navigate (waste-target)))
   (action drop-waste 'drop))
 
-(defun waste-removal-prog ()
-  "waste-removal-prog
+(defun waste-robot-prog ()
+  "waste-robot-prog
 Repeadedly pick up waste and drop it off."
   (loop
     (choose choose-waste-removal-action
