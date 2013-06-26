@@ -330,7 +330,7 @@ the following way:
     env)  
 \end{Code}
 This defines a structure-class \texttt{simple-state} with three
-instance variables that can be accessed usin functions called
+instance variables that can be accessed using functions called
 \texttt{simple-start-loc}, \texttt{simple-robot-loc} and
 \texttt{simple-env}.  The prefix of the instance accessors is defined
 by the \texttt{:conc-name} struct-option.  Instances are created using
@@ -473,7 +473,10 @@ on several arguments:
 
 Emacs with the Slime mode for Lisp development offers many features to
 navigate through source code and to interact with a running Lisp
-process.  Some of the most useful are given in
+process.  You start the Lisp listener with the Emacs command
+\texttt{M-x slime}.
+
+Some of the most useful are given in
 Fig.~\ref{fig:emacs-commands}.  Some commands that are only valid in
 the interaction buffer are given in Fig.~\ref{fig:emacs-interaction}.
 
@@ -497,6 +500,8 @@ the interaction buffer are given in Fig.~\ref{fig:emacs-interaction}.
     \hline
     \texttt{,force-load-system} & Force (re)loading of a system\\
     \hline
+    \texttt{,sayoonara} & Quit the Lisp process\\
+    \hline
   \end{tabular}
   \caption{Some Emacs commands in the interaction buffer}
   \label{fig:emacs-interaction}
@@ -516,10 +521,13 @@ The most important ones are the following:
 \item[call] Calls a partial program with arguments.  Can optionally
   have a label that is used by the learning algorithms to determine
   which call sites should be learned together; if no label is
-  provided, the name of the function is used.
+  provided, the name of the function is used.  For example,
   \begin{Code}
     (call (nav some-location))
   \end{Code}
+  calls the partial program \texttt{nav} with argument
+  \texttt{some-location} (which is the location we want to travel to,
+  and should be bound as variable).
 \item[with-choice] Selects a value from a set of values.  A label is
   mandatory to allow the learning algorithms to determine how the
   choice should be learned.  E.g., choose among the action values
@@ -745,21 +753,25 @@ action.  This can be done by calling \texttt{(explore-policies)}:
   --------------------------------------------------
   Please enter choice, or nil to terminate. 
 \end{Code}
-Like \texttt{explore-environment}, the function
-\texttt{explore-policies} allows us to interact with the environments.
-In addition it shows the $Q$-functions computed by the different
-learning algorithms and their choice.  After following the advice of
-the first algorithm for a few steps we see why it performs badly on
-many examples: even though the robot bumps into the wall when moving
-west, the algorithm repeatedly suggests this move.  The second
-algorithm, in contrast, correctly suggests moving south.  (When
-looking at the code we will see that the first algorithm operates
-without knowing the robot's position on the board or the walls
-adjacent to the robot's position so that it cannot develop a strategy
-that behaves sensibly if there are obstacles in the arena.)  As a
-final example, let us try the second algorithm on a maze-like example:
+In this interaction we have elided the first step (which is a choice
+point that provides the only alternative \texttt{no-choice}.  Simply
+type \texttt{no-choice} at the prompt.  Like
+\texttt{explore-environment}, the function \texttt{explore-policies}
+allows us to interact with the environments.  In addition it shows the
+$Q$-functions computed by the different learning algorithms and their
+choice.  After following the advice of the first algorithm for a few
+steps we see why it performs badly on many examples: even though the
+robot bumps into the wall when moving west, the algorithm repeatedly
+suggests this move.  The second algorithm, in contrast, correctly
+suggests moving south.  (When looking at the code we will see that the
+first algorithm operates without knowing the robot's position on the
+board or the walls adjacent to the robot's position so that it cannot
+develop a strategy that behaves sensibly if there are obstacles in the
+arena.)  As a final example, let us try the second algorithm on a
+maze-like example:
 \begin{Code}
-  SIMPLE-PROG> (learn-behavior :environment-type :maze :algorithm-names '(hordq-a-2))
+  SIMPLE-PROG> (learn-behavior :environment-type :maze
+                               :algorithm-names '(hordq-a-2))
   Learning behavior using random exploration strategy
   Learning
   Episode
@@ -897,7 +909,7 @@ location.
 \label{sec:file-simple-features.lisp}
 
 This file defines several features that can be used for function
-approximations, and several ``3-part-Q'' featurizer that can be used
+approximations, and several ``3-part-Q'' featurizers that can be used
 to perform HORD-Q learning.  The first featurizer,
 \texttt{*simple-featurizer-0*} extracts only the current choice, so
 that function approximations using this featurizer cannot base
