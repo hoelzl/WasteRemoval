@@ -114,6 +114,8 @@ respectively.
     \hline
     Keyword & \verb|:my-keyword|\\
     \hline
+    Uninterned Symbol & \verb|#:uninterned|\\
+    \hline
     Character & \verb|#\A|, \verb|#\Newline|\\
     \hline
     List & \verb|()|, \verb|(1 2 3)|, \verb|(print "Hello")|\\
@@ -299,7 +301,7 @@ order:
   (key-arg 'a :z 'c :y 'b)        $\prints$ A, B, C 
 \end{Code}
 
-\subsection{Structs and Classes}
+\subsection{Structures and Classes}
 \label{sec:structs-classes}
 
 Common Lisp contains CLOS (Common Lisp Object System), an extremely
@@ -309,14 +311,14 @@ Structures as well as classes contain only data members; methods are
 defined outside of the user-defined data types.
 
 Structures have several restrictions that make them much less flexible
-than classes.  For example, classes can be redefined (and existing
-instances using the old class definition can be upgraded to the new
-class definition), classes support multiple inheritance, and the class
-of a class-instance can be changed dynamically.  Structures provide
-none of these features, but they can therefore be implemented more
-efficiently than classes.  Therefore it is advisable to use structure
-types only in situation where performance considerations are
-paramount.
+than classes, but also more efficient.  For example, classes can be
+redefined (and existing instances using the old class definition can
+be upgraded to the new class definition), classes support multiple
+inheritance, and the class of a class-instance can be changed
+dynamically.  Structures provide none of these features, but they can
+therefore be implemented more efficiently than classes.  Therefore it
+is advisable to use structure types only in situation where
+performance considerations are paramount.
 
 Unfortunately, for historic reasons, the syntactic for of class and
 structure definitions is quite different.  Structures are defined in
