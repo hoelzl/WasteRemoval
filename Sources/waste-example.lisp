@@ -51,7 +51,7 @@
   (let ((base-size
           (ecase *environment-type*
             ((:small) (if *use-complex-environment*  1000000  500000))
-            ((:medium) (if *use-complex-environment* 5000000 2500000))
+            ((:medium) (if *use-complex-environment* 2500000 1000000))
             ((:large) (if *use-complex-environment* 10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
                                     3000000 1500000)))))

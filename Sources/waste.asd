@@ -16,7 +16,6 @@
                (:file "simple-example")
                (:file "waste-package")
                (:file "waste-env")
-               (:file "waste-envs")
                (:file "waste-prog")
                (:file "waste-features")
                (:file "waste-example")))

@@ -39,6 +39,31 @@
         (is-valid-direction-p
          action target-x target-y robot-x robot-y)))))
 
+(def-feature shortest-path-distance (state action)
+  (let* ((robot-loc (simple-robot-loc env-state))
+         (target-loc (stack-var-val 'loc t t)))
+    (grid-world:shortest-path-dist (simple-env env-state)
+                                   robot-loc
+                                   target-loc)))
+
+(defun direction-from-to (from to)
+  (destructuring-bind (from-x from-y) from
+    (destructuring-bind (to-x to-y) to
+      (cond ((< from-x to-x) 's)
+            ((> from-x to-x) 'n)
+            ((< from-y to-y) 'e)
+            ((> from-y to-y) 'w)
+            (t 'rest)))))
+
+(def-feature shortest-path-direction (state action)
+  (let* ((robot-loc (simple-robot-loc env-state))
+         (target-loc (stack-var-val 'loc t t))
+         (robot-dest (second (grid-world:shortest-path (simple-env env-state)
+                                                       robot-loc
+                                                       target-loc))))
+    (direction-from-to robot-loc robot-dest)))
+
+
 (defparameter *simple-featurizer-0*
   (make-3partq-featurizer
    ()

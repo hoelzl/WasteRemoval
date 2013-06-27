@@ -23,16 +23,7 @@
   (ws-waste-target env-state))
 
 (def-feature robot-dest (state action)
-  (let ((res (stack-var-val 'loc t t)))
-    (case (ws-waste-status env-state)
-      ((:on-robot)
-       #+ (or)
-       (assert (member res (ws-waste-target env-state))))
-      ((:at-source)
-       #+ (or)
-       (assert (equal res (ws-waste-source env-state))))
-      ((:at-target)))
-    res))
+  (stack-var-val 'loc t t))
 
 (def-feature navigating-to-waste (state action)
   (stack-contains-frame 'pickup-waste))
@@ -51,7 +42,7 @@
                                  (ws-robot-loc env-state)
                                  (ws-waste-target env-state)))
 
-(def-feature shortest-path-dist (state action)
+(def-feature shortest-path-distance (state action)
   (let* ((robot-loc (ws-robot-loc env-state))
          (target-loc (stack-var-val 'loc t t)))
     (grid-world:shortest-path-dist (ws-env env-state)
@@ -101,7 +92,8 @@
    ()
    (navigate-choice
     (:qr-depends loc choice navigating-to-waste)
-    (:qc-depends loc choice navigating-to-waste)
+    (:qc-depends loc choice navigating-to-waste
+                 shortest-path-direction)
     (:qe-depends loc choice))
    (navigate-to-waste
     (:qr-depends)
@@ -121,9 +113,10 @@
    ()
    (navigate-choice
     (:qr-depends loc choice navigating-to-waste)
-    (:qc-depends loc choice navigating-to-waste
-                 shortest-path-dist)
-    (:qe-depends loc choice))
+    (:qc-depends choice navigating-to-waste
+                 shortest-path-distance shortest-path-direction)
+    (:qe-depends choice navigating-to-waste
+                 shortest-path-distance shortest-path-direction))
    (navigate-to-waste
     (:qr-depends)
     (:qc-depends)
@@ -142,9 +135,9 @@
    ()
    (navigate-choice
     (:qr-depends loc choice navigating-to-waste)
-    (:qc-depends loc choice navigating-to-waste
-                 shortest-path-dist shortest-path-direction)
-    (:qe-depends loc choice))
+    (:qc-depends choice navigating-to-waste
+                 shortest-path-distance shortest-path-direction)
+    (:qe-depends choice shortest-path-direction))
    (navigate-to-waste
     (:qr-depends)
     (:qc-depends)
