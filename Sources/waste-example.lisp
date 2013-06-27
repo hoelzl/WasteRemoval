@@ -51,7 +51,7 @@
   (let ((base-size
           (ecase *environment-type*
             ((:small) (if *use-complex-environment*  1000000  500000))
-            ((:medium) (if *use-complex-environment* 2500000 1000000))
+            ((:medium) (if *use-complex-environment* 5000000 5000000))
             ((:large) (if *use-complex-environment* 10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
                                     3000000 1500000)))))
@@ -145,10 +145,76 @@
   (evaluate *program* *environment* (get-policy-hist (algorithm-for name))
             :num-steps 50 :num-trials 100))
 
-(defun evaluate-performance (&optional (algorithms *algorithm-names*))
-  (format t "~2&Learning curves for ~{~A~^, ~} are:~%" algorithms)
-  (pprint (map 'vector #'list 
-               (mapcar 'evaluation-for algorithms))))
+(defvar *gnuplot-file-template*
+  "set title 'Learning Curve for ~A'
+set title font \",15\"
+set xlabel 'iterations'
+set xlabel font \",12\"
+set ylabel 'reward'
+set ylabel font \",12\"
+set key off
+set autoscale xy
+unset grid
+set style line 1 lt rgb \"blue\" lw 2 pt 6
+
+set terminal pngcairo
+set output '~A'
+
+plot '~A' with linespoints ls 1
+")
+
+(defvar *file-exists-action* :error)
+
+(defun evaluate-performance (&key (algorithm-names *algorithm-names*)
+                                  (output-directory
+                                   (merge-pathnames
+                                    (make-pathname :directory '(:relative ".." "Gnuplot"))
+                                    (asdf:system-definition-pathname :waste)))
+                                  (gnuplot-file-prefix)
+                                  (data-file-prefix "data-")
+                                  (png-file-prefix gnuplot-file-prefix)
+                                  (output-to-terminal (not gnuplot-file-prefix)))
+  (when output-to-terminal
+    (format t "~2&Learning curves for ~{~A~^, ~} are:~%" algorithm-names)
+    (pprint (map 'list #'list 
+                 (mapcar 'evaluation-for algorithm-names))))
+  (when gnuplot-file-prefix
+    (ensure-directories-exist output-directory)
+    (dolist (alg-name algorithm-names)
+      (let ((data-file (merge-pathnames
+                          (make-pathname :name (concatenate 'string
+                                                            data-file-prefix 
+                                                            (symbol-name alg-name))
+                                         :type "dat")
+                          output-directory))
+            (gnuplot-file (merge-pathnames
+                           (make-pathname :name (concatenate 'string
+                                                             gnuplot-file-prefix
+                                                             (symbol-name alg-name))
+                                          :type "plt")
+                           output-directory))
+            (png-file (merge-pathnames
+                       (make-pathname :name (concatenate 'string
+                                                         png-file-prefix
+                                                         (symbol-name alg-name))
+                                      :type "png")
+                       output-directory)))
+        (format t "~&Writing data to file ~A." (enough-namestring data-file))
+        (with-open-file (stream data-file :direction :output
+                                            :if-exists *file-exists-action*
+                                            :if-does-not-exist :create)
+          (map nil 
+               (lambda (value)
+                 (format stream "~&~A~%" value))
+               (evaluation-for alg-name)))
+        (format t "~&Writing gnuplot driver file ~A." (enough-namestring gnuplot-file))
+        (with-open-file (stream gnuplot-file :direction :output
+                                            :if-exists *file-exists-action*
+                                            :if-does-not-exist :create)
+          (format stream *gnuplot-file-template*
+                  alg-name
+                  (namestring png-file)
+                  (namestring data-file)))))))
 
 #+(or)
 (defun clean-up ()
