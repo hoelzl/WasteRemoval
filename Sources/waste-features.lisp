@@ -60,12 +60,15 @@
 
 (def-feature shortest-path-direction (state action)
   (let* ((robot-loc (ws-robot-loc env-state))
-         (target-loc ;(stack-var-val 'loc t t)
-           (ws-waste-target env-state))
-         (robot-dest (second (grid-world:shortest-path (ws-env env-state)
-                                                       robot-loc
-                                                       target-loc))))
-    (direction-from-to robot-loc robot-dest)))
+         (target-loc (ws-waste-target env-state))
+         (target-path (grid-world:shortest-path (ws-env env-state)
+                                               robot-loc
+                                               target-loc)))
+    (assert target-loc (target-loc) "No target location?")
+    (cond ((equal robot-loc target-loc) 'rest)
+          (t
+           (assert (>= (length target-path) 2))
+           (direction-from-to robot-loc (second target-path))))))
 
 
 (defparameter *waste-featurizer-0*
