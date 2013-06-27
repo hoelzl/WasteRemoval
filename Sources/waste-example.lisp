@@ -8,13 +8,12 @@
 (defvar *exploration-strategy* :random)
 
 (defparameter *algorithm-names* (list 
-                                 ;; 'smdpq
                                  ;; 'hordq
-                                 'gold-standard
-                                 ;; 'hordq-a-0
+                                 ;; 'gold-standard
+                                 'hordq-a-0
                                  'hordq-a-1
-                                 ;; 'hordq-a-2
-                                 ;; 'hordq-a-3
+                                 'hordq-a-2
+                                 'hordq-a-3
                                  ))
 
 (defvar *current-exploration-strategy*)
@@ -51,9 +50,9 @@
 (defun steps-for-environment ()
   (let ((base-size
           (ecase *environment-type*
-            ((:small) (if *use-complex-environment* 15000 7500))
-            ((:medium) (if *use-complex-environment* 300000 75000))
-            ((:large) (if *use-complex-environment* 7500000 3000000))
+            ((:small) (if *use-complex-environment*  1000000  500000))
+            ((:medium) (if *use-complex-environment* 5000000 2500000))
+            ((:large) (if *use-complex-environment* 10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
                                     3000000 1500000)))))
     (* base-size *step-number-multiplier*)))
@@ -154,3 +153,16 @@
 #+(or)
 (defun clean-up ()
   (reset *smdpq*))
+
+(defun print-hash-values (q-getter algorithm)
+  (let ((hash (fn-approx:params (q-fn:fn-approx (funcall q-getter algorithm)))))
+    (maphash (lambda (k v)
+               (format t "~&~A: ~A" k v))
+             hash)))
+
+(defun print-qr-values (&optional (algorithm (aref (algorithms) 0)))
+  (print-hash-values #'ahq::qr algorithm))
+(defun print-qc-values (&optional (algorithm (aref (algorithms) 0)))
+  (print-hash-values #'ahq::qc algorithm))
+(defun print-qe-values (&optional (algorithm (aref (algorithms) 0)))
+  (print-hash-values #'ahq::qe algorithm))

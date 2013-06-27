@@ -6,7 +6,7 @@
 
 (defstruct (waste-state (:conc-name #:ws-))
   robot-loc
-  (waste-status 'at-source) ; on-robot at-source at-dest
+  (waste-status :at-source) ; :on-robot :at-source :at-dest
   waste-source
   waste-target
   fuel
@@ -49,17 +49,17 @@
              do (cond ((or (= i -1) (= i (first d)))
                        (if (or (= j -1) (= j (second d)))
                            (format stream "XX")
-                           (format stream "~AX" j)))
+                           (format stream "~AX" (mod j 10))))
                       ((or (= j -1) (= j (second d)))
-                       (format stream "~AX" i))
+                       (format stream "~AX" (mod i 10)))
                       ((eq (loc-value env (list i j)) 'wall) 
                        (format stream "XX"))
                       ((equal (ws-robot-loc state) (list i j))
-                       (if (eq (ws-waste-status state) 'on-robot)
+                       (if (eq (ws-waste-status state) :on-robot)
                            (format stream "RR")
                            (format stream "rr")))
                       ((equal (ws-waste-source state) (list i j))
-                       (if (eq (ws-waste-status state) 'at-source)
+                       (if (eq (ws-waste-status state) :at-source)
                            (format stream "WW")
                            (format stream "ww")))
                       (t (format stream "  "))))
@@ -79,7 +79,7 @@
                    :initarg :cost-of-living :initform 0.1
                    :accessor cost-of-living)
    (init-fuel :type fixnum
-              :initarg :init-fuel :initform 3.0
+              :initarg :init-fuel :initform 100.0
               :accessor init-fuel)
    (fuel-decrease-prob :type float
                        :initarg :fuel-decrease-prob :initform 0.8
@@ -88,7 +88,7 @@
                          :initarg :fuel-amount-per-step :initform 1.0
                          :accessor fuel-amount-per-step)
    (no-fuel-cost :type float
-                 :initarg :no-fuel-cost :initform 1.0
+                 :initarg :no-fuel-cost :initform 100.0
                  :accessor no-fuel-cost)
    (refuel-success-prob :type float
                         :initarg :refuel-success-prob :initform 0.95
@@ -129,7 +129,8 @@
   "is-terminal-state WASTE-ENV STATE
 A state is terminal if we have unloaded the waste at one of the waste targets or if the robot
 has run out of fuel."
-  (or (eq (ws-waste-status state) 'at-dest)
+  (or (eq (ws-waste-status state) :at-dest)
+      #+ (or)
       (zerop (ws-fuel state))))
 
 (defun move-would-hit-wall-p (env state action)
@@ -145,7 +146,7 @@ has run out of fuel."
              (= (1+ robot-y) dim-y))))))
 
 (defun reward (env state action new-state)
-  (let* ((waste-at-dest? (eq (ws-waste-status new-state) 'at-dest))
+  (let* ((waste-at-dest? (eq (ws-waste-status new-state) :at-dest))
          (waste-reward (if waste-at-dest?
                            (waste-delivery-reward env)
                            0.0))
@@ -187,12 +188,12 @@ has run out of fuel."
     (case action
       ((pickup)
        (if (equal (ws-robot-loc state) (ws-waste-source state))
-           'on-robot
+           :on-robot
            waste-status))
       ((drop)
-       (if (and (eq (ws-waste-status state) 'on-robot)
+       (if (and (eq (ws-waste-status state) :on-robot)
                 (member (ws-robot-loc state) (waste-targets env) :test 'equal))
-           'at-dest
+           :at-dest
            waste-status))
       (otherwise
        waste-status))))
@@ -236,7 +237,7 @@ has run out of fuel."
 (defmethod sample-init ((env <waste-env>))
   (make-waste-state
    :robot-loc (funcall (unif-grid-dist-sampler env))
-   :waste-status 'at-source
+   :waste-status :at-source
    :waste-source (compute-intial-waste-source env)
    :waste-target (first (waste-targets env))
    :fuel (init-fuel env)
