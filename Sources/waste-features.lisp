@@ -60,7 +60,8 @@
 
 (def-feature shortest-path-direction (state action)
   (let* ((robot-loc (ws-robot-loc env-state))
-         (target-loc (stack-var-val 'loc t t))
+         (target-loc ;(stack-var-val 'loc t t)
+           (ws-waste-target env-state))
          (robot-dest (second (grid-world:shortest-path (ws-env env-state)
                                                        robot-loc
                                                        target-loc))))
