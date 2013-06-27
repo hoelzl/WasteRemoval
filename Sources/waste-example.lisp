@@ -141,7 +141,7 @@
                    :hist-length 100 :step-print-inc 2500 :episode-print-inc 500))
           (algorithms)))))
 
-(defvar *evaluation-steps* 100)
+(defvar *evaluation-steps* 50)
 (defvar *evaluation-trials* 25)
 
 (defun evaluation-for (name)
@@ -184,7 +184,8 @@ plot '~A' with linespoints ls 1
   (when gnuplot-file-prefix
     (ensure-directories-exist output-directory)
     (dolist (alg-name algorithm-names)
-      (let* ((file-postfix (concatenate 'string 
+      (let* ((file-postfix (concatenate 'string
+                                        "-waste-"
                                         (string-downcase (symbol-name alg-name)) "-" 
                                         (string-downcase (symbol-name *environment-type*)) "-"
                                         (if *use-complex-environment* "complex" "simple")))
