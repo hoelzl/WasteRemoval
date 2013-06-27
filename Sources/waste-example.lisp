@@ -50,7 +50,7 @@
 (defun steps-for-environment ()
   (let ((base-size
           (ecase *environment-type*
-            ((:small) (if *use-complex-environment*  1000000  500000))
+            ((:small) (if *use-complex-environment*  2500000 1000000))
             ((:medium) (if *use-complex-environment* 5000000 5000000))
             ((:large) (if *use-complex-environment* 10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
@@ -138,15 +138,18 @@
             (learn program *environment*
                    (pick-exploration-strategy alg exploration-strategy)
                    alg (steps-for-environment)
-                   :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
+                   :hist-length 100 :step-print-inc 2500 :episode-print-inc 500))
           (algorithms)))))
+
+(defvar *evaluation-steps* 100)
+(defvar *evaluation-trials* 25)
 
 (defun evaluation-for (name)
   (evaluate *program* *environment* (get-policy-hist (algorithm-for name))
-            :num-steps 50 :num-trials 100))
+            :num-steps *evaluation-steps* :num-trials *evaluation-trials*))
 
 (defvar *gnuplot-file-template*
-  "set title 'Learning Curve for ~A'
+  "set title 'Learning Curve for ~A (WR, ~A, ~A)'
 set title font \",15\"
 set xlabel 'iterations'
 set xlabel font \",12\"
@@ -181,22 +184,26 @@ plot '~A' with linespoints ls 1
   (when gnuplot-file-prefix
     (ensure-directories-exist output-directory)
     (dolist (alg-name algorithm-names)
-      (let ((data-file (merge-pathnames
+      (let* ((file-postfix (concatenate 'string 
+                                        (string-downcase (symbol-name alg-name)) "-" 
+                                        (string-downcase (symbol-name *environment-type*)) "-"
+                                        (if *use-complex-environment* "complex" "simple")))
+             (data-file (merge-pathnames
                           (make-pathname :name (concatenate 'string
                                                             data-file-prefix 
-                                                            (symbol-name alg-name))
+                                                            file-postfix)
                                          :type "dat")
                           output-directory))
             (gnuplot-file (merge-pathnames
                            (make-pathname :name (concatenate 'string
                                                              gnuplot-file-prefix
-                                                             (symbol-name alg-name))
+                                                             file-postfix)
                                           :type "plt")
                            output-directory))
             (png-file (merge-pathnames
                        (make-pathname :name (concatenate 'string
                                                          png-file-prefix
-                                                         (symbol-name alg-name))
+                                                         file-postfix)
                                       :type "png")
                        output-directory)))
         (format t "~&Writing data to file ~A." (enough-namestring data-file))
@@ -206,13 +213,16 @@ plot '~A' with linespoints ls 1
           (map nil 
                (lambda (value)
                  (format stream "~&~A~%" value))
-               (evaluation-for alg-name)))
+               (let ((*evaluation-steps* (floor (* *evaluation-steps* 2.5))))
+                 (evaluation-for alg-name))))
         (format t "~&Writing gnuplot driver file ~A." (enough-namestring gnuplot-file))
         (with-open-file (stream gnuplot-file :direction :output
                                             :if-exists *file-exists-action*
                                             :if-does-not-exist :create)
           (format stream *gnuplot-file-template*
                   alg-name
+                  *environment-type*
+                  (if *use-complex-environment* "Complex" "Simple")
                   (namestring png-file)
                   (namestring data-file)))))))
 
