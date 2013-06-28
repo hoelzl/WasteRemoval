@@ -4,16 +4,47 @@
 \include{macros}
 
 \begin{document}
-\title{A Whirlwind Introduction to ALisp/Poem}
+\title{A Whirlwind Introduction to Reinforcement Learning with
+  Poem/ALisp} 
+
 \author{Matthias H\"olzl}
 
 \maketitle
 
-\section{Lisp}
+\begin{abstract}
+  This tutorial contains a short introduction to the sublanguage of
+  \Poem{} that deals with probabilistic reasoning and reinforcement
+  learning.  We assume a certain level of mathematical maturity, but
+  no prior knowledge of the specific techniques, tools or languages
+  used.
+\end{abstract}
+
+\section{\Poem{} and Common Lisp}
 \label{sec:lisp}
 
-Most of the code in ALisp/Poem is normal Common Lisp code, so we start
-with a very short introduction to some features of the base language.
+As its name implies, the Pseudo-Operational Ensemble Modeling Language
+(\Poem), is a modeling and programming languag for ensembles.  An
+important characteristic of ensembles is that they are designed to
+operate in a wide variety of open-ended, semi-structured or
+unstructured probabilistic environments; we call the set of all these
+environments the ensemble's \emph{adaptation space}. \Poem{} allows
+developers to design logical specification of the adaptation space and
+its behavior, to reason about the adaptation space using automated
+reasoners, to describe (possible incomplete) strategies for achieving
+solutions, and to employ hierarchical reinforcement learning
+techniques to automatically complete the strategies by finding good
+choices for the non-deterministic behaviors.
+
+\Poem{} is implemented as a domain-specific language based on Common
+Lisp, which integrates the Snark theorem prover, the ALisp system for
+hierarchical reinforcement learning, and extensions for manipulating
+logical theories, Markov decision processes, etc.  Since this tutorial
+focuses on the reinforcement learning aspects of \Poem, we ignore the
+parts of the language that deal with specifications in logic,
+reasoning and knowledge representation.  Therefore, large parts of the
+code in the examples for this tutorial consists of Common Lisp
+expressions, so we start with a very short introduction to some
+features of the base language.
 
 \subsection{Values}
 \label{sec:values}
