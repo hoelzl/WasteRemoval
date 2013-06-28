@@ -187,8 +187,9 @@ plot '~A' with linespoints ls 1
       (let* ((file-postfix (concatenate 'string
                                         "waste-"
                                         (string-downcase (symbol-name alg-name)) "-" 
-                                        (string-downcase (symbol-name *environment-type*)) "-"
-                                        (if *use-complex-environment* "complex" "simple")))
+                                        (string-downcase (symbol-name *environment-type*))
+                                        (if *use-complex-environment* "-complex-" "-simple-")
+					(format nil "~A" (steps-for-environment))))
              (data-file (merge-pathnames
                           (make-pathname :name (concatenate 'string
                                                             data-file-prefix 
