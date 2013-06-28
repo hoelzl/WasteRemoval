@@ -174,7 +174,7 @@ plot '~A' with linespoints ls 1
                                     (make-pathname :directory '(:relative ".." "Gnuplot"))
                                     (asdf:system-definition-pathname :waste)))
                                   (gnuplot-file-prefix)
-                                  (data-file-prefix "data-")
+                                  (data-file-prefix "data")
                                   (png-file-prefix gnuplot-file-prefix)
                                   (output-to-terminal (not gnuplot-file-prefix)))
   (when output-to-terminal
@@ -185,7 +185,7 @@ plot '~A' with linespoints ls 1
     (ensure-directories-exist output-directory)
     (dolist (alg-name algorithm-names)
       (let* ((file-postfix (concatenate 'string
-                                        "-waste-"
+                                        "waste-"
                                         (string-downcase (symbol-name alg-name)) "-" 
                                         (string-downcase (symbol-name *environment-type*)) "-"
                                         (if *use-complex-environment* "complex" "simple")))
