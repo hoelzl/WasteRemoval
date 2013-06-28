@@ -78,7 +78,7 @@
    (cost-of-living :type float
                    :initarg :cost-of-living :initform 0.1
                    :accessor cost-of-living)
-   (init-fuel :type fixnum
+   (init-fuel :type number
               :initarg :init-fuel :initform 100.0
               :accessor init-fuel)
    (fuel-decrease-prob :type float
@@ -93,8 +93,7 @@
    (refuel-success-prob :type float
                         :initarg :refuel-success-prob :initform 0.95
                         :accessor refuel-success-prob)
-   (waste-sources :type list
-                  :initarg :waste-sources
+   (waste-sources :initarg :waste-sources
                   :accessor waste-sources)
    (waste-targets :type list
                   :initarg :waste-targets :initform '((0 0))
