@@ -185,14 +185,14 @@ plot '~A' with linespoints ls 1
     (ensure-directories-exist output-directory)
     (dolist (alg-name algorithm-names)
       (let* ((file-postfix (concatenate 'string
-                                        "waste-"
+                                        "-waste-"
                                         (string-downcase (symbol-name alg-name)) "-" 
                                         (string-downcase (symbol-name *environment-type*))
                                         (if *use-complex-environment* "-complex-" "-simple-")
 					(format nil "~A" (steps-for-environment))))
              (data-file (merge-pathnames
                           (make-pathname :name (concatenate 'string
-                                                            data-file-prefix 
+                                                            data-file-prefix
                                                             file-postfix)
                                          :type "dat")
                           output-directory))

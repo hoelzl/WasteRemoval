@@ -186,7 +186,7 @@ plot '~A' with linespoints ls 1
     (ensure-directories-exist output-directory)
     (dolist (alg-name algorithm-names)
       (let* ((file-postfix (concatenate 'string 
-                                        "simple-"
+                                        "-simple-"
                                         (string-downcase (symbol-name alg-name)) "-"
                                         (string-downcase (symbol-name *environment-type*)) "-"
                                         (if *use-complex-environment* "complex" "simple")))
