@@ -50,11 +50,11 @@
 (defun steps-for-environment ()
   (let ((base-size
           (ecase *environment-type*
-            ((:small) (if *use-complex-environment*  2500000 1000000))
-            ((:medium) (if *use-complex-environment* 5000000 5000000))
-            ((:large) (if *use-complex-environment* 10000000 5000000))
+            ((:small) (if *use-complex-environment*   500000  250000))
+            ((:medium) (if *use-complex-environment* 2500000 1000000))
+            ((:large) (if *use-complex-environment*  5000000 2500000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
-                                    3000000 1500000)))))
+                                    5000000 2500000)))))
     (* base-size *step-number-multiplier*)))
 
 
@@ -138,7 +138,7 @@
             (learn program *environment*
                    (pick-exploration-strategy alg exploration-strategy)
                    alg (steps-for-environment)
-                   :hist-length 100 :step-print-inc 2500 :episode-print-inc 500))
+                   :hist-length 100 :step-print-inc 10000 :episode-print-inc 250))
           (algorithms)))))
 
 (defvar *evaluation-steps* 50)
