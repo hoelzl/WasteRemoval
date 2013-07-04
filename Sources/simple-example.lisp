@@ -113,15 +113,19 @@
     (setf *current-exploration-strategy* result)
     result))
 
-(defun learn-behavior (&key (program *program*)
+(defun learn-behavior  (&key (program *program*)
                             environment-type
                             (use-complex-environment nil use-complex-environment-p)
-                            (exploration-strategy *exploration-strategy*)
-                            (algorithm-names *algorithm-names*))
+                            (exploration-strategy *exploration-strategy* exploration-strategy-p)
+                            (algorithm-names *algorithm-names* algorithm-names-p))
   (when environment-type
     (setf *environment-type* environment-type))
   (when use-complex-environment-p
     (setf *use-complex-environment* use-complex-environment))
+  (when exploration-strategy-p
+    (setf *exploration-strategy* exploration-strategy))
+  (when algorithm-names-p
+    (setf *algorithm-names* algorithm-names))
   (initialize-environment)
   (initialize-algorithms algorithm-names)
   (case exploration-strategy 
