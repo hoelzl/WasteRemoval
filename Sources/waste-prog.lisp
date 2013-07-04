@@ -15,7 +15,7 @@
 (def-env-accessor env ws-env
     "The environemnt for a state")
 
-(defun nav (loc)
+(defun* nav (loc)
   "nav LOC 
 Navigate to location LOC.  Repeatedly choose among the N, E, S, W, and REFUEL actions until the
 robot reaches LOC."
@@ -23,7 +23,7 @@ robot reaches LOC."
     (with-choice navigate-choice (dir '(N E S W refuel))
       (action navigate-move dir))))
 
-(defun nav-directly (loc)
+(defun* nav-directly (loc)
   "nav-directly LOC
 navigate to LOC using the solution computed from Floyd's algorithm."
   (until (equal (robot-loc) loc)
@@ -35,7 +35,7 @@ navigate to LOC using the solution computed from Floyd's algorithm."
 (defparameter *refuel-counter* 0)
 (defparameter *move-counter* 0)
 
-(defun refuel-and-nav (loc)
+(defun* refuel-and-nav (loc)
   "refuel-and-navigate LOC 
 Navigate to location LOC.  Repeatedly choose among the N, E, S and W actions until the robot
 reaches LOC."
@@ -51,8 +51,8 @@ reaches LOC."
           (with-choice navigate-choice (dir '(N E S W))
             (action navigate-move dir))))))
 
-(defun refuel-and-nav-directly (loc)
-  "refuel-and-navigate LOC 
+(defun* refuel-and-nav-directly (loc)
+  "refuel-and-nav-directly LOC 
 Navigate to location LOC.  Repeatedly choose among the N, E, S and W actions until the robot
 reaches LOC."
   (until (equal (robot-loc) loc)
@@ -67,19 +67,19 @@ reaches LOC."
           (let ((next-loc (second (grid-world:shortest-path (env) (robot-loc) loc))))
             (action navigate-move (direction-from-to (robot-loc) next-loc)))))))
 
-(defun pickup-waste ()
+(defun* pickup-waste ()
   "pickup-waste
 Navigate to the location of the waste and pick it up."
   (call navigate-to-waste (refuel-and-nav (waste-source)))
   (action pickup-action 'pickup))
 
-(defun drop-waste ()
+(defun* drop-waste ()
   "drop-waste
 Navigate to the dropoff location and drop off the waste."
   (call navigate-to-dropoff (refuel-and-nav (waste-target)))
   (action drop-action 'drop))
 
-(defun waste-robot-prog ()
+(defun* waste-robot-prog ()
   "waste-robot-prog
 Repeadedly pick up waste and drop it off."
   (loop
