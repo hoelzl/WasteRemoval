@@ -27,11 +27,22 @@
 (defvar *algorithms* (make-array (list (length *algorithm-names*))
                                  :adjustable t :fill-pointer 0))
 
-(defun algorithm-for (name)
+(defstruct (algorithm-description (:conc-name ad-))
+  algorithm
+  (bucket-function #'canonicalize)
+  (test #'equal))
+
+(defun algorithm-descriptions ()
+  *algorithms*)
+
+(defun algorithm-description-for (name)
   (aref *algorithms* (algorithm-index name)))
 
+(defun algorithm-for (name)
+  (ad-algorithm (algorithm-description-for name)))
+
 (defun algorithms ()
-  *algorithms*)
+  (map-array 'ad-algorithm *algorithms*))
 
 (defun make-new-environment (&optional (type *environment-type*)
                                        (complexp *use-complex-environment*))
@@ -50,11 +61,22 @@
 (defun steps-for-environment ()
   (let ((base-size
           (ecase *environment-type*
-            ((:small) (if *use-complex-environment*   500000  250000))
-            ((:medium) (if *use-complex-environment* 2500000 1000000))
-            ((:large) (if *use-complex-environment*  5000000 2500000))
+            ((:small)
+             (if (eq *exploration-strategy* :random)
+                 #+ (or)
+                 (if *use-complex-environment* 100000 50000)
+                 (if *use-complex-environment*  50000 25000)
+                 (if *use-complex-environment*  50000 25000)))
+            ((:medium)
+             (if (eq *exploration-strategy* :random)
+                 #+ (or)
+                 (if *use-complex-environment* 5000000 2500000)
+                 (if *use-complex-environment*  500000  250000)
+                 (if *use-complex-environment*  50000  25000))
+             (if *use-complex-environment* 5000000 2500000))
+            ((:large) (if *use-complex-environment*  10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
-                                    5000000 2500000)))))
+                                    10000000 5000000)))))
     (* base-size *step-number-multiplier*)))
 
 
@@ -71,15 +93,28 @@
   (setf (fill-pointer *algorithms*) 0)
   (mapc (lambda (alg)
           (when (member (first alg) algorithm-names)
-            (vector-push-extend (second alg) *algorithms*)))
+            (vector-push-extend (apply 'make-algorithm-description (rest alg)) *algorithms*)))
         (list
-         (list 'smdpq (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/"))
-         (list 'hordq (make-instance 'ahq:<hordq>))
-         (list 'gold-standard (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
-         (list 'hordq-a-0 (make-instance 'ahq:<hordq> :features *waste-featurizer-0*))
-         (list 'hordq-a-1 (make-instance 'ahq:<hordq> :features *waste-featurizer-1*))
-         (list 'hordq-a-2 (make-instance 'ahq:<hordq> :features *waste-featurizer-2*))
-         (list 'hordq-a-3 (make-instance 'ahq:<hordq> :features *waste-featurizer-3*))))
+         (list 'smdpq :algorithm (alisp-smdpq:make-smdpq-alg :hist-out-dir "Temp/"))
+         (list 'hordq :algorithm (make-instance 'ahq:<hordq>))
+         (list 'gold-standard 
+               :algorithm (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
+         (list 'hordq-a-0 
+               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-0*)
+               :bucket-function *waste-bucket-function-0*
+               :test #'equalp)
+         (list 'hordq-a-1 
+               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-1*)
+               :bucket-function *waste-bucket-function-1*
+               :test #'equalp)
+         (list 'hordq-a-2 
+               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-2*)
+               :bucket-function *waste-bucket-function-2*
+               :test #'equalp)
+         (list 'hordq-a-3 
+               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-3*)
+               :bucket-function *waste-bucket-function-3*
+               :test #'equalp)))
   (values))
 
 (defun explore-policies (&optional (show-advice t))
@@ -95,17 +130,22 @@
                               hists))
                     '())))
 
-(defun pick-exploration-strategy (algorithm &optional (strategy *exploration-strategy*))
+(defun pick-exploration-strategy (algorithm-description
+                                  &optional (strategy *exploration-strategy*))
   (let ((result 
           (ecase strategy
             ((:random)
              'random)
             ((:epsilon)
              (make-instance '<epsilon-policy>
-               :q-learning-alg algorithm))
+               :q-learning-alg (ad-algorithm algorithm-description)
+               :bucket-fn (ad-bucket-function algorithm-description)
+               :test (ad-test algorithm-description)))
             ((:boltzman)
              (make-instance 'exp-pol:<epsilon-boltzmann-exp-pol>
-               :q-learning-alg algorithm
+               :q-learning-alg (ad-algorithm algorithm-description)
+               :bucket-fn (ad-bucket-function algorithm-description)
+               :test (ad-test algorithm-description)
                ;; TODO: Make first parameter depend on number of trials
                :temp-fn (lambda (n) (/ 1000.0 (1+ n)))
                :epsilon-decay-fn (exp-pol:make-linear-epsilon-decay-fn 10000 0.01))))))
@@ -133,17 +173,17 @@
      (learn program *environment* 'random
             (coerce (algorithms) 'list)
             (steps-for-environment)
-            :hist-length 50 :step-print-inc 2500 :episode-print-inc 500))
+            :hist-length 100 :step-print-inc 2500 :episode-print-inc 500))
     (otherwise
      (format t "~&Learning behavior using exploration strategy ~A~%"
              exploration-strategy)
      (map nil
-          (lambda (alg)
+          (lambda (ad)
             (learn program *environment*
-                   (pick-exploration-strategy alg exploration-strategy)
-                   alg (steps-for-environment)
-                   :hist-length 100 :step-print-inc 10000 :episode-print-inc 250))
-          (algorithms)))))
+                   (pick-exploration-strategy ad exploration-strategy)
+                   (ad-algorithm ad) (steps-for-environment)
+                   :hist-length 100 :step-print-inc 1000 :episode-print-inc 250))
+          (algorithm-descriptions)))))
 
 (defvar *evaluation-steps* 50)
 (defvar *evaluation-trials* 25)
@@ -152,10 +192,10 @@
   (evaluate *program* *environment* (get-policy-hist (algorithm-for name))
             :num-steps *evaluation-steps* :num-trials *evaluation-trials*))
 
-(defvar *gnuplot-file-template*
+(defparameter *gnuplot-file-template*
   "set title 'Learning Curve for ~A (WR, ~A, ~A)'
 set title font \",15\"
-set xlabel 'iterations'
+set xlabel 'episodes (%)'
 set xlabel font \",12\"
 set ylabel 'reward'
 set ylabel font \",12\"

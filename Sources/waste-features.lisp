@@ -26,11 +26,20 @@
   (stack-var-val 'loc t t))
 
 (def-feature navigating-to-waste (state action)
-  (stack-contains-frame 'pickup-waste))
+  (cond ((stack-contains-frame 'pickup-waste)
+         #+ (or)
+         (assert (not (stack-contains-frame 'drop-waste)))
+         t)
+        (t nil)))
 
 ;;; Superfluous, since it currently is always the negation of NAVIGATING-TO-WASTE
 (def-feature navigating-to-dropoff (state action)
   (stack-contains-frame 'drop-waste))
+
+(def-feature target-loc (state action)
+  (if (navigating-to-waste state action)
+      (waste-source-feature state action)
+      (waste-target-feature state action)))
 
 (def-feature waste-dist (state action)
   (grid-world:shortest-path-dist (ws-env env-state)
@@ -58,6 +67,9 @@
             ((> from-y to-y) 'w)
             (t 'rest)))))
 
+(def-feature target-direction (state action)
+  (direction-from-to (loc state action) (target-loc state action)))
+
 (def-feature shortest-path-direction (state action)
   (let* ((robot-loc (ws-robot-loc env-state))
          (target-loc (stack-var-val 'loc t t))
@@ -70,14 +82,19 @@
            (assert (>= (length target-path) 2))
            (direction-from-to robot-loc (second target-path))))))
 
+(defun make-bucket-fun (features)
+  (lambda (state)
+    (mapcar (lambda (fun)
+              (funcall fun state nil))
+            features)))
 
 (defparameter *waste-featurizer-0*
   (make-3partq-featurizer
    ()
-   ((navigate-choice
-     (:qr-depends loc choice navigating-to-waste)
-     (:qc-depends)
-     (:qe-depends)))
+   (navigate-choice
+    (:qr-depends loc target-direction choice)
+    (:qc-depends loc target-direction choice)
+    (:qe-depends loc target-loc choice))
    (navigate-to-waste
     (:qr-depends)
     (:qc-depends)
@@ -91,14 +108,16 @@
     (:qc-depends)
     (:qe-depends))))
 
+(defparameter *waste-bucket-function-0*
+  (make-bucket-fun '(loc target-direction target-loc)))
+
 (defparameter *waste-featurizer-1*
   (make-3partq-featurizer
    ()
    (navigate-choice
-    (:qr-depends loc choice navigating-to-waste)
-    (:qc-depends loc choice navigating-to-waste
-                 shortest-path-direction)
-    (:qe-depends loc choice))
+    (:qr-depends loc target-loc choice)
+    (:qc-depends loc target-loc choice)
+    (:qe-depends loc target-loc choice))
    (navigate-to-waste
     (:qr-depends)
     (:qc-depends)
@@ -111,6 +130,9 @@
     (:qr-depends)
     (:qc-depends)
     (:qe-dependes))))
+
+(defparameter *waste-bucket-function-1*
+  (make-bucket-fun '(loc target-loc)))
 
 (defparameter *waste-featurizer-2*
   (make-3partq-featurizer
@@ -134,6 +156,9 @@
     (:qc-depends)
     (:qe-dependes))))
 
+(defparameter *waste-bucket-function-2*
+  (make-bucket-fun '(loc navigating-to-waste shortest-path-distance shortest-path-direction)))
+
 (defparameter *waste-featurizer-3*
   (make-3partq-featurizer
    ()
@@ -154,3 +179,6 @@
     (:qr-depends)
     (:qc-depends)
     (:qe-dependes))))
+
+(defparameter *waste-bucket-function-3*
+  (make-bucket-fun '(loc navigating-to-waste shortest-path-distance shortest-path-direction)))
