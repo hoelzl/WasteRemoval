@@ -1,0 +1,10 @@
+Profile was generated using:
+
+(sb-sprof:with-profiling ()
+  (learn-behavior :algorithm-names '(hordq-a-1)
+                  :environment-type :medium
+                  :use-complex-environment t 
+                  :exploration-strategy :epsilon))
+
+(with-open-file (stream "profile.out" :direction :output :if-exists :supersede)
+  (sb-sprof:report :stream stream))

@@ -63,20 +63,15 @@
           (ecase *environment-type*
             ((:small)
              (if (eq *exploration-strategy* :random)
-                 #+ (or)
-                 (if *use-complex-environment* 100000 50000)
                  (if *use-complex-environment*  50000 25000)
                  (if *use-complex-environment*  50000 25000)))
             ((:medium)
              (if (eq *exploration-strategy* :random)
-                 #+ (or)
-                 (if *use-complex-environment* 5000000 2500000)
-                 (if *use-complex-environment*  500000  250000)
-                 (if *use-complex-environment*  50000  25000))
-             (if *use-complex-environment* 5000000 2500000))
+                 (if *use-complex-environment* 1000000  250000)
+                 (if *use-complex-environment* 1000000  250000)))
             ((:large) (if *use-complex-environment*  10000000 5000000))
             ((:maze :labyrinth) (if (eq *exploration-strategy* :random)
-                                    10000000 5000000)))))
+                                     500000 250000)))))
     (* base-size *step-number-multiplier*)))
 
 
@@ -88,7 +83,12 @@
   (initialize-environment (not recreate))
   (env:io-interface *environment*))
 
-(defun initialize-algorithms (&optional (algorithm-names *algorithm-names*))
+(defparameter *hordq-learning-rate* 0.02)
+(defparameter *hordq-discount* 1)
+
+(defun initialize-algorithms (&optional (algorithm-names *algorithm-names*)
+                                        (hordq-learning-rate *hordq-learning-rate*)
+                                        (hordq-discount *hordq-discount*))
   (setf *algorithm-names* algorithm-names)
   (setf (fill-pointer *algorithms*) 0)
   (mapc (lambda (alg)
@@ -100,19 +100,31 @@
          (list 'gold-standard 
                :algorithm (alisp-gold-standard:make-alisp-gold-standard-learning-alg))
          (list 'hordq-a-0 
-               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-0*)
+               :algorithm (make-instance 'ahq:<hordq>
+                            :features *waste-featurizer-0*
+                            :learning-rate hordq-learning-rate
+                            :discount hordq-discount)
                :bucket-function *waste-bucket-function-0*
                :test #'equalp)
          (list 'hordq-a-1 
-               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-1*)
+               :algorithm (make-instance 'ahq:<hordq>
+                            :features *waste-featurizer-1*
+                            :learning-rate hordq-learning-rate
+                            :discount hordq-discount)
                :bucket-function *waste-bucket-function-1*
                :test #'equalp)
          (list 'hordq-a-2 
-               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-2*)
+               :algorithm (make-instance 'ahq:<hordq>
+                            :features *waste-featurizer-2*
+                            :learning-rate hordq-learning-rate
+                            :discount hordq-discount)
                :bucket-function *waste-bucket-function-2*
                :test #'equalp)
          (list 'hordq-a-3 
-               :algorithm (make-instance 'ahq:<hordq> :features *waste-featurizer-3*)
+               :algorithm (make-instance 'ahq:<hordq>
+                            :features *waste-featurizer-3*
+                            :learning-rate hordq-learning-rate
+                            :discount hordq-discount)
                :bucket-function *waste-bucket-function-3*
                :test #'equalp)))
   (values))
@@ -156,7 +168,9 @@
                             environment-type
                             (use-complex-environment nil use-complex-environment-p)
                             (exploration-strategy *exploration-strategy* exploration-strategy-p)
-                            (algorithm-names *algorithm-names* algorithm-names-p))
+                            (algorithm-names *algorithm-names* algorithm-names-p)
+                            (hordq-learning-rate *hordq-learning-rate* hordq-learning-rate-p)
+                            (hordq-discount *hordq-discount* hordq-discount-p))
   (when environment-type
     (setf *environment-type* environment-type))
   (when use-complex-environment-p
@@ -165,15 +179,19 @@
     (setf *exploration-strategy* exploration-strategy))
   (when algorithm-names-p
     (setf *algorithm-names* algorithm-names))
+  (when hordq-learning-rate-p
+    (setf *hordq-learning-rate* hordq-learning-rate))
+  (when hordq-discount-p
+    (setf *hordq-discount* hordq-discount))
   (initialize-environment)
-  (initialize-algorithms algorithm-names)
+  (initialize-algorithms algorithm-names hordq-learning-rate hordq-discount)
   (case exploration-strategy 
     ((:random)
      (format t "~&Learning behavior using random exploration strategy~%")
      (learn program *environment* 'random
             (coerce (algorithms) 'list)
             (steps-for-environment)
-            :hist-length 100 :step-print-inc 2500 :episode-print-inc 500))
+            :hist-length 100 :step-print-inc 1000 :episode-print-inc 250))
     (otherwise
      (format t "~&Learning behavior using exploration strategy ~A~%"
              exploration-strategy)
@@ -185,8 +203,8 @@
                    :hist-length 100 :step-print-inc 1000 :episode-print-inc 250))
           (algorithm-descriptions)))))
 
-(defvar *evaluation-steps* 50)
-(defvar *evaluation-trials* 25)
+(defparameter *evaluation-steps* 100)
+(defparameter *evaluation-trials* 100)
 
 (defun evaluation-for (name)
   (evaluate *program* *environment* (get-policy-hist (algorithm-for name))

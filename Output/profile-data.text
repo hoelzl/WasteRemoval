@@ -1,0 +1,2363 @@
+
+Number of samples:   50000
+Sample interval:     0.01 seconds
+Total sampling time: 500.0 seconds
+Number of cycles:    0
+Sampled threads:
+ #<SB-THREAD:THREAD "main thread" RUNNING {1002AC3713}>
+
+                               Callers
+                 Total.     Function
+ Count     %  Count     %      Callees
+------------------------------------------------------------------------
+     9   0.0                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+     1   0.0                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+ 30423  60.8                   SB-KERNEL:%PUTHASH [18]
+ 10780  21.6  30432  60.9   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+    12   0.0                   SB-IMPL::OPTIMIZED-DATA-VECTOR-REF [23]
+     1   0.0                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+    69   0.1                   SB-INT:PSXHASH [3]
+   897   1.8                   "foreign function stack_allocation_recover" [295]
+  2235   4.5                   EQUALP [7]
+ 16439  32.9                   SB-IMPL::EQUALP-HASH [19]
+------------------------------------------------------------------------
+   591   1.2                   (LAMBDA (SB-PCL::|.P0.|)) [53]
+   771   1.5                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+ 10777  21.6                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+  9407  18.8  12139  24.3   MAKE-HASH-TABLE [2]
+     1   0.0                   SB-KERNEL:%SINGLE-FLOAT [229]
+     1   0.0                   SB-INT:POWER-OF-TWO-CEILING [199]
+   291   0.6                   SB-IMPL::%MAKE-HASH-TABLE [24]
+   546   1.1                   SB-KERNEL:UB64-BASH-FILL [16]
+  1893   3.8                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:PSXHASH [3]
+    69   0.1                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+  5677  11.4                   SB-IMPL::LIST-PSXHASH [4]
+ 16099  32.2                   SB-IMPL::EQUALP-HASH [19]
+ 12811  25.6                   SB-IMPL::ARRAY-PSXHASH [5]
+  4822   9.6  16168  32.3   SB-INT:PSXHASH [3]
+     1   0.0                   SB-INT:PSXHASH [3]
+   535   1.1                   (LABELS SB-IMPL::SXHASH-NUMBER :IN SXHASH) [15]
+   969   1.9                   SB-IMPL::NUMBER-PSXHASH [10]
+   762   1.5                   SXHASH [9]
+   557   1.1                   (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH) [11]
+  5568  11.1                   SB-IMPL::LIST-PSXHASH [4]
+  2956   5.9                   SB-IMPL::ARRAY-PSXHASH [5]
+------------------------------------------------------------------------
+   195   0.4                   SB-IMPL::ARRAY-PSXHASH [5]
+     1   0.0                   SB-IMPL::LIST-PSXHASH [4]
+  5568  11.1                   SB-INT:PSXHASH [3]
+  4759   9.5  11439  22.9   SB-IMPL::LIST-PSXHASH [4]
+   342   0.7                   SXHASH [9]
+   358   0.7                   (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH) [11]
+     1   0.0                   SB-IMPL::LIST-PSXHASH [4]
+   273   0.5                   SB-IMPL::NUMBER-PSXHASH [10]
+    31   0.1                   (LABELS SB-IMPL::SXHASH-NUMBER :IN SXHASH) [15]
+  5677  11.4                   SB-INT:PSXHASH [3]
+------------------------------------------------------------------------
+     1   0.0                   SB-IMPL::ARRAY-PSXHASH [5]
+    84   0.2                   SB-IMPL::EQUALP-HASH [19]
+  2956   5.9                   SB-INT:PSXHASH [3]
+  2206   4.4  15850  31.7   SB-IMPL::ARRAY-PSXHASH [5]
+   195   0.4                   SB-IMPL::LIST-PSXHASH [4]
+     1   0.0                   SB-IMPL::ARRAY-PSXHASH [5]
+   305   0.6                   (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH) [11]
+   333   0.7                   SXHASH [9]
+ 12811  25.6                   SB-INT:PSXHASH [3]
+------------------------------------------------------------------------
+    35   0.1                   "foreign function signal_emulation_wrapper" [13]
+  2022   4.0                   "foreign function maybe_gc" [293]
+  2057   4.1   2057   4.1   "foreign function __pthread_sigmask" [6]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+    19   0.0                   SB-KERNEL:%PUTHASH [18]
+  2235   4.5                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+    34   0.1                   (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3) [40]
+     1   0.0                   EQUALP [7]
+  1773   3.5   2309   4.6   EQUALP [7]
+     1   0.0                   "foreign function closure_tramp" [34]
+    34   0.1                   SB-VM::GENERIC-+ [41]
+   287   0.6                   SB-KERNEL:HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS [20]
+   214   0.4                   SB-IMPL::OPTIMIZED-DATA-VECTOR-REF [23]
+     1   0.0                   EQUALP [7]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   ROBOT-LOC [186]
+     3   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     3   0.0                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   WASTE-ENV::MOVE-WOULD-HIT-WALL-P [131]
+     3   0.0                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     2   0.0                   REFUEL-AND-NAV [59]
+     1   0.0                   ALISP::RUN [319]
+  1405   2.8                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+    18   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+  1439   2.9   1439   2.9   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+------------------------------------------------------------------------
+   342   0.7                   SB-IMPL::LIST-PSXHASH [4]
+   762   1.5                   SB-INT:PSXHASH [3]
+   333   0.7                   SB-IMPL::ARRAY-PSXHASH [5]
+  1437   2.9   1437   2.9   SXHASH [9]
+------------------------------------------------------------------------
+   969   1.9                   SB-INT:PSXHASH [3]
+   273   0.5                   SB-IMPL::LIST-PSXHASH [4]
+  1242   2.5   1242   2.5   SB-IMPL::NUMBER-PSXHASH [10]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:VALUES-SPECIFIER-TYPE [65]
+   358   0.7                   SB-IMPL::LIST-PSXHASH [4]
+   305   0.6                   SB-IMPL::ARRAY-PSXHASH [5]
+   557   1.1                   SB-INT:PSXHASH [3]
+  1221   2.4   1221   2.4   (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH) [11]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+ 42277  84.6                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+  1139   2.3  42277  84.6   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+     1   0.0                   HASH-TABLE-SIZE [231]
+     9   0.0                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+    58   0.1                   "foreign function funcallable_instance_tramp" [32]
+   106   0.2                   (SB-PCL::FAST-METHOD CLONE (NUMBER)) [30]
+    43   0.1                   "foreign function closure_tramp" [34]
+  1405   2.8                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+ 10777  21.6                   MAKE-HASH-TABLE [2]
+ 28739  57.5                   SB-KERNEL:%PUTHASH [18]
+------------------------------------------------------------------------
+  3048   6.1                   "foreign function stack_allocation_recover" [295]
+   978   2.0   3048   6.1   "foreign function signal_emulation_wrapper" [13]
+     5   0.0                   "foreign function os_invalidate" [345]
+     1   0.0                   "foreign function _platform_memmove$VARIANT$Nehalem" [196]
+     7   0.0                   "foreign function os_validate" [339]
+    35   0.1                   "foreign function __pthread_sigmask" [6]
+  2022   4.0                   "foreign function interrupt_handle_pending" [294]
+------------------------------------------------------------------------
+  1653   3.3                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+  1185   2.4                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+    83   0.2                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+   675   1.4   1736   3.5   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+     1   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+    29   0.1                   "foreign function stack_allocation_recover" [295]
+   440   0.9                   SB-KERNEL:MAKE-RESTART [17]
+    69   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+   523   1.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+------------------------------------------------------------------------
+   535   1.1                   SB-INT:PSXHASH [3]
+    31   0.1                   SB-IMPL::LIST-PSXHASH [4]
+   566   1.1    566   1.1   (LABELS SB-IMPL::SXHASH-NUMBER :IN SXHASH) [15]
+------------------------------------------------------------------------
+   546   1.1                   MAKE-HASH-TABLE [2]
+   546   1.1    546   1.1   SB-KERNEL:UB64-BASH-FILL [16]
+------------------------------------------------------------------------
+    89   0.2                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+   440   0.9                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+   508   1.0    529   1.1   SB-KERNEL:MAKE-RESTART [17]
+    21   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     1   0.0                   SB-KERNEL:%PUTHASH [18]
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+   174   0.3                   EXPLORATION-POLICY::GET-AND-INC-COUNT [187]
+  1981   4.0                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+ 28739  57.5                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+   405   0.8  30897  61.8   SB-KERNEL:%PUTHASH [18]
+    21   0.0                   (FLET SB-THREAD::WITH-RECURSIVE-SYSTEM-LOCK-THUNK :IN SB-KERNEL:%PUTHASH) [49]
+     1   0.0                   SB-KERNEL:%PUTHASH [18]
+    29   0.1                   SB-IMPL::EQUALP-HASH [19]
+    19   0.0                   EQUALP [7]
+ 30423  60.8                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+------------------------------------------------------------------------
+    29   0.1                   SB-KERNEL:%PUTHASH [18]
+     1   0.0                   SB-IMPL::EQUALP-HASH [19]
+    46   0.1                   (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3) [40]
+ 16439  32.9                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+   331   0.7  16514  33.0   SB-IMPL::EQUALP-HASH [19]
+     1   0.0                   SB-IMPL::EQUALP-HASH [19]
+    84   0.2                   SB-IMPL::ARRAY-PSXHASH [5]
+ 16099  32.2                   SB-INT:PSXHASH [3]
+------------------------------------------------------------------------
+   287   0.6                   EQUALP [7]
+   293   0.6    293   0.6   SB-KERNEL:HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS [20]
+------------------------------------------------------------------------
+   264   0.5                   SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK [133]
+   264   0.5    264   0.5   (FLET #:CLEANUP-FUN-610 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK) [21]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+   254   0.5                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+    20   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+   236   0.5    274   0.5   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     1   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     3   0.0                   WASTE-SOURCE-FEATURE [115]
+    20   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   LOC [180]
+    14   0.0                   TARGET-LOC [112]
+------------------------------------------------------------------------
+    12   0.0                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+   214   0.4                   EQUALP [7]
+   226   0.5    226   0.5   SB-IMPL::OPTIMIZED-DATA-VECTOR-REF [23]
+------------------------------------------------------------------------
+   291   0.6                   MAKE-HASH-TABLE [2]
+   225   0.4    291   0.6   SB-IMPL::%MAKE-HASH-TABLE [24]
+     6   0.0                   "foreign function stack_allocation_recover" [295]
+    60   0.1                   SB-THREAD:MAKE-MUTEX [37]
+------------------------------------------------------------------------
+    65   0.1                   SB-IMPL::DATA-VECTOR-FROM-INITS [94]
+   233   0.5                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+   179   0.4    233   0.5   MAKE-ARRAY [25]
+     1   0.0                   SB-IMPL::%VECTOR-WIDETAG-AND-N-BITS [237]
+     3   0.0                   REDUCE [113]
+     4   0.0                   "foreign function stack_allocation_recover" [295]
+     2   0.0                   SB-IMPL::%COMPLEX-VECTOR-WIDETAG [139]
+     5   0.0                   SB-IMPL::DATA-VECTOR-FROM-INITS [94]
+    40   0.1                   SB-IMPL::ALLOCATE-VECTOR-WITH-WIDETAG [42]
+------------------------------------------------------------------------
+   982   2.0                   "Unknown component: #x1002ECE5A0" [36]
+   157   0.3    982   2.0   "Unknown component: #x1002E06E60" [26]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+    27   0.1                   (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION) [118]
+    22   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+   775   1.5                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+   458   0.9                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+   145   0.3    458   0.9   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0                   "foreign function closure_tramp" [34]
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/fn-approx/tabular-fn-approx.lisp") [219]
+    32   0.1                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+    49   0.1                   (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION) [118]
+     3   0.0                   SB-PCL::GET-INSTANCE-HASH-CODE [87]
+   223   0.4                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+------------------------------------------------------------------------
+   146   0.3                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+ 43877  87.8                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<SUM-Q-FUNCTION>)) [321]
+   135   0.3  44023  88.0   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+     2   0.0                   "foreign function closure_tramp" [34]
+    12   0.0                   "foreign function stack_allocation_recover" [295]
+     6   0.0                   (SB-PCL::FAST-METHOD CLONE (SYMBOL)) [79]
+    18   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+ 43849  87.7                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+------------------------------------------------------------------------
+   116   0.2                   EVAL [106]
+   113   0.2    116   0.2   SB-KERNEL:MAKE-NULL-LEXENV [29]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+   106   0.2                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+   106   0.2    106   0.2   (SB-PCL::FAST-METHOD CLONE (NUMBER)) [30]
+------------------------------------------------------------------------
+  1497   3.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<GREEDY-POLICY> T)) [84]
+   729   1.5                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+    99   0.2   2226   4.5   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   (LAMBDA NIL :IN Q-FUNCTION:BEST-CHOICE) [203]
+    89   0.2                   SB-KERNEL:MAKE-RESTART [17]
+    37   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+  1995   4.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+     2   0.0                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<MULTINOMIAL-DIST>)) [350]
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     1   0.0                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+     1   0.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     1   0.0                   "Unknown component: #x1002ECE5A0" [36]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     1   0.0                   WASTE-ENV::REWARD [323]
+     2   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+    58   0.1                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+     1   0.0                   (FLET #:CLEANUP-FUN-555 :IN #:DROP-THRU-TAG-484) [132]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     3   0.0                   REFUEL-AND-NAV [59]
+     1   0.0                   ROBOT-LOC [186]
+     3   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+    93   0.2     93   0.2   "foreign function funcallable_instance_tramp" [32]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [148]
+    16   0.0                   "Unknown component: #x1002ECE5A0" [36]
+    13   0.0                   (LAMBDA (SB-PCL::|.P0.|)) [64]
+    32   0.1                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+    11   0.0                   (LAMBDA (SB-PCL::|.P0.|)) [53]
+    22   0.0                   "Unknown component: #x1002E06E60" [26]
+    92   0.2     95   0.2   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     2   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+     3   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     3   0.0                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+     3   0.0                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     1   0.0                   EQUALP [7]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     3   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP :AFTER (REINFORCEMENT-LEARNING:<LEARNING-ALGORITHM> T T T T)) [191]
+     2   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+     2   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     5   0.0                   REFUEL-AND-NAV [59]
+     2   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>)) [99]
+     1   0.0                   FUEL [329]
+    43   0.1                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+     1   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+    89   0.2     89   0.2   "foreign function closure_tramp" [34]
+------------------------------------------------------------------------
+    70   0.1                   SB-PCL::GET-PV [211]
+    68   0.1     70   0.1   SB-PCL::PV-WRAPPERS-FROM-ALL-ARGS [35]
+     2   0.0                   SB-PCL::VALID-WRAPPER-OF [127]
+------------------------------------------------------------------------
+  1064   2.1                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+    60   0.1   1064   2.1   "Unknown component: #x1002ECE5A0" [36]
+     1   0.0                   SB-PCL::GET-INSTANCE-HASH-CODE [87]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+    16   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+     2   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (Q-FUNCTION:<APPROX-Q-FUNCTION>)) [154]
+     2   0.0                   (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/rl-functions/q-function/approx-q-function.lisp") [150]
+   982   2.0                   "Unknown component: #x1002E06E60" [26]
+------------------------------------------------------------------------
+    60   0.1                   SB-IMPL::%MAKE-HASH-TABLE [24]
+    58   0.1     60   0.1   SB-THREAD:MAKE-MUTEX [37]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+    37   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+    35   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+    56   0.1     72   0.1   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   "foreign function closure_tramp" [34]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     7   0.0                   SB-KERNEL:%MAP [101]
+     5   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+   219   0.4                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+    54   0.1    219   0.4   COERCE [39]
+     1   0.0                   SB-INT:VALID-FUNCTION-NAME-P [238]
+     1   0.0                   SB-KERNEL:%TYPEP [183]
+     2   0.0                   SB-KERNEL:CLASSOID-TYPEP [88]
+     5   0.0                   SB-KERNEL:SPECIFIER-TYPE [182]
+     6   0.0                   MACRO-FUNCTION [215]
+     5   0.0                   SB-KERNEL:CSUBTYPEP [91]
+     6   0.0                   SB-KERNEL::%%TYPEP [80]
+   126   0.3                   EVAL [106]
+    12   0.0                   FBOUNDP [189]
+------------------------------------------------------------------------
+   150   0.3                   SB-IMPL::GETHASH3 [93]
+    51   0.1    150   0.3   (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3) [40]
+    19   0.0                   "foreign function stack_allocation_recover" [295]
+    34   0.1                   EQUALP [7]
+    46   0.1                   SB-IMPL::EQUALP-HASH [19]
+------------------------------------------------------------------------
+     1   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     2   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+     1   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     1   0.0                   SET::ARGEXT [346]
+     1   0.0                   SB-INT:EQUAL-BUT-NO-CAR-RECURSION [197]
+    34   0.1                   EQUALP [7]
+     1   0.0                   AREF [130]
+     1   0.0                   STACK-CONTAINS-FRAME [111]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+     5   0.0                   SB-KERNEL:%MEMBER-KEY [138]
+     1   0.0                   WASTE-ENV::COMPUTE-FUEL [136]
+    43   0.1     50   0.1   SB-VM::GENERIC-+ [41]
+     6   0.0                   EQL [77]
+     1   0.0                   SB-KERNEL:TWO-ARG-< [185]
+------------------------------------------------------------------------
+    40   0.1                   MAKE-ARRAY [25]
+    37   0.1     40   0.1   SB-IMPL::ALLOCATE-VECTOR-WITH-WIDETAG [42]
+     3   0.0                   ASH [58]
+------------------------------------------------------------------------
+   322   0.6                   MAKE-CONDITION [44]
+    36   0.1    323   0.6   SB-KERNEL:ALLOCATE-CONDITION [43]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+    15   0.0                   SB-KERNEL::%MAKE-CONDITION-OBJECT [55]
+   269   0.5                   SB-KERNEL:FIND-CLASSOID [178]
+------------------------------------------------------------------------
+    77   0.2                   SIGNAL [57]
+   284   0.6                   ERROR [47]
+    35   0.1    361   0.7   MAKE-CONDITION [44]
+     1   0.0                   SB-KERNEL:FIND-CLASSOID [178]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+   322   0.6                   SB-KERNEL:ALLOCATE-CONDITION [43]
+------------------------------------------------------------------------
+     1   0.0                   WASTE-ROBOT-PROG [318]
+     1   0.0                   DROP-WASTE [169]
+     1   0.0                   (FLET #:CLEANUP-FUN-1082 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [335]
+    11   0.0                   REFUEL-AND-NAV [59]
+    15   0.0                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+    27   0.1     29   0.1   ALISP::MAKE-JOINT-STATE [45]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   WASTE-ENV::REWARD [323]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     1   0.0                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     1   0.0                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     2   0.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     3   0.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     4   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<GREEDY-POLICY> T)) [84]
+     2   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     3   0.0                   REFUEL-AND-NAV [59]
+    24   0.0     24   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+------------------------------------------------------------------------
+   209   0.4                   DROP-WASTE [169]
+    42   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+    55   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+    10   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+    23   0.0    316   0.6   ERROR [47]
+     4   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   SB-IMPL::INFINITE-ERROR-PROTECTOR [192]
+     4   0.0                   SIGNAL [57]
+   284   0.6                   MAKE-CONDITION [44]
+------------------------------------------------------------------------
+    22   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+    22   0.0     22   0.0   (SB-PCL::FAST-METHOD SET:ITERATOR (LIST)) [48]
+------------------------------------------------------------------------
+    21   0.0                   SB-KERNEL:%PUTHASH [18]
+    21   0.0     21   0.0   (FLET SB-THREAD::WITH-RECURSIVE-SYSTEM-LOCK-THUNK :IN SB-KERNEL:%PUTHASH) [49]
+------------------------------------------------------------------------
+     1   0.0                   ALISP-HORDQ::QE-BACKUP [356]
+     3   0.0                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+     1   0.0                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+     1   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+     1   0.0                   WASTE-ENV::COMPUTE-FUEL [136]
+     1   0.0                   ALISP-HORDQ::QR-BACKUP [347]
+     2   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP :AFTER (REINFORCEMENT-LEARNING:<LEARNING-ALGORITHM> T T T T)) [191]
+     1   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (PROGRESS-PRINTER:<PROGRESS-PRINTER> T T T T)) [188]
+     1   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<NUMBERED-SET-DIST>)) [340]
+     3   0.0                   REFUEL-AND-NAV [59]
+     1   0.0                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+    20   0.0     20   0.0   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+------------------------------------------------------------------------
+     2   0.0                   REFUEL-AND-NAV [59]
+     1   0.0                   DROP-WASTE [169]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+     5   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     7   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     2   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+    19   0.0     19   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+------------------------------------------------------------------------
+    21   0.0                   ALISP::UPDATE-PROGRAM-COUNTER [331]
+    18   0.0     21   0.0   ALISP::MAKE-PROGRAM-COUNTER [52]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+   620   1.2                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+    18   0.0    620   1.2   (LAMBDA (SB-PCL::|.P0.|)) [53]
+    11   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+   591   1.2                   MAKE-HASH-TABLE [2]
+------------------------------------------------------------------------
+     1   0.0                   DROP-WASTE [169]
+    22   0.0                   REFUEL-AND-NAV [59]
+    17   0.0     23   0.0   ALISP::MAKE-FRAME [54]
+     6   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+    15   0.0                   SB-KERNEL:ALLOCATE-CONDITION [43]
+    15   0.0     15   0.0   SB-KERNEL::%MAKE-CONDITION-OBJECT [55]
+------------------------------------------------------------------------
+    14   0.0                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+    13   0.0     14   0.0   CHECK-EXACT-CLASS [56]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+------------------------------------------------------------------------
+     4   0.0                   ERROR [47]
+     8   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+    90   0.2                   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+    12   0.0    102   0.2   SIGNAL [57]
+     1   0.0                   INVOKE-RESTART [354]
+     1   0.0                   SB-KERNEL:COERCE-TO-CONDITION [207]
+     1   0.0                   TYPEP [202]
+     1   0.0                   SB-KERNEL::%%TYPEP [80]
+     1   0.0                   SB-KERNEL:CLASSOID-TYPEP [88]
+     2   0.0                   SB-C:RETURN-MULTIPLE [98]
+     5   0.0                   SB-KERNEL:%TYPEP [183]
+    77   0.2                   MAKE-CONDITION [44]
+------------------------------------------------------------------------
+     6   0.0                   SB-KERNEL:%LDB [240]
+     3   0.0                   SB-KERNEL::FLOAT-RATIO [141]
+     3   0.0                   SB-IMPL::ALLOCATE-VECTOR-WITH-WIDETAG [42]
+    12   0.0     12   0.0   ASH [58]
+------------------------------------------------------------------------
+     1   0.0                   REFUEL-AND-NAV [59]
+ 16986  34.0                   DROP-WASTE [169]
+ 29086  58.2                   PICKUP-WASTE [317]
+    11   0.0  46072  92.1   REFUEL-AND-NAV [59]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (REINFORCEMENT-LEARNING:<RL-OBSERVER> T T)) [216]
+     2   0.0                   ALISP::MOVE-NEXT-FRAME-TO-STACK [214]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:AT-TERMINAL-STATE (ENV:<ENV>)) [153]
+     1   0.0                   SB-C:RETURN-MULTIPLE [98]
+     3   0.0                   (SB-PCL::FAST-METHOD ENV:IS-TERMINAL-STATE (<WASTE-ENV> T)) [123]
+    11   0.0                   ALISP::MAKE-JOINT-STATE [45]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     3   0.0                   "foreign function funcallable_instance_tramp" [32]
+    22   0.0                   ALISP::MAKE-FRAME [54]
+    17   0.0                   ALISP::UPDATE-PROGRAM-COUNTER [331]
+    97   0.2                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (PROGRESS-PRINTER:<PROGRESS-PRINTER> T T T T)) [188]
+     1   0.0                   REFUEL-AND-NAV [59]
+     5   0.0                   "foreign function closure_tramp" [34]
+     3   0.0                   ROBOT-LOC [186]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     5   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3. SB-PCL::.ARG4.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [66]
+     1   0.0                   FUEL [329]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+    42   0.1                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     5   0.0                   (FLET #:CLEANUP-FUN-555 :IN #:DROP-THRU-TAG-484) [132]
+   882   1.8                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+   104   0.2                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     8   0.0                   ALISP::SET-FRAME-VAR-VAL [69]
+ 42990  86.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+  1741   3.5                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+   102   0.2                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+   523   1.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+    11   0.0    523   1.0   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     1   0.0                   "foreign function closure_tramp" [34]
+     1   0.0                   EQUALP [7]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     7   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+   254   0.5                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+    42   0.1                   ERROR [47]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [110]
+   197   0.4                   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+     5   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [92]
+------------------------------------------------------------------------
+     1   0.0                   CHECK-EXACT-CLASS [56]
+     3   0.0                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [92]
+     2   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>)) [99]
+    11   0.0     11   0.0   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+------------------------------------------------------------------------
+    15   0.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (EXPLORATION-POLICY:<EXP-POL> T)) [145]
+    10   0.0     15   0.0   (LAMBDA (STATE) :IN MAKE-BUCKET-FUN) [62]
+     4   0.0                   SB-KERNEL:%COERCE-CALLABLE-TO-FUN [143]
+     1   0.0                   TARGET-LOC [112]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     1   0.0                   PROBABILITY:SAMPLE-MULTINOMIAL [78]
+     1   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+     4   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+     9   0.0      9   0.0   SB-KERNEL:TWO-ARG-+ [63]
+------------------------------------------------------------------------
+    22   0.0                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     9   0.0     22   0.0   (LAMBDA (SB-PCL::|.P0.|)) [64]
+    13   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+------------------------------------------------------------------------
+    10   0.0                   SB-KERNEL:SPECIFIER-TYPE [182]
+     8   0.0     11   0.0   SB-KERNEL:VALUES-SPECIFIER-TYPE [65]
+     2   0.0                   SB-INT:EQUAL-BUT-NO-CAR-RECURSION [197]
+     1   0.0                   (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH) [11]
+------------------------------------------------------------------------
+     3   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     5   0.0                   REFUEL-AND-NAV [59]
+     8   0.0      8   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3. SB-PCL::.ARG4.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [66]
+------------------------------------------------------------------------
+     8   0.0                   SB-C::GET-INFO-VALUE [102]
+     8   0.0      8   0.0   SB-C::VOLATILE-INFO-LOOKUP [67]
+------------------------------------------------------------------------
+     9   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     8   0.0      9   0.0   ALISP-HORDQ::MAKE-CSI [68]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     8   0.0                   REFUEL-AND-NAV [59]
+     7   0.0      8   0.0   ALISP::SET-FRAME-VAR-VAL [69]
+     1   0.0                   SB-KERNEL:%ASSOC [181]
+------------------------------------------------------------------------
+     7   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     7   0.0      7   0.0   WASTE-ENV::MAKE-WASTE-STATE [70]
+------------------------------------------------------------------------
+     7   0.0                   SB-KERNEL:%DOUBLE-FLOAT [184]
+     7   0.0      7   0.0   SB-KERNEL:SCALE-DOUBLE-FLOAT [71]
+------------------------------------------------------------------------
+     2   0.0                   (FLET #:CLEANUP-FUN-555 :IN #:DROP-THRU-TAG-484) [132]
+    95   0.2                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (PROGRESS-PRINTER:<PROGRESS-PRINTER> T T T T)) [188]
+     7   0.0     97   0.2   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [72]
+    90   0.2                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     7   0.0                   "foreign function os_validate" [339]
+     7   0.0      7   0.0   "foreign function __mmap" [73]
+------------------------------------------------------------------------
+     2   0.0                   WASTE-ENV::MOVE-WOULD-HIT-WALL-P [131]
+     5   0.0                   GRID-WORLD:IS-VALID-LOC [100]
+     7   0.0      7   0.0   ARRAY-DIMENSIONS [74]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+     3   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+     2   0.0                   ALISP-HORDQ::BACKUP [210]
+     7   0.0      7   0.0   SB-KERNEL:TWO-ARG-* [75]
+------------------------------------------------------------------------
+     8   0.0                   SET::ARGEXT [346]
+     7   0.0      8   0.0   (SB-PCL::FAST-METHOD SET:ITERATOR (VECTOR)) [76]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     6   0.0                   SB-VM::GENERIC-+ [41]
+     6   0.0      6   0.0   EQL [77]
+------------------------------------------------------------------------
+     8   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     6   0.0      8   0.0   PROBABILITY:SAMPLE-MULTINOMIAL [78]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   SB-KERNEL:TWO-ARG-+ [63]
+------------------------------------------------------------------------
+     6   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+     6   0.0      6   0.0   (SB-PCL::FAST-METHOD CLONE (SYMBOL)) [79]
+------------------------------------------------------------------------
+     6   0.0                   COERCE [39]
+     1   0.0                   SIGNAL [57]
+     6   0.0      7   0.0   SB-KERNEL::%%TYPEP [80]
+     1   0.0                   SB-KERNEL:CLASSOID-TYPEP [88]
+------------------------------------------------------------------------
+     6   0.0                   SB-C::GET-INFO-VALUE [102]
+     6   0.0      6   0.0   SB-C::COMPACT-INFO-LOOKUP [81]
+------------------------------------------------------------------------
+   114   0.2                   DROP-WASTE [169]
+    29   0.1                   PICKUP-WASTE [317]
+   129   0.3                   WASTE-ROBOT-PROG [318]
+  1741   3.5                   REFUEL-AND-NAV [59]
+     5   0.0   2013   4.0   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0                   ALISP:ACTION-STATE? [239]
+     1   0.0                   ALISP-HORDQ::BACKUP [210]
+     1   0.0                   ALISP-HORDQ::QE-BACKUP [356]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     2   0.0                   SB-KERNEL:TWO-ARG-+ [63]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3. SB-PCL::.ARG4.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [66]
+     9   0.0                   ALISP-HORDQ::MAKE-CSI [68]
+     1   0.0                   ALISP-HORDQ::QC-BACKUP [209]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [152]
+     2   0.0                   ALISP:EXIT-STATE? [86]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+     3   0.0                   "foreign function closure_tramp" [34]
+    15   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+  1150   2.3                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+     3   0.0                   "foreign function funcallable_instance_tramp" [32]
+   729   1.5                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+    83   0.2                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+------------------------------------------------------------------------
+    69   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+     5   0.0   1253   2.5   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T)) [83]
+     2   0.0                   "foreign function closure_tramp" [34]
+     4   0.0                   SB-KERNEL:TWO-ARG-+ [63]
+    55   0.1                   ERROR [47]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+  1185   2.4                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+------------------------------------------------------------------------
+  1504   3.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     5   0.0   1504   3.0   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<GREEDY-POLICY> T)) [84]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+  1497   3.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+------------------------------------------------------------------------
+     5   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     5   0.0      5   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [85]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     5   0.0      5   0.0   ALISP:EXIT-STATE? [86]
+------------------------------------------------------------------------
+     1   0.0                   "Unknown component: #x1002ECE5A0" [36]
+     3   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     5   0.0      5   0.0   SB-PCL::GET-INSTANCE-HASH-CODE [87]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::GF-DISPATCH ENV:SAMPLE-PERCEPT) [230]
+     2   0.0                   COERCE [39]
+     1   0.0                   SB-KERNEL::%%TYPEP [80]
+     1   0.0                   SIGNAL [57]
+     5   0.0      5   0.0   SB-KERNEL:CLASSOID-TYPEP [88]
+------------------------------------------------------------------------
+     7   0.0                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     5   0.0      7   0.0   GRID-WORLD:RESULT [89]
+     2   0.0                   GRID-WORLD:IS-VALID-LOC [100]
+------------------------------------------------------------------------
+     5   0.0                   "foreign function os_invalidate" [345]
+     5   0.0      5   0.0   "foreign function __munmap" [90]
+------------------------------------------------------------------------
+     5   0.0                   COERCE [39]
+     5   0.0      5   0.0   SB-KERNEL:CSUBTYPEP [91]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+     5   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     4   0.0      6   0.0   (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [92]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+     1   0.0                   SB-KERNEL:%COERCE-CALLABLE-TO-FUN [143]
+------------------------------------------------------------------------
+    34   0.1                   EXPLORATION-POLICY::GET-AND-INC-COUNT [187]
+    16   0.0                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+   104   0.2                   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+     4   0.0    154   0.3   SB-IMPL::GETHASH3 [93]
+   150   0.3                   (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3) [40]
+------------------------------------------------------------------------
+     5   0.0                   MAKE-ARRAY [25]
+     4   0.0     69   0.1   SB-IMPL::DATA-VECTOR-FROM-INITS [94]
+    65   0.1                   MAKE-ARRAY [25]
+------------------------------------------------------------------------
+     1   0.0                   PICKUP-WASTE [317]
+    42   0.1                   REFUEL-AND-NAV [59]
+     4   0.0     43   0.1   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     3   0.0                   VECTOR-PUSH-EXTEND [337]
+     2   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP :AFTER (REINFORCEMENT-LEARNING:<LEARNING-ALGORITHM> T T T T)) [191]
+    23   0.0                   REINFORCEMENT-LEARNING::SAVE-STATE [334]
+     1   0.0                   "foreign function closure_tramp" [34]
+     8   0.0                   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:%MEMBER-KEY [138]
+     4   0.0      4   0.0   ALISP::FRAME-NAME [96]
+------------------------------------------------------------------------
+     4   0.0                   SB-KERNEL:%LDB [240]
+     4   0.0      4   0.0   SB-BIGNUM:BIGNUM-LOGICAL-AND [97]
+------------------------------------------------------------------------
+     1   0.0                   REFUEL-AND-NAV [59]
+     2   0.0                   SIGNAL [57]
+     4   0.0      4   0.0   SB-C:RETURN-MULTIPLE [98]
+------------------------------------------------------------------------
+     9   0.0                   GRID-WORLD:IS-VALID-LOC [100]
+     4   0.0      9   0.0   (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>)) [99]
+     1   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:WORLD-MAP (GRID-WORLD:<GRID-WORLD>)) [227]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+     2   0.0                   "foreign function closure_tramp" [34]
+------------------------------------------------------------------------
+     2   0.0                   GRID-WORLD:RESULT [89]
+    16   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     4   0.0     18   0.0   GRID-WORLD:IS-VALID-LOC [100]
+     5   0.0                   ARRAY-DIMENSIONS [74]
+     9   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>)) [99]
+------------------------------------------------------------------------
+     7   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     4   0.0      7   0.0   SB-KERNEL:%MAP [101]
+     3   0.0                   SB-KERNEL:SPECIFIER-TYPE [182]
+------------------------------------------------------------------------
+     6   0.0                   MACRO-FUNCTION [215]
+    15   0.0                   SB-KERNEL:FDEFINITION-OBJECT [338]
+     4   0.0     21   0.0   SB-C::GET-INFO-VALUE [102]
+     6   0.0                   SB-C::COMPACT-INFO-LOOKUP [81]
+     3   0.0                   (LAMBDA (SB-C::NAME) :IN #:!GLOBALDB-COLD-INIT) [125]
+     8   0.0                   SB-C::VOLATILE-INFO-LOOKUP [67]
+------------------------------------------------------------------------
+     5   0.0                   (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp") [142]
+     4   0.0      5   0.0   SB-KERNEL::INTEGER-/-INTEGER [103]
+     1   0.0                   SB-KERNEL:TWO-ARG-GCD [208]
+------------------------------------------------------------------------
+     6   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     4   0.0      6   0.0   VECTOR-PUSH [104]
+     2   0.0                   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-SET [156]
+------------------------------------------------------------------------
+     4   0.0                   SB-KERNEL:%LDB [240]
+     4   0.0      4   0.0   SB-BIGNUM:SUBTRACT-BIGNUM [105]
+------------------------------------------------------------------------
+   126   0.3                   COERCE [39]
+ 49959  99.9                   SB-EXT:INTERACTIVE-EVAL [280]
+     3   0.0  49959  99.9   EVAL [106]
+   116   0.2                   SB-KERNEL:MAKE-NULL-LEXENV [29]
+ 49840  99.7                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+------------------------------------------------------------------------
+ 43849  87.7                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-SMDPQ:<SMDPQ>)) [291]
+     3   0.0  43850  87.7   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [161]
+     1   0.0                   (LAMBDA NIL) [221]
+     3   0.0                   SB-PCL::ENSURE-CACHED-CTOR [218]
+     5   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [85]
+  1064   2.1                   "Unknown component: #x1002ECE5A0" [36]
+ 42771  85.5                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+------------------------------------------------------------------------
+    49   0.1                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     3   0.0     49   0.1   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     1   0.0                   SB-KERNEL:TWO-ARG-+ [63]
+     7   0.0                   GRID-WORLD:RESULT [89]
+    35   0.1                   GRID-WORLD:IS-LEGAL-LOC [316]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+   197   0.4                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     3   0.0    198   0.4   (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T)) [109]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+    90   0.2                   SIGNAL [57]
+   104   0.2                   SB-IMPL::GETHASH3 [93]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [60]
+     3   0.0      3   0.0   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [110]
+------------------------------------------------------------------------
+    12   0.0                   NAVIGATING-TO-WASTE [179]
+     3   0.0     12   0.0   STACK-CONTAINS-FRAME [111]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     8   0.0                   SB-KERNEL:%MEMBER-KEY [138]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (STATE) :IN MAKE-BUCKET-FUN) [62]
+    14   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     3   0.0     15   0.0   TARGET-LOC [112]
+    12   0.0                   NAVIGATING-TO-WASTE [179]
+------------------------------------------------------------------------
+     3   0.0                   MAKE-ARRAY [25]
+     3   0.0      3   0.0   REDUCE [113]
+------------------------------------------------------------------------
+     5   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     3   0.0      5   0.0   (SB-PCL::FAST-METHOD SET:SIZE (SEQUENCE)) [114]
+     2   0.0                   LENGTH [151]
+------------------------------------------------------------------------
+     3   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     3   0.0      3   0.0   WASTE-SOURCE-FEATURE [115]
+------------------------------------------------------------------------
+     4   0.0                   SB-KERNEL:%LDB [240]
+     3   0.0      4   0.0   SB-BIGNUM::BIGNUM-ASHIFT-LEFT-UNALIGNED [116]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     3   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     3   0.0      3   0.0   ARGMAX [117]
+------------------------------------------------------------------------
+    27   0.1                   "Unknown component: #x1002E06E60" [26]
+    49   0.1                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     3   0.0     76   0.2   (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION) [118]
+     1   0.0                   SB-PCL::PV-TABLE-LOOKUP [236]
+    71   0.1                   SB-PCL::GET-PV [211]
+------------------------------------------------------------------------
+     3   0.0                   (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp") [142]
+     3   0.0      3   0.0   SB-KERNEL:TWO-ARG-/ [119]
+------------------------------------------------------------------------
+     3   0.0                   AREF [130]
+     3   0.0      3   0.0   ARRAY-TOTAL-SIZE [120]
+------------------------------------------------------------------------
+     3   0.0                   SB-KERNEL:SPECIFIER-TYPE [182]
+     3   0.0      3   0.0   SB-KERNEL:VALUES-TYPE-P [121]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     3   0.0      3   0.0   (SB-PCL::FAST-METHOD SET:ITEM :AROUND (T T)) [122]
+------------------------------------------------------------------------
+     3   0.0                   REFUEL-AND-NAV [59]
+     3   0.0      3   0.0   (SB-PCL::FAST-METHOD ENV:IS-TERMINAL-STATE (<WASTE-ENV> T)) [123]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   LENGTH [151]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     3   0.0      3   0.0   SB-KERNEL:SEQUENCEP [124]
+------------------------------------------------------------------------
+     3   0.0                   SB-C::GET-INFO-VALUE [102]
+     3   0.0      3   0.0   (LAMBDA (SB-C::NAME) :IN #:!GLOBALDB-COLD-INIT) [125]
+------------------------------------------------------------------------
+     3   0.0                   WASTE-ENV::MOVE-WOULD-HIT-WALL-P [131]
+     3   0.0      3   0.0   SB-INT:PROPER-LIST-OF-LENGTH-P [126]
+------------------------------------------------------------------------
+     2   0.0                   SB-PCL::PV-WRAPPERS-FROM-ALL-ARGS [35]
+     3   0.0      3   0.0   SB-PCL::VALID-WRAPPER-OF [127]
+------------------------------------------------------------------------
+     2   0.0                   SB-PCL::ENSURE-CACHED-CTOR [218]
+     3   0.0      3   0.0   SB-PCL::FIND-CTOR [128]
+------------------------------------------------------------------------
+     2   0.0                   SB-C::MAKE-CORE-COMPONENT [288]
+     2   0.0      2   0.0   (FLET #:CLEANUP-FUN-65 :IN SB-C::MAKE-CORE-COMPONENT) [129]
+------------------------------------------------------------------------
+     1   0.0                   AREF [130]
+     9   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     2   0.0      9   0.0   AREF [130]
+     2   0.0                   SB-IMPL::%ARRAY-ROW-MAJOR-INDEX [226]
+     1   0.0                   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF [194]
+     3   0.0                   ARRAY-TOTAL-SIZE [120]
+     1   0.0                   AREF [130]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+------------------------------------------------------------------------
+     8   0.0                   WASTE-ENV::REWARD [323]
+     2   0.0      8   0.0   WASTE-ENV::MOVE-WOULD-HIT-WALL-P [131]
+     2   0.0                   ARRAY-DIMENSIONS [74]
+     3   0.0                   SB-INT:PROPER-LIST-OF-LENGTH-P [126]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+------------------------------------------------------------------------
+     5   0.0                   REFUEL-AND-NAV [59]
+     2   0.0      5   0.0   (FLET #:CLEANUP-FUN-555 :IN #:DROP-THRU-TAG-484) [132]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [72]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+------------------------------------------------------------------------
+   268   0.5                   SB-KERNEL:FIND-CLASSOID-CELL [134]
+     2   0.0    268   0.5   SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK [133]
+     2   0.0                   (FLET #:WITHOUT-INTERRUPTS-BODY-605 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK) [147]
+   264   0.5                   (FLET #:CLEANUP-FUN-610 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK) [21]
+------------------------------------------------------------------------
+   269   0.5                   SB-KERNEL:FIND-CLASSOID [178]
+     2   0.0    270   0.5   SB-KERNEL:FIND-CLASSOID-CELL [134]
+   268   0.5                   SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK [133]
+------------------------------------------------------------------------
+     2   0.0                   WASTE-ENV::COMPUTE-FUEL [136]
+     2   0.0      2   0.0   SB-KERNEL:TWO-ARG-- [135]
+------------------------------------------------------------------------
+     8   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     2   0.0      8   0.0   WASTE-ENV::COMPUTE-FUEL [136]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     2   0.0                   SB-KERNEL:TWO-ARG-- [135]
+------------------------------------------------------------------------
+   223   0.4                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+   775   1.5                   "Unknown component: #x1002E06E60" [26]
+     2   0.0    998   2.0   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+     2   0.0                   "foreign function closure_tramp" [34]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/defcombin.fasl") [222]
+     2   0.0                   SB-VM::GENERIC-+ [41]
+   219   0.4                   COERCE [39]
+   771   1.5                   MAKE-HASH-TABLE [2]
+------------------------------------------------------------------------
+     8   0.0                   STACK-CONTAINS-FRAME [111]
+     2   0.0      8   0.0   SB-KERNEL:%MEMBER-KEY [138]
+     1   0.0                   ALISP::FRAME-NAME [96]
+     5   0.0                   SB-VM::GENERIC-+ [41]
+------------------------------------------------------------------------
+     2   0.0                   MAKE-ARRAY [25]
+     2   0.0      2   0.0   SB-IMPL::%COMPLEX-VECTOR-WIDETAG [139]
+------------------------------------------------------------------------
+     8   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     2   0.0      8   0.0   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T)) [140]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     3   0.0                   SB-KERNEL:TWO-ARG-* [75]
+     1   0.0                   "foreign function closure_tramp" [34]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+------------------------------------------------------------------------
+    27   0.1                   SB-KERNEL:%DOUBLE-FLOAT [184]
+     2   0.0     27   0.1   SB-KERNEL::FLOAT-RATIO [141]
+     3   0.0                   SB-C::MASK-SIGNED-FIELD [146]
+     3   0.0                   ASH [58]
+    19   0.0                   SB-KERNEL:%LDB [240]
+------------------------------------------------------------------------
+    46   0.1                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     2   0.0     46   0.1   (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp") [142]
+     5   0.0                   SB-KERNEL::INTEGER-/-INTEGER [103]
+     3   0.0                   SB-KERNEL:TWO-ARG-/ [119]
+    36   0.1                   EXP [328]
+------------------------------------------------------------------------
+     4   0.0                   (LAMBDA (STATE) :IN MAKE-BUCKET-FUN) [62]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [92]
+     2   0.0      5   0.0   SB-KERNEL:%COERCE-CALLABLE-TO-FUN [143]
+     3   0.0                   SB-KERNEL:FDEFINITION-OBJECT [338]
+------------------------------------------------------------------------
+     2   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     2   0.0      2   0.0   (LAMBDA (SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-OPTIMIZED-STD-READER-METHOD-FUNCTION) [144]
+------------------------------------------------------------------------
+   226   0.5                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     2   0.0    226   0.5   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (EXPLORATION-POLICY:<EXP-POL> T)) [145]
+    15   0.0                   (LAMBDA (STATE) :IN MAKE-BUCKET-FUN) [62]
+   209   0.4                   EXPLORATION-POLICY::GET-AND-INC-COUNT [187]
+------------------------------------------------------------------------
+     3   0.0                   SB-KERNEL::FLOAT-RATIO [141]
+     2   0.0      3   0.0   SB-C::MASK-SIGNED-FIELD [146]
+     1   0.0                   LOGBITP [190]
+------------------------------------------------------------------------
+     2   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK [133]
+     2   0.0      2   0.0   (FLET #:WITHOUT-INTERRUPTS-BODY-605 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK) [147]
+------------------------------------------------------------------------
+     3   0.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     2   0.0      3   0.0   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [148]
+     1   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     2   0.0      2   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [149]
+------------------------------------------------------------------------
+     2   0.0                   "Unknown component: #x1002ECE5A0" [36]
+     2   0.0      2   0.0   (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/rl-functions/q-function/approx-q-function.lisp") [150]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+     2   0.0                   (SB-PCL::FAST-METHOD SET:SIZE (SEQUENCE)) [114]
+     2   0.0      3   0.0   LENGTH [151]
+     1   0.0                   SB-KERNEL:SEQUENCEP [124]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     2   0.0      2   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [152]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0                   REFUEL-AND-NAV [59]
+     2   0.0      2   0.0   (SB-PCL::FAST-METHOD ENV:AT-TERMINAL-STATE (ENV:<ENV>)) [153]
+------------------------------------------------------------------------
+     2   0.0                   "Unknown component: #x1002ECE5A0" [36]
+     2   0.0      2   0.0   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (Q-FUNCTION:<APPROX-Q-FUNCTION>)) [154]
+------------------------------------------------------------------------
+     2   0.0                   PROBABILITY:SAMPLE-UNIFORMLY [351]
+     2   0.0      2   0.0   RANDOM [155]
+------------------------------------------------------------------------
+     2   0.0                   VECTOR-PUSH [104]
+     2   0.0      2   0.0   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-SET [156]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     2   0.0      2   0.0   (LAMBDA NIL :IN SET:ITERATOR) [157]
+------------------------------------------------------------------------
+     2   0.0                   SET::ARGEXT [346]
+     2   0.0      2   0.0   (FLET SET::NEW-BEST :IN SET::ARGEXT) [158]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:EQUAL-BUT-NO-CAR-RECURSION [197]
+     2   0.0                   MACROEXPAND [160]
+     2   0.0      3   0.0   MACROEXPAND-1 [159]
+     1   0.0                   MACRO-FUNCTION [215]
+------------------------------------------------------------------------
+     4   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+     2   0.0      4   0.0   MACROEXPAND [160]
+     2   0.0                   MACROEXPAND-1 [159]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     2   0.0      2   0.0   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [161]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:%LDB [240]
+     1   0.0      1   0.0   SB-BIGNUM::%NORMALIZE-BIGNUM [162]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::DERIVE-NODE-TYPE [297]
+     1   0.0      1   0.0   SB-KERNEL:TYPE/= [163]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::SIMPLIFY-INTERSECTIONS [307]
+     1   0.0      1   0.0   SB-KERNEL:TYPE-INTERSECTION2 [164]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-OPTIMIZE [302]
+     1   0.0      1   0.0   SB-C::FLUSH-DEAD-CODE [165]
+------------------------------------------------------------------------
+    89   0.2                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0     89   0.2   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0                   WASTE-ENV::COMPUTE-WASTE-STATUS [223]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     2   0.0                   (SB-PCL::FAST-METHOD SET:ITEM :AROUND (T T)) [122]
+     1   0.0                   SB-KERNEL:%MEMBER [198]
+     8   0.0                   PROBABILITY:SAMPLE-MULTINOMIAL [78]
+     8   0.0                   WASTE-ENV::COMPUTE-FUEL [136]
+     7   0.0                   WASTE-ENV::MAKE-WASTE-STATE [70]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:AVAIL-ACTIONS (<WASTE-ENV> T)) [177]
+    10   0.0                   WASTE-ENV::REWARD [323]
+    49   0.1                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+------------------------------------------------------------------------
+   102   0.2                   REFUEL-AND-NAV [59]
+     1   0.0    102   0.2   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     2   0.0                   (SB-PCL::GF-DISPATCH ENV:SAMPLE-PERCEPT) [230]
+     1   0.0                   (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-PCL::NV SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-WRITER-METHOD-FUNCTION) [220]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:AT-TERMINAL-STATE (ENV:<ENV>)) [153]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [110]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [149]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-PERCEPT (ENV:<FULLY-OBSERVABLE-ENV> T T T T)) [193]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     2   0.0                   "foreign function closure_tramp" [34]
+    89   0.2                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+------------------------------------------------------------------------
+     1   0.0      1   0.0   SB-KERNEL:TWO-ARG-> [168]
+------------------------------------------------------------------------
+ 18326  36.7                   WASTE-ROBOT-PROG [318]
+     1   0.0  18326  36.7   DROP-WASTE [169]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+     1   0.0                   ALISP::MAKE-JOINT-STATE [45]
+     1   0.0                   ALISP::MAKE-FRAME [54]
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     3   0.0                   (FLET #:CLEANUP-FUN-1082 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [335]
+  1008   2.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+   114   0.2                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+   209   0.4                   ERROR [47]
+ 16986  34.0                   REFUEL-AND-NAV [59]
+------------------------------------------------------------------------
+ 42302  84.6                   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0  42302  84.6   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     2   0.0                   "foreign function funcallable_instance_tramp" [32]
+     3   0.0                   "foreign function closure_tramp" [34]
+    14   0.0                   CHECK-EXACT-CLASS [56]
+     2   0.0                   SB-KERNEL:%PUTHASH [18]
+ 42277  84.6                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+------------------------------------------------------------------------
+ 44549  89.1                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     1   0.0  44549  89.1   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     3   0.0                   "foreign function closure_tramp" [34]
+    22   0.0                   (LAMBDA (SB-PCL::|.P0.|)) [64]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-INT:&MORE SB-PCL::.MORE-CONTEXT. SB-PCL::.MORE-COUNT.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [212]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+   620   1.2                   (LAMBDA (SB-PCL::|.P0.|)) [53]
+    46   0.1                   (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp") [142]
+ 43854  87.7                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<SUM-Q-FUNCTION>)) [321]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+  1008   2.0                   DROP-WASTE [169]
+   214   0.4                   PICKUP-WASTE [317]
+  2104   4.2                   WASTE-ROBOT-PROG [318]
+ 42990  86.0                   REFUEL-AND-NAV [59]
+     1   0.0  46316  92.6   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0                   SB-KERNEL:SEQUENCEP [124]
+     3   0.0                   "foreign function closure_tramp" [34]
+     1   0.0                   (SB-PCL::FAST-METHOD SET:ITEM (T SEQUENCE)) [232]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     1   0.0                   ELT [224]
+     2   0.0                   "foreign function funcallable_instance_tramp" [32]
+     2   0.0                   PROBABILITY:SAMPLE-UNIFORMLY [351]
+     2   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<MULTINOMIAL-DIST>)) [350]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     1   0.0                   (SB-PCL::FAST-METHOD SET:ITEM :AROUND (T T)) [122]
+     1   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<NUMBERED-SET-DIST>)) [340]
+ 46298  92.6                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+------------------------------------------------------------------------
+     2   0.0                   DROP-WASTE [169]
+     2   0.0                   WASTE-ROBOT-PROG [318]
+    43   0.1                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+   104   0.2                   REFUEL-AND-NAV [59]
+     1   0.0    151   0.3   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+     1   0.0                   "foreign function closure_tramp" [34]
+   146   0.3                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+------------------------------------------------------------------------
+     1   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0      1   0.0   (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-READER-METHOD-FUNCTION) [174]
+------------------------------------------------------------------------
+     1   0.0                   (FLET #:CLEANUP-FUN-1364 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [349]
+    18   0.0                   (FLET #:CLEANUP-FUN-1279 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [348]
+    38   0.1                   (FLET #:CLEANUP-FUN-885 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [330]
+   815   1.6                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+     1   0.0    872   1.7   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [152]
+     2   0.0                   ALISP-HORDQ::BACKUP [210]
+     1   0.0                   ALISP-HORDQ::QR-BACKUP [347]
+   858   1.7                   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+     9   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+------------------------------------------------------------------------
+  1517   3.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     1   0.0   1517   3.0   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     2   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     1   0.0                   SB-KERNEL:%PUTHASH [18]
+     5   0.0                   PROBABILITY:MAKE-MULTINOMIAL-DIST [206]
+     3   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [148]
+  1504   3.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<GREEDY-POLICY> T)) [84]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD ENV:AVAIL-ACTIONS (<WASTE-ENV> T)) [177]
+------------------------------------------------------------------------
+     1   0.0                   MAKE-CONDITION [44]
+   269   0.5                   SB-KERNEL:ALLOCATE-CONDITION [43]
+     1   0.0    270   0.5   SB-KERNEL:FIND-CLASSOID [178]
+   269   0.5                   SB-KERNEL:FIND-CLASSOID-CELL [134]
+------------------------------------------------------------------------
+    12   0.0                   TARGET-LOC [112]
+     1   0.0     13   0.0   NAVIGATING-TO-WASTE [179]
+    12   0.0                   STACK-CONTAINS-FRAME [111]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     1   0.0      1   0.0   LOC [180]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::SET-FRAME-VAR-VAL [69]
+     1   0.0      1   0.0   SB-KERNEL:%ASSOC [181]
+------------------------------------------------------------------------
+     5   0.0                   COERCE [39]
+     3   0.0                   SB-KERNEL:%MAP [101]
+     6   0.0                   SB-KERNEL:%TYPEP [183]
+     1   0.0     14   0.0   SB-KERNEL:SPECIFIER-TYPE [182]
+     3   0.0                   SB-KERNEL:VALUES-TYPE-P [121]
+    10   0.0                   SB-KERNEL:VALUES-SPECIFIER-TYPE [65]
+------------------------------------------------------------------------
+     1   0.0                   COERCE [39]
+     1   0.0                   FIND-RESTART [352]
+     5   0.0                   SIGNAL [57]
+     1   0.0      7   0.0   SB-KERNEL:%TYPEP [183]
+     6   0.0                   SB-KERNEL:SPECIFIER-TYPE [182]
+------------------------------------------------------------------------
+    36   0.1                   EXP [328]
+     1   0.0     36   0.1   SB-KERNEL:%DOUBLE-FLOAT [184]
+     1   0.0                   (LABELS SB-KERNEL::FLOAT-AND-SCALE :IN SB-KERNEL::FLOAT-RATIO) [358]
+     7   0.0                   SB-KERNEL:SCALE-DOUBLE-FLOAT [71]
+    27   0.1                   SB-KERNEL::FLOAT-RATIO [141]
+------------------------------------------------------------------------
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     1   0.0      1   0.0   SB-KERNEL:TWO-ARG-< [185]
+------------------------------------------------------------------------
+     3   0.0                   REFUEL-AND-NAV [59]
+     1   0.0      3   0.0   ROBOT-LOC [186]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+------------------------------------------------------------------------
+   209   0.4                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (EXPLORATION-POLICY:<EXP-POL> T)) [145]
+     1   0.0    209   0.4   EXPLORATION-POLICY::GET-AND-INC-COUNT [187]
+    34   0.1                   SB-IMPL::GETHASH3 [93]
+   174   0.3                   SB-KERNEL:%PUTHASH [18]
+------------------------------------------------------------------------
+    97   0.2                   REFUEL-AND-NAV [59]
+     1   0.0     97   0.2   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (PROGRESS-PRINTER:<PROGRESS-PRINTER> T T T T)) [188]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+    95   0.2                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [72]
+------------------------------------------------------------------------
+    12   0.0                   COERCE [39]
+     1   0.0     12   0.0   FBOUNDP [189]
+    11   0.0                   SB-KERNEL:FDEFINITION-OBJECT [338]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::MASK-SIGNED-FIELD [146]
+     1   0.0      1   0.0   LOGBITP [190]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     1   0.0      3   0.0   (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP :AFTER (REINFORCEMENT-LEARNING:<LEARNING-ALGORITHM> T T T T)) [191]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+     1   0.0                   "foreign function closure_tramp" [34]
+------------------------------------------------------------------------
+     1   0.0                   ERROR [47]
+     1   0.0      1   0.0   SB-IMPL::INFINITE-ERROR-PROTECTOR [192]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD ENV:SAMPLE-PERCEPT (ENV:<FULLY-OBSERVABLE-ENV> T T T T)) [193]
+------------------------------------------------------------------------
+     1   0.0                   AREF [130]
+     1   0.0      1   0.0   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF [194]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:UNIF-GRID-DIST-SAMPLER (GRID-WORLD:<GRID-WORLD>)) [341]
+     1   0.0      1   0.0   COPY-LIST [195]
+------------------------------------------------------------------------
+     1   0.0                   "foreign function signal_emulation_wrapper" [13]
+     1   0.0      1   0.0   "foreign function _platform_memmove$VARIANT$Nehalem" [196]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+     2   0.0                   SB-KERNEL:VALUES-SPECIFIER-TYPE [65]
+     1   0.0      3   0.0   SB-INT:EQUAL-BUT-NO-CAR-RECURSION [197]
+     1   0.0                   MACROEXPAND-1 [159]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0      1   0.0   SB-KERNEL:%MEMBER [198]
+------------------------------------------------------------------------
+     1   0.0                   MAKE-HASH-TABLE [2]
+     1   0.0      1   0.0   SB-INT:POWER-OF-TWO-CEILING [199]
+------------------------------------------------------------------------
+     1   0.0                   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD GRID-WORLD:LOC-VALUE (GRID-WORLD:<GRID-WORLD> T)) [200]
+------------------------------------------------------------------------
+     1   0.0                   SET::ARGEXT [346]
+     1   0.0      1   0.0   IDENTITY [201]
+------------------------------------------------------------------------
+     1   0.0                   SIGNAL [57]
+     1   0.0      1   0.0   TYPEP [202]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+     1   0.0      1   0.0   (LAMBDA NIL :IN Q-FUNCTION:BEST-CHOICE) [203]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:%MAP-TO-SIMPLE-VECTOR-ARITY-1 [205]
+     1   0.0      1   0.0   (LAMBDA (PROBABILITY::X) :IN PROBABILITY:MAKE-MULTINOMIAL-DIST) [204]
+------------------------------------------------------------------------
+     2   0.0                   PROBABILITY:MAKE-MULTINOMIAL-DIST [206]
+     1   0.0      2   0.0   SB-KERNEL:%MAP-TO-SIMPLE-VECTOR-ARITY-1 [205]
+     1   0.0                   (LAMBDA (PROBABILITY::X) :IN PROBABILITY:MAKE-MULTINOMIAL-DIST) [204]
+------------------------------------------------------------------------
+     5   0.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+     1   0.0      5   0.0   PROBABILITY:MAKE-MULTINOMIAL-DIST [206]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+     2   0.0                   SB-KERNEL:%MAP-TO-SIMPLE-VECTOR-ARITY-1 [205]
+------------------------------------------------------------------------
+     1   0.0                   SIGNAL [57]
+     1   0.0      1   0.0   SB-KERNEL:COERCE-TO-CONDITION [207]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::INTEGER-/-INTEGER [103]
+     1   0.0      1   0.0   SB-KERNEL:TWO-ARG-GCD [208]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0      1   0.0   ALISP-HORDQ::QC-BACKUP [209]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     2   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+     1   0.0      3   0.0   ALISP-HORDQ::BACKUP [210]
+     2   0.0                   SB-KERNEL:TWO-ARG-* [75]
+------------------------------------------------------------------------
+    71   0.1                   (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION) [118]
+     1   0.0     72   0.1   SB-PCL::GET-PV [211]
+    70   0.1                   SB-PCL::PV-WRAPPERS-FROM-ALL-ARGS [35]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     1   0.0      1   0.0   (LAMBDA (SB-PCL::.ARG0. SB-INT:&MORE SB-PCL::.MORE-CONTEXT. SB-PCL::.MORE-COUNT.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [212]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<MULTINOMIAL-DIST>)) [350]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (VECTOR)) [213]
+------------------------------------------------------------------------
+     2   0.0                   REFUEL-AND-NAV [59]
+     1   0.0      2   0.0   ALISP::MOVE-NEXT-FRAME-TO-STACK [214]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   MACROEXPAND-1 [159]
+     6   0.0                   COERCE [39]
+     1   0.0      7   0.0   MACRO-FUNCTION [215]
+     6   0.0                   SB-C::GET-INFO-VALUE [102]
+------------------------------------------------------------------------
+     1   0.0                   REFUEL-AND-NAV [59]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (REINFORCEMENT-LEARNING:<RL-OBSERVER> T T)) [216]
+------------------------------------------------------------------------
+     1   0.0                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (REINFORCEMENT-LEARNING:<RL-OBSERVER> T)) [217]
+------------------------------------------------------------------------
+     3   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     1   0.0      3   0.0   SB-PCL::ENSURE-CACHED-CTOR [218]
+     2   0.0                   SB-PCL::FIND-CTOR [128]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0      1   0.0   (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/fn-approx/tabular-fn-approx.lisp") [219]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0      1   0.0   (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-PCL::NV SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-WRITER-METHOD-FUNCTION) [220]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     1   0.0      1   0.0   (LAMBDA NIL) [221]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>)) [137]
+     1   0.0      1   0.0   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/defcombin.fasl") [222]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     1   0.0      1   0.0   WASTE-ENV::COMPUTE-WASTE-STATUS [223]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0      1   0.0   ELT [224]
+------------------------------------------------------------------------
+     1   0.0                   SB-IMPL::%ARRAY-ROW-MAJOR-INDEX [226]
+     1   0.0      1   0.0   NREVERSE [225]
+------------------------------------------------------------------------
+     2   0.0                   AREF [130]
+     1   0.0      2   0.0   SB-IMPL::%ARRAY-ROW-MAJOR-INDEX [226]
+     1   0.0                   NREVERSE [225]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>)) [99]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD GRID-WORLD:WORLD-MAP (GRID-WORLD:<GRID-WORLD>)) [227]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA NIL :IN SET:ITERATOR) [355]
+     1   0.0      1   0.0   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS [228]
+------------------------------------------------------------------------
+     1   0.0                   MAKE-HASH-TABLE [2]
+     1   0.0      1   0.0   SB-KERNEL:%SINGLE-FLOAT [229]
+------------------------------------------------------------------------
+     2   0.0                   (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T)) [167]
+     1   0.0      2   0.0   (SB-PCL::GF-DISPATCH ENV:SAMPLE-PERCEPT) [230]
+     1   0.0                   SB-KERNEL:CLASSOID-TYPEP [88]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (HASH-TABLE)) [12]
+     1   0.0      1   0.0   HASH-TABLE-SIZE [231]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     1   0.0      1   0.0   (SB-PCL::FAST-METHOD SET:ITEM (T SEQUENCE)) [232]
+------------------------------------------------------------------------
+     1   0.0      1   0.0   SB-PCL::PROBE-CACHE [233]
+------------------------------------------------------------------------
+     1   0.0                   (LABELS SB-KERNEL::FLOATIT :IN SB-KERNEL::FLOAT-RATIO) [357]
+     1   0.0      1   0.0   SB-KERNEL::DOUBLE-FROM-BITS [234]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:%LDB [240]
+     1   0.0      1   0.0   SB-BIGNUM:BIGNUM-ASHIFT-LEFT [235]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION) [118]
+     1   0.0      1   0.0   SB-PCL::PV-TABLE-LOOKUP [236]
+------------------------------------------------------------------------
+     1   0.0                   MAKE-ARRAY [25]
+     1   0.0      1   0.0   SB-IMPL::%VECTOR-WIDETAG-AND-N-BITS [237]
+------------------------------------------------------------------------
+     1   0.0                   COERCE [39]
+     1   0.0      1   0.0   SB-INT:VALID-FUNCTION-NAME-P [238]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0      1   0.0   ALISP:ACTION-STATE? [239]
+------------------------------------------------------------------------
+    19   0.0                   SB-KERNEL::FLOAT-RATIO [141]
+     1   0.0                   SB-KERNEL::MAKE-VALUES-TYPE-CACHED [241]
+     0   0.0     20   0.0   SB-KERNEL:%LDB [240]
+     1   0.0                   SB-BIGNUM:BIGNUM-ASHIFT-LEFT [235]
+     4   0.0                   SB-BIGNUM:SUBTRACT-BIGNUM [105]
+     6   0.0                   ASH [58]
+     4   0.0                   SB-BIGNUM::BIGNUM-ASHIFT-LEFT-UNALIGNED [116]
+     4   0.0                   SB-BIGNUM:BIGNUM-LOGICAL-AND [97]
+     1   0.0                   SB-BIGNUM::%NORMALIZE-BIGNUM [162]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::MAKE-REF [242]
+     0   0.0      1   0.0   SB-KERNEL::MAKE-VALUES-TYPE-CACHED [241]
+     1   0.0                   SB-KERNEL:%LDB [240]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::REFERENCE-CONSTANT [243]
+     0   0.0      1   0.0   SB-C::MAKE-REF [242]
+     1   0.0                   SB-KERNEL::MAKE-VALUES-TYPE-CACHED [241]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::REFERENCE-CONSTANT [243]
+     1   0.0                   SB-C::MAKE-REF [242]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-GLOBAL-FUNCTOID [256]
+     1   0.0                   SB-C::IR1-CONVERT-PROGN-BODY [249]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     1   0.0                   SB-C::IR1-CONVERT-%FUNCALL [248]
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION-ARGS [245]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT [244]
+     1   0.0                   SB-C::IR1-CONVERT-FUNCTION [262]
+     1   0.0                   SB-C::IR1-CONVERT-FLET [260]
+     1   0.0                   SB-C::IR1-CONVERT-BLOCK [258]
+     1   0.0                   SB-C::IR1-CONVERT-LET* [257]
+     1   0.0                   SB-C::IR1-CONVERT-GLOBAL-FUNCTOID [256]
+     1   0.0                   SB-C::IR1-CONVERT-LET [255]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     1   0.0                   SB-C::IR1-CONVERT-%FUNCALL [248]
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION-CHECKING-TYPE [247]
+     1   0.0                   SB-C::REFERENCE-CONSTANT [243]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION [246]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-COMBINATION-ARGS [245]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION-CHECKING-TYPE [247]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-COMBINATION [246]
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION-ARGS [245]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-COMBINATION-CHECKING-TYPE [247]
+     1   0.0                   SB-C::IR1-CONVERT-COMBINATION [246]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-%FUNCALL [248]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::%PROCESSING-DECLS [254]
+     1   0.0                   SB-C::IR1-CONVERT-BLOCK [258]
+     1   0.0                   SB-C::IR1-CONVERT-AUX-BINDINGS [250]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-PROGN-BODY [249]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::%PROCESSING-DECLS [254]
+     1   0.0                   SB-C::IR1-CONVERT-SPECIAL-BINDINGS [251]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-AUX-BINDINGS [250]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA-BODY [252]
+     1   0.0                   SB-C::IR1-CONVERT-PROGN-BODY [249]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA-BODY [252]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-SPECIAL-BINDINGS [251]
+     1   0.0                   SB-C::IR1-CONVERT-AUX-BINDINGS [250]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA [259]
+     1   0.0                   SB-C::IR1-CONVERT-AUX-BINDINGS [250]
+     1   0.0                   (LAMBDA (SB-C::NEXT SB-C::RESULT SB-C::POST-BINDING-LEXENV) :IN SB-C::IR1-CONVERT-LET) [253]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-LAMBDA-BODY [252]
+     1   0.0                   SB-C::IR1-CONVERT-SPECIAL-BINDINGS [251]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::%PROCESSING-DECLS [254]
+     0   0.0      1   0.0   (LAMBDA (SB-C::NEXT SB-C::RESULT SB-C::POST-BINDING-LEXENV) :IN SB-C::IR1-CONVERT-LET) [253]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA-BODY [252]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-LET* [257]
+     1   0.0                   SB-C::IR1-CONVERT-LET [255]
+     0   0.0      1   0.0   SB-C::%PROCESSING-DECLS [254]
+     1   0.0                   SB-C::IR1-CONVERT-PROGN-BODY [249]
+     1   0.0                   SB-C::IR1-CONVERT-AUX-BINDINGS [250]
+     1   0.0                   (LAMBDA (SB-C::NEXT SB-C::RESULT SB-C::POST-BINDING-LEXENV) :IN SB-C::IR1-CONVERT-LET) [253]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-LET [255]
+     1   0.0                   SB-C::%PROCESSING-DECLS [254]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-GLOBAL-FUNCTOID [256]
+     1   0.0                   SB-C::IR1-CONVERT [244]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-LET* [257]
+     1   0.0                   SB-C::%PROCESSING-DECLS [254]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-BLOCK [258]
+     1   0.0                   SB-C::IR1-CONVERT-PROGN-BODY [249]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::MAKE-FUNCTIONAL-FROM-TOPLEVEL-LAMBDA [263]
+     1   0.0                   SB-C::FUN-NAME-LEAF [261]
+     1   0.0                   SB-C::IR1-CONVERT-FLET [260]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-LAMBDA [259]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA-BODY [252]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-FLET [260]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA [259]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT-FUNCTION [262]
+     0   0.0      1   0.0   SB-C::FUN-NAME-LEAF [261]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA [259]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::IR1-CONVERT [244]
+     0   0.0      1   0.0   SB-C::IR1-CONVERT-FUNCTION [262]
+     1   0.0                   SB-C::FUN-NAME-LEAF [261]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::%COMPILE [264]
+     0   0.0      1   0.0   SB-C::MAKE-FUNCTIONAL-FROM-TOPLEVEL-LAMBDA [263]
+     1   0.0                   SB-C::IR1-CONVERT-LAMBDA [259]
+------------------------------------------------------------------------
+     7   0.0                   (FLET #:WITHOUT-INTERRUPTS-BODY-564 :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [265]
+     0   0.0      7   0.0   SB-C::%COMPILE [264]
+     6   0.0                   SB-C::COMPILE-COMPONENT [290]
+     1   0.0                   SB-C::MAKE-FUNCTIONAL-FROM-TOPLEVEL-LAMBDA [263]
+------------------------------------------------------------------------
+     7   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [266]
+     0   0.0      7   0.0   (FLET #:WITHOUT-INTERRUPTS-BODY-564 :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [265]
+     1   0.0                   (FLET SB-THREAD::WITH-RECURSIVE-LOCK-THUNK :IN SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR) [272]
+     7   0.0                   SB-C::%COMPILE [264]
+------------------------------------------------------------------------
+     7   0.0                   SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR [273]
+     7   0.0                   (LAMBDA NIL :IN SB-C::ACTUALLY-COMPILE) [267]
+     0   0.0      7   0.0   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [266]
+     7   0.0                   (FLET #:WITHOUT-INTERRUPTS-BODY-564 :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [265]
+------------------------------------------------------------------------
+     7   0.0                   (FLET SB-C::WITH-IT :IN SB-C::%WITH-COMPILATION-UNIT) [268]
+     0   0.0      7   0.0   (LAMBDA NIL :IN SB-C::ACTUALLY-COMPILE) [267]
+     7   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [266]
+------------------------------------------------------------------------
+     7   0.0                   SB-C::ACTUALLY-COMPILE [269]
+     0   0.0      7   0.0   (FLET SB-C::WITH-IT :IN SB-C::%WITH-COMPILATION-UNIT) [268]
+     7   0.0                   (LAMBDA NIL :IN SB-C::ACTUALLY-COMPILE) [267]
+------------------------------------------------------------------------
+     7   0.0                   SB-C:COMPILE-IN-LEXENV [270]
+     0   0.0      7   0.0   SB-C::ACTUALLY-COMPILE [269]
+     7   0.0                   (FLET SB-C::WITH-IT :IN SB-C::%WITH-COMPILATION-UNIT) [268]
+------------------------------------------------------------------------
+     7   0.0                   COMPILE [271]
+     0   0.0      7   0.0   SB-C:COMPILE-IN-LEXENV [270]
+     7   0.0                   SB-C::ACTUALLY-COMPILE [269]
+------------------------------------------------------------------------
+     7   0.0                   (FLET SB-THREAD::WITH-RECURSIVE-LOCK-THUNK :IN SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR) [272]
+     0   0.0      7   0.0   COMPILE [271]
+     7   0.0                   SB-C:COMPILE-IN-LEXENV [270]
+------------------------------------------------------------------------
+     1   0.0                   (FLET #:WITHOUT-INTERRUPTS-BODY-564 :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK) [265]
+     0   0.0      7   0.0   (FLET SB-THREAD::WITH-RECURSIVE-LOCK-THUNK :IN SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR) [272]
+     7   0.0                   COMPILE [271]
+------------------------------------------------------------------------
+     7   0.0                   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+     0   0.0      7   0.0   SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR [273]
+     7   0.0                   SB-THREAD::CALL-WITH-RECURSIVE-LOCK [266]
+------------------------------------------------------------------------
+     1   0.0                   LEARN [314]
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-HORDQ:<HORDQ>)) [312]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     4   0.0                   INITIALIZE-ALGORITHMS [275]
+     0   0.0      7   0.0   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+     7   0.0                   SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR [273]
+------------------------------------------------------------------------
+     6   0.0                   LEARN-BEHAVIOR [276]
+     0   0.0      6   0.0   INITIALIZE-ALGORITHMS [275]
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.|)) [313]
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.| SB-PCL::|.P2.| SB-PCL::|.P3.| SB-PCL::|.P4.|)) [292]
+     4   0.0                   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+------------------------------------------------------------------------
+ 49959  99.9                   "Unknown component: #x1013AD4300" [277]
+     0   0.0  49959  99.9   LEARN-BEHAVIOR [276]
+ 49953  99.9                   SB-IMPL::%MAP-FOR-EFFECT-ARITY-1 [315]
+     6   0.0                   INITIALIZE-ALGORITHMS [275]
+------------------------------------------------------------------------
+ 49959  99.9                   SB-EXT:CALL-WITH-TIMING [278]
+     0   0.0  49959  99.9   "Unknown component: #x1013AD4300" [277]
+ 49959  99.9                   LEARN-BEHAVIOR [276]
+------------------------------------------------------------------------
+ 49952  99.9                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+     0   0.0  49959  99.9   SB-EXT:CALL-WITH-TIMING [278]
+ 49959  99.9                   "Unknown component: #x1013AD4300" [277]
+------------------------------------------------------------------------
+ 49840  99.7                   EVAL [106]
+     0   0.0  49959  99.9   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+     1   0.0                   SB-INT:EQUAL-BUT-NO-CAR-RECURSION [197]
+     1   0.0                   SB-KERNEL:FDEFINITION-OBJECT [338]
+     1   0.0                   LENGTH [151]
+     4   0.0                   MACROEXPAND [160]
+ 49952  99.9                   SB-EXT:CALL-WITH-TIMING [278]
+------------------------------------------------------------------------
+ 49959  99.9                   SB-IMPL::REPL-FUN [281]
+     0   0.0  49959  99.9   SB-EXT:INTERACTIVE-EVAL [280]
+ 49959  99.9                   EVAL [106]
+------------------------------------------------------------------------
+ 49959  99.9                   (LAMBDA NIL :IN SB-IMPL::TOPLEVEL-REPL) [282]
+     0   0.0  49959  99.9   SB-IMPL::REPL-FUN [281]
+ 49959  99.9                   SB-EXT:INTERACTIVE-EVAL [280]
+------------------------------------------------------------------------
+ 49959  99.9                   SB-IMPL::%WITH-REBOUND-IO-SYNTAX [283]
+     0   0.0  49959  99.9   (LAMBDA NIL :IN SB-IMPL::TOPLEVEL-REPL) [282]
+ 49959  99.9                   SB-IMPL::REPL-FUN [281]
+------------------------------------------------------------------------
+ 49959  99.9                   SB-IMPL::TOPLEVEL-REPL [284]
+     0   0.0  49959  99.9   SB-IMPL::%WITH-REBOUND-IO-SYNTAX [283]
+ 49959  99.9                   (LAMBDA NIL :IN SB-IMPL::TOPLEVEL-REPL) [282]
+------------------------------------------------------------------------
+ 49959  99.9                   SB-IMPL::TOPLEVEL-INIT [285]
+     0   0.0  49959  99.9   SB-IMPL::TOPLEVEL-REPL [284]
+ 49959  99.9                   SB-IMPL::%WITH-REBOUND-IO-SYNTAX [283]
+------------------------------------------------------------------------
+ 49959  99.9                   (FLET #:WITHOUT-INTERRUPTS-BODY-52 :IN SB-EXT:SAVE-LISP-AND-DIE) [286]
+     0   0.0  49959  99.9   SB-IMPL::TOPLEVEL-INIT [285]
+ 49959  99.9                   SB-IMPL::TOPLEVEL-REPL [284]
+------------------------------------------------------------------------
+ 49959  99.9                   (LABELS SB-IMPL::RESTART-LISP :IN SB-EXT:SAVE-LISP-AND-DIE) [287]
+     0   0.0  49959  99.9   (FLET #:WITHOUT-INTERRUPTS-BODY-52 :IN SB-EXT:SAVE-LISP-AND-DIE) [286]
+ 49959  99.9                   SB-IMPL::TOPLEVEL-INIT [285]
+------------------------------------------------------------------------
+     0   0.0  49959  99.9   (LABELS SB-IMPL::RESTART-LISP :IN SB-EXT:SAVE-LISP-AND-DIE) [287]
+ 49959  99.9                   (FLET #:WITHOUT-INTERRUPTS-BODY-52 :IN SB-EXT:SAVE-LISP-AND-DIE) [286]
+------------------------------------------------------------------------
+     2   0.0                   SB-C::%COMPILE-COMPONENT [289]
+     0   0.0      2   0.0   SB-C::MAKE-CORE-COMPONENT [288]
+     2   0.0                   (FLET #:CLEANUP-FUN-65 :IN SB-C::MAKE-CORE-COMPONENT) [129]
+------------------------------------------------------------------------
+     2   0.0                   SB-C::COMPILE-COMPONENT [290]
+     0   0.0      2   0.0   SB-C::%COMPILE-COMPONENT [289]
+     2   0.0                   SB-C::MAKE-CORE-COMPONENT [288]
+------------------------------------------------------------------------
+     6   0.0                   SB-C::%COMPILE [264]
+     0   0.0      6   0.0   SB-C::COMPILE-COMPONENT [290]
+     4   0.0                   SB-C::IR1-PHASES [304]
+     2   0.0                   SB-C::%COMPILE-COMPONENT [289]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.| SB-PCL::|.P2.| SB-PCL::|.P3.| SB-PCL::|.P4.|)) [292]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-SMDPQ:<SMDPQ>)) [291]
+     1   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+------------------------------------------------------------------------
+     1   0.0                   INITIALIZE-ALGORITHMS [275]
+     0   0.0      1   0.0   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.| SB-PCL::|.P2.| SB-PCL::|.P3.| SB-PCL::|.P4.|)) [292]
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-SMDPQ:<SMDPQ>)) [291]
+------------------------------------------------------------------------
+  2022   4.0                   "foreign function interrupt_handle_pending" [294]
+     0   0.0   2022   4.0   "foreign function maybe_gc" [293]
+  2022   4.0                   "foreign function __pthread_sigmask" [6]
+------------------------------------------------------------------------
+  2022   4.0                   "foreign function signal_emulation_wrapper" [13]
+     0   0.0   2022   4.0   "foreign function interrupt_handle_pending" [294]
+  2022   4.0                   "foreign function maybe_gc" [293]
+------------------------------------------------------------------------
+     1   0.0                   ALISP-HORDQ::MAKE-CSI [68]
+     1   0.0                   ALISP::MOVE-NEXT-FRAME-TO-STACK [214]
+     1   0.0                   SB-BIGNUM::BIGNUM-ASHIFT-LEFT-UNALIGNED [116]
+     1   0.0                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     1   0.0                   "Unknown component: #x1002E06E60" [26]
+     3   0.0                   SB-KERNEL:MAKE-NULL-LEXENV [29]
+     2   0.0                   PROBABILITY:MAKE-MULTINOMIAL-DIST [206]
+     2   0.0                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+     1   0.0                   PROBABILITY:SAMPLE-MULTINOMIAL [78]
+     2   0.0                   WASTE-ENV::COMPUTE-FUEL [136]
+     3   0.0                   SB-PCL::%MAKE-STANDARD-INSTANCE [33]
+     2   0.0                   SB-THREAD:MAKE-MUTEX [37]
+     1   0.0                   (SB-PCL::FAST-METHOD SET:ITERATOR (VECTOR)) [76]
+     3   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+    12   0.0                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+     2   0.0                   ALISP::MAKE-JOINT-STATE [45]
+     3   0.0                   ALISP::MAKE-PROGRAM-COUNTER [52]
+     3   0.0                   SB-KERNEL:ALLOCATE-CONDITION [43]
+     6   0.0                   SB-IMPL::%MAKE-HASH-TABLE [24]
+     3   0.0                   SB-IMPL::OPTIMIZED-DATA-VECTOR-SET [336]
+     4   0.0                   ERROR [47]
+     2   0.0                   (FLET #:CLEANUP-FUN-1082 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [335]
+    19   0.0                   (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3) [40]
+     6   0.0                   ALISP::MAKE-FRAME [54]
+    21   0.0                   SB-KERNEL:MAKE-RESTART [17]
+    90   0.2                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [72]
+   897   1.8                   (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH) [1]
+     5   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+    29   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+    20   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+     4   0.0                   MAKE-ARRAY [25]
+  1893   3.8                   MAKE-HASH-TABLE [2]
+     3   0.0                   MAKE-CONDITION [44]
+     1   0.0                   SB-KERNEL:VALUES-TYPE-INTERSECTION [296]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+     0   0.0   3048   6.1   "foreign function stack_allocation_recover" [295]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+  3048   6.1                   "foreign function signal_emulation_wrapper" [13]
+------------------------------------------------------------------------
+     2   0.0                   SB-C::DERIVE-NODE-TYPE [297]
+     0   0.0      2   0.0   SB-KERNEL:VALUES-TYPE-INTERSECTION [296]
+     1   0.0                   SB-KERNEL::VALUES-TYPE-OP [311]
+     1   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::CHANGE-REF-LEAF [305]
+     2   0.0                   SB-C::PROPAGATE-TO-REFS [298]
+     0   0.0      3   0.0   SB-C::DERIVE-NODE-TYPE [297]
+     1   0.0                   SB-KERNEL:TYPE/= [163]
+     2   0.0                   SB-KERNEL:VALUES-TYPE-INTERSECTION [296]
+------------------------------------------------------------------------
+     2   0.0                   SB-C::PROPAGATE-LET-ARGS [299]
+     0   0.0      2   0.0   SB-C::PROPAGATE-TO-REFS [298]
+     2   0.0                   SB-C::DERIVE-NODE-TYPE [297]
+------------------------------------------------------------------------
+     3   0.0                   SB-C::IR1-OPTIMIZE-COMBINATION [300]
+     0   0.0      3   0.0   SB-C::PROPAGATE-LET-ARGS [299]
+     1   0.0                   SB-C::SUBSTITUTE-LEAF-IF [306]
+     2   0.0                   SB-C::PROPAGATE-TO-REFS [298]
+------------------------------------------------------------------------
+     3   0.0                   SB-C::IR1-OPTIMIZE-BLOCK [301]
+     0   0.0      3   0.0   SB-C::IR1-OPTIMIZE-COMBINATION [300]
+     3   0.0                   SB-C::PROPAGATE-LET-ARGS [299]
+------------------------------------------------------------------------
+     3   0.0                   SB-C::IR1-OPTIMIZE [302]
+     0   0.0      3   0.0   SB-C::IR1-OPTIMIZE-BLOCK [301]
+     3   0.0                   SB-C::IR1-OPTIMIZE-COMBINATION [300]
+------------------------------------------------------------------------
+     4   0.0                   SB-C::IR1-OPTIMIZE-UNTIL-DONE [303]
+     0   0.0      4   0.0   SB-C::IR1-OPTIMIZE [302]
+     1   0.0                   SB-C::FLUSH-DEAD-CODE [165]
+     3   0.0                   SB-C::IR1-OPTIMIZE-BLOCK [301]
+------------------------------------------------------------------------
+     4   0.0                   SB-C::IR1-PHASES [304]
+     0   0.0      4   0.0   SB-C::IR1-OPTIMIZE-UNTIL-DONE [303]
+     4   0.0                   SB-C::IR1-OPTIMIZE [302]
+------------------------------------------------------------------------
+     4   0.0                   SB-C::COMPILE-COMPONENT [290]
+     0   0.0      4   0.0   SB-C::IR1-PHASES [304]
+     4   0.0                   SB-C::IR1-OPTIMIZE-UNTIL-DONE [303]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::SUBSTITUTE-LEAF-IF [306]
+     0   0.0      1   0.0   SB-C::CHANGE-REF-LEAF [305]
+     1   0.0                   SB-C::DERIVE-NODE-TYPE [297]
+------------------------------------------------------------------------
+     1   0.0                   SB-C::PROPAGATE-LET-ARGS [299]
+     0   0.0      1   0.0   SB-C::SUBSTITUTE-LEAF-IF [306]
+     1   0.0                   SB-C::CHANGE-REF-LEAF [305]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::%TYPE-INTERSECTION [308]
+     0   0.0      1   0.0   SB-KERNEL::SIMPLIFY-INTERSECTIONS [307]
+     1   0.0                   SB-KERNEL:TYPE-INTERSECTION2 [164]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::FIXED-VALUES-OP [309]
+     0   0.0      1   0.0   SB-KERNEL::%TYPE-INTERSECTION [308]
+     1   0.0                   SB-KERNEL::SIMPLIFY-INTERSECTIONS [307]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::ARGS-TYPE-OP [310]
+     0   0.0      1   0.0   SB-KERNEL::FIXED-VALUES-OP [309]
+     1   0.0                   SB-KERNEL::%TYPE-INTERSECTION [308]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL::VALUES-TYPE-OP [311]
+     0   0.0      1   0.0   SB-KERNEL::ARGS-TYPE-OP [310]
+     1   0.0                   SB-KERNEL::FIXED-VALUES-OP [309]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:VALUES-TYPE-INTERSECTION [296]
+     0   0.0      1   0.0   SB-KERNEL::VALUES-TYPE-OP [311]
+     1   0.0                   SB-KERNEL::ARGS-TYPE-OP [310]
+------------------------------------------------------------------------
+     1   0.0                   (LAMBDA (SB-PCL::|.P0.|)) [313]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-HORDQ:<HORDQ>)) [312]
+     1   0.0                   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+------------------------------------------------------------------------
+     1   0.0                   INITIALIZE-ALGORITHMS [275]
+     0   0.0      1   0.0   (LAMBDA (SB-PCL::|.P0.|)) [313]
+     1   0.0                   (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-HORDQ:<HORDQ>)) [312]
+------------------------------------------------------------------------
+     1   0.0                   SB-IMPL::%MAP-FOR-EFFECT-ARITY-1 [315]
+     0   0.0      1   0.0   LEARN [314]
+     1   0.0                   (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR) [274]
+------------------------------------------------------------------------
+ 49953  99.9                   LEARN-BEHAVIOR [276]
+     0   0.0  49953  99.9   SB-IMPL::%MAP-FOR-EFFECT-ARITY-1 [315]
+ 49952  99.9                   ALISP::RUN [319]
+     1   0.0                   LEARN [314]
+------------------------------------------------------------------------
+    35   0.1                   WASTE-ENV::COMPUTE-NEXT-LOC [108]
+     0   0.0     35   0.1   GRID-WORLD:IS-LEGAL-LOC [316]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:LOC-VALUE (GRID-WORLD:<GRID-WORLD> T)) [200]
+     4   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+    16   0.0                   GRID-WORLD:IS-VALID-LOC [100]
+     2   0.0                   (LAMBDA (SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-OPTIMIZED-STD-READER-METHOD-FUNCTION) [144]
+     1   0.0                   (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-READER-METHOD-FUNCTION) [174]
+     9   0.0                   AREF [130]
+------------------------------------------------------------------------
+ 29368  58.7                   WASTE-ROBOT-PROG [318]
+     0   0.0  29368  58.7   PICKUP-WASTE [317]
+     1   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+    29   0.1                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+    38   0.1                   (FLET #:CLEANUP-FUN-885 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [330]
+   214   0.4                   ALISP::CHOOSE-USING-COMPLETION [172]
+ 29086  58.2                   REFUEL-AND-NAV [59]
+------------------------------------------------------------------------
+ 49949  99.9                   ALISP::RUN [319]
+     0   0.0  49949  99.9   WASTE-ROBOT-PROG [318]
+     1   0.0                   ALISP::MAKE-JOINT-STATE [45]
+     2   0.0                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+     1   0.0                   (FLET #:CLEANUP-FUN-1364 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [349]
+    18   0.0                   (FLET #:CLEANUP-FUN-1279 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [348]
+   129   0.3                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+  2104   4.2                   ALISP::CHOOSE-USING-COMPLETION [172]
+ 18326  36.7                   DROP-WASTE [169]
+ 29368  58.7                   PICKUP-WASTE [317]
+------------------------------------------------------------------------
+ 49952  99.9                   SB-IMPL::%MAP-FOR-EFFECT-ARITY-1 [315]
+     0   0.0  49952  99.9   ALISP::RUN [319]
+     1   0.0                   ALISP::INITIALIZE-EPISODE [344]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP::FINISH-EPISODE (ALISP::<RLM>)) [333]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+ 49949  99.9                   WASTE-ROBOT-PROG [318]
+------------------------------------------------------------------------
+ 42771  85.5                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>)) [107]
+     0   0.0  42771  85.5   (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>)) [320]
+     1   0.0                   "foreign function closure_tramp" [34]
+     2   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [110]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+   458   0.9                   (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|)) [27]
+ 42302  84.6                   (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>)) [170]
+------------------------------------------------------------------------
+    23   0.0                   REINFORCEMENT-LEARNING::SAVE-STATE [334]
+ 43854  87.7                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+     0   0.0  43877  87.8   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<SUM-Q-FUNCTION>)) [321]
+ 43877  87.8                   (SB-PCL::FAST-METHOD CLONE (CONS)) [28]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+ 46298  92.6                   ALISP::CHOOSE-USING-COMPLETION [172]
+     0   0.0  46298  92.6   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     1   0.0                   (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T)) [322]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+   226   0.5                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (EXPLORATION-POLICY:<EXP-POL> T)) [145]
+  1517   3.0                   (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T)) [176]
+ 44549  89.1                   (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T)) [171]
+------------------------------------------------------------------------
+    10   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T)) [166]
+     0   0.0     10   0.0   WASTE-ENV::REWARD [323]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     8   0.0                   WASTE-ENV::MOVE-WOULD-HIT-WALL-P [131]
+------------------------------------------------------------------------
+  1995   4.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T)) [31]
+     0   0.0   1995   4.0   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     2   0.0                   (LAMBDA NIL :IN SET:ITERATOR) [157]
+    22   0.0                   (SB-PCL::FAST-METHOD SET:ITERATOR (LIST)) [48]
+     1   0.0                   SB-KERNEL:SEQUENCEP [124]
+     3   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [8]
+    13   0.0                   SET::ARGEXT [346]
+     6   0.0                   VECTOR-PUSH [104]
+     1   0.0                   "foreign function closure_tramp" [34]
+     5   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+     3   0.0                   ARGMAX [117]
+    35   0.1                   (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T)) [38]
+     5   0.0                   (SB-PCL::FAST-METHOD SET:SIZE (SEQUENCE)) [114]
+   233   0.5                   MAKE-ARRAY [25]
+    10   0.0                   ERROR [47]
+  1653   3.3                   (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T)) [14]
+------------------------------------------------------------------------
+    15   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-PART-PROG-TERMINATED (ALISP-HORDQ:<HORDQ> T)) [332]
+     9   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+     0   0.0     25   0.1   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T)) [92]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [61]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [51]
+    20   0.0                   (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp") [22]
+------------------------------------------------------------------------
+   882   1.8                   REFUEL-AND-NAV [59]
+     0   0.0    882   1.8   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl") [46]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (REINFORCEMENT-LEARNING:<RL-OBSERVER> T)) [217]
+     4   0.0                   ALISP::UPDATE-PROGRAM-COUNTER [331]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+    43   0.1                   (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE)) [173]
+    15   0.0                   ALISP::MAKE-JOINT-STATE [45]
+   815   1.6                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+------------------------------------------------------------------------
+   858   1.7                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+  1150   2.3                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     0   0.0   2008   4.0   (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T)) [327]
+     2   0.0                   SB-KERNEL:TWO-ARG-* [75]
+     1   0.0                   SB-KERNEL:TWO-ARG-+ [63]
+     8   0.0                   SIGNAL [57]
+  1981   4.0                   SB-KERNEL:%PUTHASH [18]
+    16   0.0                   SB-IMPL::GETHASH3 [93]
+------------------------------------------------------------------------
+    36   0.1                   (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp") [142]
+     0   0.0     36   0.1   EXP [328]
+    36   0.1                   SB-KERNEL:%DOUBLE-FLOAT [184]
+------------------------------------------------------------------------
+     1   0.0                   REFUEL-AND-NAV [59]
+     0   0.0      1   0.0   FUEL [329]
+     1   0.0                   "foreign function closure_tramp" [34]
+------------------------------------------------------------------------
+    38   0.1                   PICKUP-WASTE [317]
+     0   0.0     38   0.1   (FLET #:CLEANUP-FUN-885 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [330]
+    38   0.1                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+------------------------------------------------------------------------
+     4   0.0                   (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [326]
+    17   0.0                   REFUEL-AND-NAV [59]
+     0   0.0     21   0.0   ALISP::UPDATE-PROGRAM-COUNTER [331]
+    21   0.0                   ALISP::MAKE-PROGRAM-COUNTER [52]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP::FINISH-EPISODE (ALISP::<RLM>)) [333]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD ALISP:INFORM-PART-PROG-TERMINATED (ALISP-HORDQ:<HORDQ> T)) [332]
+     1   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T)) [325]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::RUN [319]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD ALISP::FINISH-EPISODE (ALISP::<RLM>)) [333]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-PART-PROG-TERMINATED (ALISP-HORDQ:<HORDQ> T)) [332]
+------------------------------------------------------------------------
+    23   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     0   0.0     23   0.0   REINFORCEMENT-LEARNING::SAVE-STATE [334]
+    23   0.0                   (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<SUM-Q-FUNCTION>)) [321]
+------------------------------------------------------------------------
+     3   0.0                   DROP-WASTE [169]
+     0   0.0      3   0.0   (FLET #:CLEANUP-FUN-1082 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [335]
+     1   0.0                   ALISP::MAKE-JOINT-STATE [45]
+     2   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     3   0.0                   VECTOR-PUSH-EXTEND [337]
+     0   0.0      3   0.0   SB-IMPL::OPTIMIZED-DATA-VECTOR-SET [336]
+     3   0.0                   "foreign function stack_allocation_recover" [295]
+------------------------------------------------------------------------
+     3   0.0                   (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP) [95]
+     0   0.0      3   0.0   VECTOR-PUSH-EXTEND [337]
+     3   0.0                   SB-IMPL::OPTIMIZED-DATA-VECTOR-SET [336]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:SIMPLE-EVAL-IN-LEXENV [279]
+    11   0.0                   FBOUNDP [189]
+     3   0.0                   SB-KERNEL:%COERCE-CALLABLE-TO-FUN [143]
+     0   0.0     15   0.0   SB-KERNEL:FDEFINITION-OBJECT [338]
+    15   0.0                   SB-C::GET-INFO-VALUE [102]
+------------------------------------------------------------------------
+     7   0.0                   "foreign function signal_emulation_wrapper" [13]
+     0   0.0      7   0.0   "foreign function os_validate" [339]
+     7   0.0                   "foreign function __mmap" [73]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<NUMBERED-SET-DIST>)) [340]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-INIT (<WASTE-ENV>)) [342]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD GRID-WORLD:UNIF-GRID-DIST-SAMPLER (GRID-WORLD:<GRID-WORLD>)) [341]
+     1   0.0                   COPY-LIST [195]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:RESET (ENV:<ENV>)) [343]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD ENV:SAMPLE-INIT (<WASTE-ENV>)) [342]
+     1   0.0                   (SB-PCL::FAST-METHOD GRID-WORLD:UNIF-GRID-DIST-SAMPLER (GRID-WORLD:<GRID-WORLD>)) [341]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::INITIALIZE-EPISODE [344]
+     0   0.0      1   0.0   (SB-PCL::FAST-METHOD ENV:RESET (ENV:<ENV>)) [343]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:SAMPLE-INIT (<WASTE-ENV>)) [342]
+------------------------------------------------------------------------
+     1   0.0                   ALISP::RUN [319]
+     0   0.0      1   0.0   ALISP::INITIALIZE-EPISODE [344]
+     1   0.0                   (SB-PCL::FAST-METHOD ENV:RESET (ENV:<ENV>)) [343]
+------------------------------------------------------------------------
+     5   0.0                   "foreign function signal_emulation_wrapper" [13]
+     0   0.0      5   0.0   "foreign function os_invalidate" [345]
+     5   0.0                   "foreign function __munmap" [90]
+------------------------------------------------------------------------
+    13   0.0                   (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T)) [324]
+     0   0.0     13   0.0   SET::ARGEXT [346]
+     1   0.0                   (LAMBDA NIL :IN SET:ITERATOR) [355]
+     2   0.0                   (FLET SET::NEW-BEST :IN SET::ARGEXT) [158]
+     8   0.0                   (SB-PCL::FAST-METHOD SET:ITERATOR (VECTOR)) [76]
+     1   0.0                   SB-VM::GENERIC-+ [41]
+     1   0.0                   IDENTITY [201]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+     0   0.0      1   0.0   ALISP-HORDQ::QR-BACKUP [347]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+------------------------------------------------------------------------
+    18   0.0                   WASTE-ROBOT-PROG [318]
+     0   0.0     18   0.0   (FLET #:CLEANUP-FUN-1279 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [348]
+    18   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+------------------------------------------------------------------------
+     1   0.0                   WASTE-ROBOT-PROG [318]
+     0   0.0      1   0.0   (FLET #:CLEANUP-FUN-1364 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp") [349]
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T)) [175]
+------------------------------------------------------------------------
+     2   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     0   0.0      2   0.0   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<MULTINOMIAL-DIST>)) [350]
+     1   0.0                   "foreign function funcallable_instance_tramp" [32]
+     1   0.0                   (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (VECTOR)) [213]
+------------------------------------------------------------------------
+     2   0.0                   ALISP::CHOOSE-USING-COMPLETION [172]
+     0   0.0      2   0.0   PROBABILITY:SAMPLE-UNIFORMLY [351]
+     2   0.0                   RANDOM [155]
+------------------------------------------------------------------------
+     1   0.0                   SB-INT:FIND-RESTART-OR-CONTROL-ERROR [353]
+     0   0.0      1   0.0   FIND-RESTART [352]
+     1   0.0                   SB-KERNEL:%TYPEP [183]
+------------------------------------------------------------------------
+     1   0.0                   INVOKE-RESTART [354]
+     0   0.0      1   0.0   SB-INT:FIND-RESTART-OR-CONTROL-ERROR [353]
+     1   0.0                   FIND-RESTART [352]
+------------------------------------------------------------------------
+     1   0.0                   SIGNAL [57]
+     0   0.0      1   0.0   INVOKE-RESTART [354]
+     1   0.0                   SB-INT:FIND-RESTART-OR-CONTROL-ERROR [353]
+------------------------------------------------------------------------
+     1   0.0                   SET::ARGEXT [346]
+     0   0.0      1   0.0   (LAMBDA NIL :IN SET:ITERATOR) [355]
+     1   0.0                   SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS [228]
+------------------------------------------------------------------------
+     1   0.0                   (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T)) [82]
+     0   0.0      1   0.0   ALISP-HORDQ::QE-BACKUP [356]
+     1   0.0                   (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl") [50]
+------------------------------------------------------------------------
+     1   0.0                   (LABELS SB-KERNEL::FLOAT-AND-SCALE :IN SB-KERNEL::FLOAT-RATIO) [358]
+     0   0.0      1   0.0   (LABELS SB-KERNEL::FLOATIT :IN SB-KERNEL::FLOAT-RATIO) [357]
+     1   0.0                   SB-KERNEL::DOUBLE-FROM-BITS [234]
+------------------------------------------------------------------------
+     1   0.0                   SB-KERNEL:%DOUBLE-FLOAT [184]
+     0   0.0      1   0.0   (LABELS SB-KERNEL::FLOAT-AND-SCALE :IN SB-KERNEL::FLOAT-RATIO) [358]
+     1   0.0                   (LABELS SB-KERNEL::FLOATIT :IN SB-KERNEL::FLOAT-RATIO) [357]
+------------------------------------------------------------------------
+
+
+           Self        Total        Cumul
+  Nr  Count     %  Count     %  Count     %    Calls  Function
+------------------------------------------------------------------------
+   1  10780  21.6  30432  60.9  10780  21.6        -  (FLET #:BODY-FUN-834 :IN SB-KERNEL:%PUTHASH)
+   2   9407  18.8  12139  24.3  20187  40.4        -  MAKE-HASH-TABLE
+   3   4822   9.6  16168  32.3  25009  50.0        -  SB-INT:PSXHASH
+   4   4759   9.5  11439  22.9  29768  59.5        -  SB-IMPL::LIST-PSXHASH
+   5   2206   4.4  15850  31.7  31974  63.9        -  SB-IMPL::ARRAY-PSXHASH
+   6   2057   4.1   2057   4.1  34031  68.1        -  "foreign function __pthread_sigmask"
+   7   1773   3.5   2309   4.6  35804  71.6        -  EQUALP
+   8   1439   2.9   1439   2.9  37243  74.5        -  (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+   9   1437   2.9   1437   2.9  38680  77.4        -  SXHASH
+  10   1242   2.5   1242   2.5  39922  79.8        -  SB-IMPL::NUMBER-PSXHASH
+  11   1221   2.4   1221   2.4  41143  82.3        -  (LABELS SB-IMPL::SXHASH-RECURSE :IN SXHASH)
+  12   1139   2.3  42277  84.6  42282  84.6        -  (SB-PCL::FAST-METHOD CLONE (HASH-TABLE))
+  13    978   2.0   3048   6.1  43260  86.5        -  "foreign function signal_emulation_wrapper"
+  14    675   1.4   1736   3.5  43935  87.9        -  (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE :AROUND (T T T))
+  15    566   1.1    566   1.1  44501  89.0        -  (LABELS SB-IMPL::SXHASH-NUMBER :IN SXHASH)
+  16    546   1.1    546   1.1  45047  90.1        -  SB-KERNEL:UB64-BASH-FILL
+  17    508   1.0    529   1.1  45555  91.1        -  SB-KERNEL:MAKE-RESTART
+  18    405   0.8  30897  61.8  45960  91.9        -  SB-KERNEL:%PUTHASH
+  19    331   0.7  16514  33.0  46291  92.6        -  SB-IMPL::EQUALP-HASH
+  20    293   0.6    293   0.6  46584  93.2        -  SB-KERNEL:HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS
+  21    264   0.5    264   0.5  46848  93.7        -  (FLET #:CLEANUP-FUN-610 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK)
+  22    236   0.5    274   0.5  47084  94.2        -  (LAMBDA (OMEGA ALISP::U) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-features.lisp")
+  23    226   0.5    226   0.5  47310  94.6        -  SB-IMPL::OPTIMIZED-DATA-VECTOR-REF
+  24    225   0.4    291   0.6  47535  95.1        -  SB-IMPL::%MAKE-HASH-TABLE
+  25    179   0.4    233   0.5  47714  95.4        -  MAKE-ARRAY
+  26    157   0.3    982   2.0  47871  95.7        -  "Unknown component: #x1002E06E60"
+  27    145   0.3    458   0.9  48016  96.0        -  (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|))
+  28    135   0.3  44023  88.0  48151  96.3        -  (SB-PCL::FAST-METHOD CLONE (CONS))
+  29    113   0.2    116   0.2  48264  96.5        -  SB-KERNEL:MAKE-NULL-LEXENV
+  30    106   0.2    106   0.2  48370  96.7        -  (SB-PCL::FAST-METHOD CLONE (NUMBER))
+  31     99   0.2   2226   4.5  48469  96.9        -  (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE :AROUND (T T))
+  32     93   0.2     93   0.2  48562  97.1        -  "foreign function funcallable_instance_tramp"
+  33     92   0.2     95   0.2  48654  97.3        -  SB-PCL::%MAKE-STANDARD-INSTANCE
+  34     89   0.2     89   0.2  48743  97.5        -  "foreign function closure_tramp"
+  35     68   0.1     70   0.1  48811  97.6        -  SB-PCL::PV-WRAPPERS-FROM-ALL-ARGS
+  36     60   0.1   1064   2.1  48871  97.7        -  "Unknown component: #x1002ECE5A0"
+  37     58   0.1     60   0.1  48929  97.9        -  SB-THREAD:MAKE-MUTEX
+  38     56   0.1     72   0.1  48985  98.0        -  (SB-PCL::FAST-METHOD Q-FUNCTION:CHOICES (Q-FUNCTION:<SUM-Q-FUNCTION> T))
+  39     54   0.1    219   0.4  49039  98.1        -  COERCE
+  40     51   0.1    150   0.3  49090  98.2        -  (FLET #:BODY-FUN-637 :IN SB-IMPL::GETHASH3)
+  41     43   0.1     50   0.1  49133  98.3        -  SB-VM::GENERIC-+
+  42     37   0.1     40   0.1  49170  98.3        -  SB-IMPL::ALLOCATE-VECTOR-WITH-WIDETAG
+  43     36   0.1    323   0.6  49206  98.4        -  SB-KERNEL:ALLOCATE-CONDITION
+  44     35   0.1    361   0.7  49241  98.5        -  MAKE-CONDITION
+  45     27   0.1     29   0.1  49268  98.5        -  ALISP::MAKE-JOINT-STATE
+  46     24   0.0     24   0.0  49292  98.6        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+  47     23   0.0    316   0.6  49315  98.6        -  ERROR
+  48     22   0.0     22   0.0  49337  98.7        -  (SB-PCL::FAST-METHOD SET:ITERATOR (LIST))
+  49     21   0.0     21   0.0  49358  98.7        -  (FLET SB-THREAD::WITH-RECURSIVE-SYSTEM-LOCK-THUNK :IN SB-KERNEL:%PUTHASH)
+  50     20   0.0     20   0.0  49378  98.8        -  (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl")
+  51     19   0.0     19   0.0  49397  98.8        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+  52     18   0.0    620   1.2  49415  98.8        -  (LAMBDA (SB-PCL::|.P0.|))
+  53     18   0.0     21   0.0  49433  98.9        -  ALISP::MAKE-PROGRAM-COUNTER
+  54     17   0.0     23   0.0  49450  98.9        -  ALISP::MAKE-FRAME
+  55     15   0.0     15   0.0  49465  98.9        -  SB-KERNEL::%MAKE-CONDITION-OBJECT
+  56     13   0.0     14   0.0  49478  99.0        -  CHECK-EXACT-CLASS
+  57     12   0.0    102   0.2  49490  99.0        -  SIGNAL
+  58     12   0.0     12   0.0  49502  99.0        -  ASH
+  59     11   0.0  46072  92.1  49513  99.0        -  REFUEL-AND-NAV
+  60     11   0.0    523   1.0  49524  99.0        -  (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T))
+  61     11   0.0     11   0.0  49535  99.1        -  (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl")
+  62     10   0.0     15   0.0  49545  99.1        -  (LAMBDA (STATE) :IN MAKE-BUCKET-FUN)
+  63      9   0.0     22   0.0  49554  99.1        -  (LAMBDA (SB-PCL::|.P0.|))
+  64      9   0.0      9   0.0  49563  99.1        -  SB-KERNEL:TWO-ARG-+
+  65      8   0.0     11   0.0  49571  99.1        -  SB-KERNEL:VALUES-SPECIFIER-TYPE
+  66      8   0.0      9   0.0  49579  99.2        -  ALISP-HORDQ::MAKE-CSI
+  67      8   0.0      8   0.0  49587  99.2        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3. SB-PCL::.ARG4.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+  68      8   0.0      8   0.0  49595  99.2        -  SB-C::VOLATILE-INFO-LOOKUP
+  69      7   0.0     97   0.2  49602  99.2        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl")
+  70      7   0.0      8   0.0  49609  99.2        -  ALISP::SET-FRAME-VAR-VAL
+  71      7   0.0      8   0.0  49616  99.2        -  (SB-PCL::FAST-METHOD SET:ITERATOR (VECTOR))
+  72      7   0.0      7   0.0  49623  99.2        -  WASTE-ENV::MAKE-WASTE-STATE
+  73      7   0.0      7   0.0  49630  99.3        -  SB-KERNEL:SCALE-DOUBLE-FLOAT
+  74      7   0.0      7   0.0  49637  99.3        -  "foreign function __mmap"
+  75      7   0.0      7   0.0  49644  99.3        -  ARRAY-DIMENSIONS
+  76      7   0.0      7   0.0  49651  99.3        -  SB-KERNEL:TWO-ARG-*
+  77      6   0.0      8   0.0  49657  99.3        -  PROBABILITY:SAMPLE-MULTINOMIAL
+  78      6   0.0      7   0.0  49663  99.3        -  SB-KERNEL::%%TYPEP
+  79      6   0.0      6   0.0  49669  99.3        -  EQL
+  80      6   0.0      6   0.0  49675  99.3        -  (SB-PCL::FAST-METHOD CLONE (SYMBOL))
+  81      6   0.0      6   0.0  49681  99.4        -  SB-C::COMPACT-INFO-LOOKUP
+  82      5   0.0   2013   4.0  49686  99.4        -  (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (ALISP-HORDQ:<HORDQ> T T))
+  83      5   0.0   1504   3.0  49691  99.4        -  (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<GREEDY-POLICY> T))
+  84      5   0.0   1253   2.5  49696  99.4        -  (SB-PCL::FAST-METHOD Q-FUNCTION:EVALUATE (Q-FUNCTION:<SUM-Q-FUNCTION> T T))
+  85      5   0.0      7   0.0  49701  99.4        -  GRID-WORLD:RESULT
+  86      5   0.0      5   0.0  49706  99.4        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl")
+  87      5   0.0      5   0.0  49711  99.4        -  ALISP:EXIT-STATE?
+  88      5   0.0      5   0.0  49716  99.4        -  SB-PCL::GET-INSTANCE-HASH-CODE
+  89      5   0.0      5   0.0  49721  99.4        -  SB-KERNEL:CLASSOID-TYPEP
+  90      5   0.0      5   0.0  49726  99.5        -  "foreign function __munmap"
+  91      5   0.0      5   0.0  49731  99.5        -  SB-KERNEL:CSUBTYPEP
+  92      4   0.0    154   0.3  49735  99.5        -  SB-IMPL::GETHASH3
+  93      4   0.0     69   0.1  49739  99.5        -  SB-IMPL::DATA-VECTOR-FROM-INITS
+  94      4   0.0     43   0.1  49743  99.5        -  (SB-PCL::EMF REINFORCEMENT-LEARNING:INFORM-ENV-STEP)
+  95      4   0.0     21   0.0  49747  99.5        -  SB-C::GET-INFO-VALUE
+  96      4   0.0     18   0.0  49751  99.5        -  GRID-WORLD:IS-VALID-LOC
+  97      4   0.0      9   0.0  49755  99.5        -  (SB-PCL::FAST-METHOD GRID-WORLD:DIMENSIONS (GRID-WORLD:<GRID-WORLD>))
+  98      4   0.0      7   0.0  49759  99.5        -  SB-KERNEL:%MAP
+  99      4   0.0      6   0.0  49763  99.5        -  (SB-PCL::FAST-METHOD Q-FUNCTION:FEATURIZE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T))
+ 100      4   0.0      6   0.0  49767  99.5        -  VECTOR-PUSH
+ 101      4   0.0      5   0.0  49771  99.5        -  SB-KERNEL::INTEGER-/-INTEGER
+ 102      4   0.0      4   0.0  49775  99.6        -  ALISP::FRAME-NAME
+ 103      4   0.0      4   0.0  49779  99.6        -  SB-BIGNUM:BIGNUM-LOGICAL-AND
+ 104      4   0.0      4   0.0  49783  99.6        -  SB-C:RETURN-MULTIPLE
+ 105      4   0.0      4   0.0  49787  99.6        -  SB-BIGNUM:SUBTRACT-BIGNUM
+ 106      3   0.0  49959  99.9  49790  99.6        -  EVAL
+ 107      3   0.0  43850  87.7  49793  99.6        -  (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<Q-FUNCTION>))
+ 108      3   0.0    198   0.4  49796  99.6        -  (SB-PCL::FAST-METHOD FN-APPROX:EVALUATE (FN-APPROX:<TABULAR-FN-APPROX> T))
+ 109      3   0.0     76   0.2  49799  99.6        -  (LAMBDA (SB-PCL::METHOD-ARGS SB-PCL::NEXT-METHODS) :IN SB-PCL::METHOD-FUNCTION-FROM-FAST-FUNCTION)
+ 110      3   0.0     49   0.1  49802  99.6        -  WASTE-ENV::COMPUTE-NEXT-LOC
+ 111      3   0.0     15   0.0  49805  99.6        -  TARGET-LOC
+ 112      3   0.0     12   0.0  49808  99.6        -  STACK-CONTAINS-FRAME
+ 113      3   0.0      5   0.0  49811  99.6        -  (SB-PCL::FAST-METHOD SET:SIZE (SEQUENCE))
+ 114      3   0.0      4   0.0  49814  99.6        -  SB-BIGNUM::BIGNUM-ASHIFT-LEFT-UNALIGNED
+ 115      3   0.0      3   0.0  49817  99.6        -  (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/braid.fasl")
+ 116      3   0.0      3   0.0  49820  99.6        -  REDUCE
+ 117      3   0.0      3   0.0  49823  99.6        -  WASTE-SOURCE-FEATURE
+ 118      3   0.0      3   0.0  49826  99.7        -  ARGMAX
+ 119      3   0.0      3   0.0  49829  99.7        -  SB-KERNEL:TWO-ARG-/
+ 120      3   0.0      3   0.0  49832  99.7        -  ARRAY-TOTAL-SIZE
+ 121      3   0.0      3   0.0  49835  99.7        -  SB-KERNEL:VALUES-TYPE-P
+ 122      3   0.0      3   0.0  49838  99.7        -  (SB-PCL::FAST-METHOD SET:ITEM :AROUND (T T))
+ 123      3   0.0      3   0.0  49841  99.7        -  (SB-PCL::FAST-METHOD ENV:IS-TERMINAL-STATE (<WASTE-ENV> T))
+ 124      3   0.0      3   0.0  49844  99.7        -  SB-KERNEL:SEQUENCEP
+ 125      3   0.0      3   0.0  49847  99.7        -  (LAMBDA (SB-C::NAME) :IN #:!GLOBALDB-COLD-INIT)
+ 126      3   0.0      3   0.0  49850  99.7        -  SB-INT:PROPER-LIST-OF-LENGTH-P
+ 127      3   0.0      3   0.0  49853  99.7        -  SB-PCL::VALID-WRAPPER-OF
+ 128      3   0.0      3   0.0  49856  99.7        -  SB-PCL::FIND-CTOR
+ 129      2   0.0    998   2.0  49858  99.7        -  (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (FN-APPROX:<TABULAR-FN-APPROX>))
+ 130      2   0.0    270   0.5  49860  99.7        -  SB-KERNEL:FIND-CLASSOID-CELL
+ 131      2   0.0    268   0.5  49862  99.7        -  SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK
+ 132      2   0.0    226   0.5  49864  99.7        -  (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (EXPLORATION-POLICY:<EXP-POL> T))
+ 133      2   0.0     46   0.1  49866  99.7        -  (LAMBDA (COUNT) :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/epsilon-policy.lisp")
+ 134      2   0.0     27   0.1  49868  99.7        -  SB-KERNEL::FLOAT-RATIO
+ 135      2   0.0      9   0.0  49870  99.7        -  AREF
+ 136      2   0.0      8   0.0  49872  99.7        -  WASTE-ENV::MOVE-WOULD-HIT-WALL-P
+ 137      2   0.0      8   0.0  49874  99.7        -  WASTE-ENV::COMPUTE-FUEL
+ 138      2   0.0      8   0.0  49876  99.8        -  SB-KERNEL:%MEMBER-KEY
+ 139      2   0.0      8   0.0  49878  99.8        -  (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (ALISP-HORDQ:<HORDQ> T T T T))
+ 140      2   0.0      5   0.0  49880  99.8        -  (FLET #:CLEANUP-FUN-555 :IN #:DROP-THRU-TAG-484)
+ 141      2   0.0      5   0.0  49882  99.8        -  SB-KERNEL:%COERCE-CALLABLE-TO-FUN
+ 142      2   0.0      4   0.0  49884  99.8        -  MACROEXPAND
+ 143      2   0.0      3   0.0  49886  99.8        -  SB-C::MASK-SIGNED-FIELD
+ 144      2   0.0      3   0.0  49888  99.8        -  (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.|))
+ 145      2   0.0      3   0.0  49890  99.8        -  LENGTH
+ 146      2   0.0      3   0.0  49892  99.8        -  MACROEXPAND-1
+ 147      2   0.0      2   0.0  49894  99.8        -  (FLET #:CLEANUP-FUN-65 :IN SB-C::MAKE-CORE-COMPONENT)
+ 148      2   0.0      2   0.0  49896  99.8        -  SB-KERNEL:TWO-ARG--
+ 149      2   0.0      2   0.0  49898  99.8        -  SB-IMPL::%COMPLEX-VECTOR-WIDETAG
+ 150      2   0.0      2   0.0  49900  99.8        -  (LAMBDA (SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-OPTIMIZED-STD-READER-METHOD-FUNCTION)
+ 151      2   0.0      2   0.0  49902  99.8        -  (FLET #:WITHOUT-INTERRUPTS-BODY-605 :IN SB-THREAD::CALL-WITH-RECURSIVE-SYSTEM-LOCK)
+ 152      2   0.0      2   0.0  49904  99.8        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+ 153      2   0.0      2   0.0  49906  99.8        -  (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/rl-functions/q-function/approx-q-function.lisp")
+ 154      2   0.0      2   0.0  49908  99.8        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1. SB-PCL::.ARG2. SB-PCL::.ARG3.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+ 155      2   0.0      2   0.0  49910  99.8        -  (SB-PCL::FAST-METHOD ENV:AT-TERMINAL-STATE (ENV:<ENV>))
+ 156      2   0.0      2   0.0  49912  99.8        -  (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (Q-FUNCTION:<APPROX-Q-FUNCTION>))
+ 157      2   0.0      2   0.0  49914  99.8        -  RANDOM
+ 158      2   0.0      2   0.0  49916  99.8        -  SB-IMPL::SLOW-HAIRY-DATA-VECTOR-SET
+ 159      2   0.0      2   0.0  49918  99.8        -  (LAMBDA NIL :IN SET:ITERATOR)
+ 160      2   0.0      2   0.0  49920  99.8        -  (FLET SET::NEW-BEST :IN SET::ARGEXT)
+ 161      2   0.0      2   0.0  49922  99.8        -  (LAMBDA (SB-PCL::.ARG0. SB-PCL::.ARG1.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+ 162      1   0.0  46316  92.6  49923  99.8        -  ALISP::CHOOSE-USING-COMPLETION
+ 163      1   0.0  44549  89.1  49924  99.8        -  (SB-PCL::FAST-METHOD EXPLORATION-POLICY:GET-CHOICE-DIST (<EPSILON-POLICY> T T))
+ 164      1   0.0  42302  84.6  49925  99.8        -  (SB-PCL::FAST-METHOD CLONE (FN-APPROX:<TABULAR-FN-APPROX>))
+ 165      1   0.0  18326  36.7  49926  99.9        -  DROP-WASTE
+ 166      1   0.0   1517   3.0  49927  99.9        -  (SB-PCL::FAST-METHOD POLICY:CHOICE-DIST (POLICY:<GREEDY-POLICY> T))
+ 167      1   0.0    872   1.7  49928  99.9        -  (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (ALISP-HORDQ:<HORDQ> T))
+ 168      1   0.0    270   0.5  49929  99.9        -  SB-KERNEL:FIND-CLASSOID
+ 169      1   0.0    209   0.4  49930  99.9        -  EXPLORATION-POLICY::GET-AND-INC-COUNT
+ 170      1   0.0    151   0.3  49931  99.9        -  (SB-PCL::FAST-METHOD CLONE (ALISP::JOINT-STATE))
+ 171      1   0.0    102   0.2  49932  99.9        -  (SB-PCL::FAST-METHOD ENV:DO-ACTION (ENV:<ENV> T))
+ 172      1   0.0     97   0.2  49933  99.9        -  (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP (PROGRESS-PRINTER:<PROGRESS-PRINTER> T T T T))
+ 173      1   0.0     89   0.2  49934  99.9        -  (SB-PCL::FAST-METHOD ENV:SAMPLE-NEXT (<WASTE-ENV> T T))
+ 174      1   0.0     72   0.1  49935  99.9        -  SB-PCL::GET-PV
+ 175      1   0.0     36   0.1  49936  99.9        -  SB-KERNEL:%DOUBLE-FLOAT
+ 176      1   0.0     14   0.0  49937  99.9        -  SB-KERNEL:SPECIFIER-TYPE
+ 177      1   0.0     13   0.0  49938  99.9        -  NAVIGATING-TO-WASTE
+ 178      1   0.0     12   0.0  49939  99.9        -  FBOUNDP
+ 179      1   0.0      7   0.0  49940  99.9        -  SB-KERNEL:%TYPEP
+ 180      1   0.0      7   0.0  49941  99.9        -  MACRO-FUNCTION
+ 181      1   0.0      5   0.0  49942  99.9        -  PROBABILITY:MAKE-MULTINOMIAL-DIST
+ 182      1   0.0      3   0.0  49943  99.9        -  ROBOT-LOC
+ 183      1   0.0      3   0.0  49944  99.9        -  (SB-PCL::FAST-METHOD REINFORCEMENT-LEARNING:INFORM-ENV-STEP :AFTER (REINFORCEMENT-LEARNING:<LEARNING-ALGORITHM> T T T T))
+ 184      1   0.0      3   0.0  49945  99.9        -  SB-INT:EQUAL-BUT-NO-CAR-RECURSION
+ 185      1   0.0      3   0.0  49946  99.9        -  ALISP-HORDQ::BACKUP
+ 186      1   0.0      3   0.0  49947  99.9        -  SB-PCL::ENSURE-CACHED-CTOR
+ 187      1   0.0      2   0.0  49948  99.9        -  SB-KERNEL:%MAP-TO-SIMPLE-VECTOR-ARITY-1
+ 188      1   0.0      2   0.0  49949  99.9        -  ALISP::MOVE-NEXT-FRAME-TO-STACK
+ 189      1   0.0      2   0.0  49950  99.9        -  SB-IMPL::%ARRAY-ROW-MAJOR-INDEX
+ 190      1   0.0      2   0.0  49951  99.9        -  (SB-PCL::GF-DISPATCH ENV:SAMPLE-PERCEPT)
+ 191      1   0.0      1   0.0  49952  99.9        -  SB-BIGNUM::%NORMALIZE-BIGNUM
+ 192      1   0.0      1   0.0  49953  99.9        -  SB-KERNEL:TYPE/=
+ 193      1   0.0      1   0.0  49954  99.9        -  SB-KERNEL:TYPE-INTERSECTION2
+ 194      1   0.0      1   0.0  49955  99.9        -  SB-C::FLUSH-DEAD-CODE
+ 195      1   0.0      1   0.0  49956  99.9        -  SB-KERNEL:TWO-ARG->
+ 196      1   0.0      1   0.0  49957  99.9        -  (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-READER-METHOD-FUNCTION)
+ 197      1   0.0      1   0.0  49958  99.9        -  (SB-PCL::FAST-METHOD ENV:AVAIL-ACTIONS (<WASTE-ENV> T))
+ 198      1   0.0      1   0.0  49959  99.9        -  LOC
+ 199      1   0.0      1   0.0  49960  99.9        -  SB-KERNEL:%ASSOC
+ 200      1   0.0      1   0.0  49961  99.9        -  SB-KERNEL:TWO-ARG-<
+ 201      1   0.0      1   0.0  49962  99.9        -  LOGBITP
+ 202      1   0.0      1   0.0  49963  99.9        -  SB-IMPL::INFINITE-ERROR-PROTECTOR
+ 203      1   0.0      1   0.0  49964  99.9        -  (SB-PCL::FAST-METHOD ENV:SAMPLE-PERCEPT (ENV:<FULLY-OBSERVABLE-ENV> T T T T))
+ 204      1   0.0      1   0.0  49965  99.9        -  SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF
+ 205      1   0.0      1   0.0  49966  99.9        -  COPY-LIST
+ 206      1   0.0      1   0.0  49967  99.9        -  "foreign function _platform_memmove$VARIANT$Nehalem"
+ 207      1   0.0      1   0.0  49968  99.9        -  SB-KERNEL:%MEMBER
+ 208      1   0.0      1   0.0  49969  99.9        -  SB-INT:POWER-OF-TWO-CEILING
+ 209      1   0.0      1   0.0  49970  99.9        -  (SB-PCL::FAST-METHOD GRID-WORLD:LOC-VALUE (GRID-WORLD:<GRID-WORLD> T))
+ 210      1   0.0      1   0.0  49971  99.9        -  IDENTITY
+ 211      1   0.0      1   0.0  49972  99.9        -  TYPEP
+ 212      1   0.0      1   0.0  49973  99.9        -  (LAMBDA NIL :IN Q-FUNCTION:BEST-CHOICE)
+ 213      1   0.0      1   0.0  49974  99.9        -  (LAMBDA (PROBABILITY::X) :IN PROBABILITY:MAKE-MULTINOMIAL-DIST)
+ 214      1   0.0      1   0.0  49975  99.9        -  SB-KERNEL:COERCE-TO-CONDITION
+ 215      1   0.0      1   0.0  49976 100.0        -  SB-KERNEL:TWO-ARG-GCD
+ 216      1   0.0      1   0.0  49977 100.0        -  ALISP-HORDQ::QC-BACKUP
+ 217      1   0.0      1   0.0  49978 100.0        -  (LAMBDA (SB-PCL::.ARG0. SB-INT:&MORE SB-PCL::.MORE-CONTEXT. SB-PCL::.MORE-COUNT.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/dlisp3.fasl")
+ 218      1   0.0      1   0.0  49979 100.0        -  (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (VECTOR))
+ 219      1   0.0      1   0.0  49980 100.0        -  (SB-PCL::FAST-METHOD ALISP:INFORM-ALISP-STEP (REINFORCEMENT-LEARNING:<RL-OBSERVER> T T))
+ 220      1   0.0      1   0.0  49981 100.0        -  (SB-PCL::FAST-METHOD ALISP:INFORM-END-CHOICE-BLOCK (REINFORCEMENT-LEARNING:<RL-OBSERVER> T))
+ 221      1   0.0      1   0.0  49982 100.0        -  (LAMBDA NIL :IN "/Users/tc/Prog/Lisp/ALisp/programmable-reinforcement-learning/lisp/fn-approx/tabular-fn-approx.lisp")
+ 222      1   0.0      1   0.0  49983 100.0        -  (LAMBDA (SB-PCL::.PV. SB-PCL::.NEXT-METHOD-CALL. SB-PCL::NV SB-KERNEL:INSTANCE) :IN SB-PCL::MAKE-STD-WRITER-METHOD-FUNCTION)
+ 223      1   0.0      1   0.0  49984 100.0        -  (LAMBDA NIL)
+ 224      1   0.0      1   0.0  49985 100.0        -  (LAMBDA (SB-PCL::.ARG0.) :IN "/private/tmp/sbcl-3ITm/sbcl-1.1.12/src/pcl/defcombin.fasl")
+ 225      1   0.0      1   0.0  49986 100.0        -  WASTE-ENV::COMPUTE-WASTE-STATUS
+ 226      1   0.0      1   0.0  49987 100.0        -  ELT
+ 227      1   0.0      1   0.0  49988 100.0        -  NREVERSE
+ 228      1   0.0      1   0.0  49989 100.0        -  (SB-PCL::FAST-METHOD GRID-WORLD:WORLD-MAP (GRID-WORLD:<GRID-WORLD>))
+ 229      1   0.0      1   0.0  49990 100.0        -  SB-IMPL::SLOW-HAIRY-DATA-VECTOR-REF/CHECK-BOUNDS
+ 230      1   0.0      1   0.0  49991 100.0        -  SB-KERNEL:%SINGLE-FLOAT
+ 231      1   0.0      1   0.0  49992 100.0        -  HASH-TABLE-SIZE
+ 232      1   0.0      1   0.0  49993 100.0        -  (SB-PCL::FAST-METHOD SET:ITEM (T SEQUENCE))
+ 233      1   0.0      1   0.0  49994 100.0        -  SB-PCL::PROBE-CACHE
+ 234      1   0.0      1   0.0  49995 100.0        -  SB-KERNEL::DOUBLE-FROM-BITS
+ 235      1   0.0      1   0.0  49996 100.0        -  SB-BIGNUM:BIGNUM-ASHIFT-LEFT
+ 236      1   0.0      1   0.0  49997 100.0        -  SB-PCL::PV-TABLE-LOOKUP
+ 237      1   0.0      1   0.0  49998 100.0        -  SB-IMPL::%VECTOR-WIDETAG-AND-N-BITS
+ 238      1   0.0      1   0.0  49999 100.0        -  SB-INT:VALID-FUNCTION-NAME-P
+ 239      1   0.0      1   0.0  50000 100.0        -  ALISP:ACTION-STATE?
+ 240      0   0.0  49959  99.9  50000 100.0        -  LEARN-BEHAVIOR
+ 241      0   0.0  49959  99.9  50000 100.0        -  "Unknown component: #x1013AD4300"
+ 242      0   0.0  49959  99.9  50000 100.0        -  SB-EXT:CALL-WITH-TIMING
+ 243      0   0.0  49959  99.9  50000 100.0        -  SB-INT:SIMPLE-EVAL-IN-LEXENV
+ 244      0   0.0  49959  99.9  50000 100.0        -  SB-EXT:INTERACTIVE-EVAL
+ 245      0   0.0  49959  99.9  50000 100.0        -  SB-IMPL::REPL-FUN
+ 246      0   0.0  49959  99.9  50000 100.0        -  (LAMBDA NIL :IN SB-IMPL::TOPLEVEL-REPL)
+ 247      0   0.0  49959  99.9  50000 100.0        -  SB-IMPL::%WITH-REBOUND-IO-SYNTAX
+ 248      0   0.0  49959  99.9  50000 100.0        -  SB-IMPL::TOPLEVEL-REPL
+ 249      0   0.0  49959  99.9  50000 100.0        -  SB-IMPL::TOPLEVEL-INIT
+ 250      0   0.0  49959  99.9  50000 100.0        -  (FLET #:WITHOUT-INTERRUPTS-BODY-52 :IN SB-EXT:SAVE-LISP-AND-DIE)
+ 251      0   0.0  49959  99.9  50000 100.0        -  (LABELS SB-IMPL::RESTART-LISP :IN SB-EXT:SAVE-LISP-AND-DIE)
+ 252      0   0.0  49953  99.9  50000 100.0        -  SB-IMPL::%MAP-FOR-EFFECT-ARITY-1
+ 253      0   0.0  49952  99.9  50000 100.0        -  ALISP::RUN
+ 254      0   0.0  49949  99.9  50000 100.0        -  WASTE-ROBOT-PROG
+ 255      0   0.0  46298  92.6  50000 100.0        -  (SB-PCL::FAST-METHOD POLICY:MAKE-CHOICE (POLICY:<STOCHASTIC-POLICY> T))
+ 256      0   0.0  43877  87.8  50000 100.0        -  (SB-PCL::FAST-METHOD CLONE (Q-FUNCTION:<SUM-Q-FUNCTION>))
+ 257      0   0.0  42771  85.5  50000 100.0        -  (SB-PCL::FAST-METHOD COPY-INTO PROGN (Q-FUNCTION:<APPROX-Q-FUNCTION> Q-FUNCTION:<APPROX-Q-FUNCTION>))
+ 258      0   0.0  29368  58.7  50000 100.0        -  PICKUP-WASTE
+ 259      0   0.0   3048   6.1  50000 100.0        -  "foreign function stack_allocation_recover"
+ 260      0   0.0   2022   4.0  50000 100.0        -  "foreign function maybe_gc"
+ 261      0   0.0   2022   4.0  50000 100.0        -  "foreign function interrupt_handle_pending"
+ 262      0   0.0   2008   4.0  50000 100.0        -  (SB-PCL::FAST-METHOD FN-APPROX:UPDATE (FN-APPROX:<TABULAR-FN-APPROX> T T T))
+ 263      0   0.0   1995   4.0  50000 100.0        -  (SB-PCL::FAST-METHOD Q-FUNCTION:BEST-CHOICE (Q-FUNCTION:<Q-FUNCTION> T))
+ 264      0   0.0    882   1.8  50000 100.0        -  (FLET #:CLEANUP-FUN-483 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp")
+ 265      0   0.0     38   0.1  50000 100.0        -  (FLET #:CLEANUP-FUN-885 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp")
+ 266      0   0.0     36   0.1  50000 100.0        -  EXP
+ 267      0   0.0     35   0.1  50000 100.0        -  GRID-WORLD:IS-LEGAL-LOC
+ 268      0   0.0     25   0.1  50000 100.0        -  (SB-PCL::FAST-METHOD Q-FUNCTION:UPDATE (Q-FUNCTION:<APPROX-Q-FUNCTION> T T T T))
+ 269      0   0.0     23   0.0  50000 100.0        -  REINFORCEMENT-LEARNING::SAVE-STATE
+ 270      0   0.0     21   0.0  50000 100.0        -  ALISP::UPDATE-PROGRAM-COUNTER
+ 271      0   0.0     20   0.0  50000 100.0        -  SB-KERNEL:%LDB
+ 272      0   0.0     18   0.0  50000 100.0        -  (FLET #:CLEANUP-FUN-1279 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp")
+ 273      0   0.0     15   0.0  50000 100.0        -  SB-KERNEL:FDEFINITION-OBJECT
+ 274      0   0.0     13   0.0  50000 100.0        -  SET::ARGEXT
+ 275      0   0.0     10   0.0  50000 100.0        -  WASTE-ENV::REWARD
+ 276      0   0.0      7   0.0  50000 100.0        -  SB-C::%COMPILE
+ 277      0   0.0      7   0.0  50000 100.0        -  (FLET #:WITHOUT-INTERRUPTS-BODY-564 :IN SB-THREAD::CALL-WITH-RECURSIVE-LOCK)
+ 278      0   0.0      7   0.0  50000 100.0        -  SB-THREAD::CALL-WITH-RECURSIVE-LOCK
+ 279      0   0.0      7   0.0  50000 100.0        -  (LAMBDA NIL :IN SB-C::ACTUALLY-COMPILE)
+ 280      0   0.0      7   0.0  50000 100.0        -  (FLET SB-C::WITH-IT :IN SB-C::%WITH-COMPILATION-UNIT)
+ 281      0   0.0      7   0.0  50000 100.0        -  SB-C::ACTUALLY-COMPILE
+ 282      0   0.0      7   0.0  50000 100.0        -  SB-C:COMPILE-IN-LEXENV
+ 283      0   0.0      7   0.0  50000 100.0        -  COMPILE
+ 284      0   0.0      7   0.0  50000 100.0        -  (FLET SB-THREAD::WITH-RECURSIVE-LOCK-THUNK :IN SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR)
+ 285      0   0.0      7   0.0  50000 100.0        -  SB-PCL::INSTALL-OPTIMIZED-CONSTRUCTOR
+ 286      0   0.0      7   0.0  50000 100.0        -  (LAMBDA (&REST SB-PCL::ARGS) :IN SB-PCL::INSTALL-INITIAL-CONSTRUCTOR)
+ 287      0   0.0      7   0.0  50000 100.0        -  "foreign function os_validate"
+ 288      0   0.0      6   0.0  50000 100.0        -  INITIALIZE-ALGORITHMS
+ 289      0   0.0      6   0.0  50000 100.0        -  SB-C::COMPILE-COMPONENT
+ 290      0   0.0      5   0.0  50000 100.0        -  "foreign function os_invalidate"
+ 291      0   0.0      4   0.0  50000 100.0        -  SB-C::IR1-OPTIMIZE
+ 292      0   0.0      4   0.0  50000 100.0        -  SB-C::IR1-OPTIMIZE-UNTIL-DONE
+ 293      0   0.0      4   0.0  50000 100.0        -  SB-C::IR1-PHASES
+ 294      0   0.0      3   0.0  50000 100.0        -  SB-C::DERIVE-NODE-TYPE
+ 295      0   0.0      3   0.0  50000 100.0        -  SB-C::PROPAGATE-LET-ARGS
+ 296      0   0.0      3   0.0  50000 100.0        -  SB-C::IR1-OPTIMIZE-COMBINATION
+ 297      0   0.0      3   0.0  50000 100.0        -  SB-C::IR1-OPTIMIZE-BLOCK
+ 298      0   0.0      3   0.0  50000 100.0        -  (FLET #:CLEANUP-FUN-1082 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp")
+ 299      0   0.0      3   0.0  50000 100.0        -  SB-IMPL::OPTIMIZED-DATA-VECTOR-SET
+ 300      0   0.0      3   0.0  50000 100.0        -  VECTOR-PUSH-EXTEND
+ 301      0   0.0      2   0.0  50000 100.0        -  SB-C::MAKE-CORE-COMPONENT
+ 302      0   0.0      2   0.0  50000 100.0        -  SB-C::%COMPILE-COMPONENT
+ 303      0   0.0      2   0.0  50000 100.0        -  SB-KERNEL:VALUES-TYPE-INTERSECTION
+ 304      0   0.0      2   0.0  50000 100.0        -  SB-C::PROPAGATE-TO-REFS
+ 305      0   0.0      2   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<MULTINOMIAL-DIST>))
+ 306      0   0.0      2   0.0  50000 100.0        -  PROBABILITY:SAMPLE-UNIFORMLY
+ 307      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::MAKE-VALUES-TYPE-CACHED
+ 308      0   0.0      1   0.0  50000 100.0        -  SB-C::MAKE-REF
+ 309      0   0.0      1   0.0  50000 100.0        -  SB-C::REFERENCE-CONSTANT
+ 310      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT
+ 311      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-COMBINATION-ARGS
+ 312      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-COMBINATION
+ 313      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-COMBINATION-CHECKING-TYPE
+ 314      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-%FUNCALL
+ 315      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-PROGN-BODY
+ 316      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-AUX-BINDINGS
+ 317      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-SPECIAL-BINDINGS
+ 318      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-LAMBDA-BODY
+ 319      0   0.0      1   0.0  50000 100.0        -  (LAMBDA (SB-C::NEXT SB-C::RESULT SB-C::POST-BINDING-LEXENV) :IN SB-C::IR1-CONVERT-LET)
+ 320      0   0.0      1   0.0  50000 100.0        -  SB-C::%PROCESSING-DECLS
+ 321      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-LET
+ 322      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-GLOBAL-FUNCTOID
+ 323      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-LET*
+ 324      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-BLOCK
+ 325      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-LAMBDA
+ 326      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-FLET
+ 327      0   0.0      1   0.0  50000 100.0        -  SB-C::FUN-NAME-LEAF
+ 328      0   0.0      1   0.0  50000 100.0        -  SB-C::IR1-CONVERT-FUNCTION
+ 329      0   0.0      1   0.0  50000 100.0        -  SB-C::MAKE-FUNCTIONAL-FROM-TOPLEVEL-LAMBDA
+ 330      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-SMDPQ:<SMDPQ>))
+ 331      0   0.0      1   0.0  50000 100.0        -  (LAMBDA (SB-PCL::|.P0.| SB-PCL::|.P1.| SB-PCL::|.P2.| SB-PCL::|.P3.| SB-PCL::|.P4.|))
+ 332      0   0.0      1   0.0  50000 100.0        -  SB-C::CHANGE-REF-LEAF
+ 333      0   0.0      1   0.0  50000 100.0        -  SB-C::SUBSTITUTE-LEAF-IF
+ 334      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::SIMPLIFY-INTERSECTIONS
+ 335      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::%TYPE-INTERSECTION
+ 336      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::FIXED-VALUES-OP
+ 337      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::ARGS-TYPE-OP
+ 338      0   0.0      1   0.0  50000 100.0        -  SB-KERNEL::VALUES-TYPE-OP
+ 339      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD INITIALIZE-INSTANCE :AFTER (ALISP-HORDQ:<HORDQ>))
+ 340      0   0.0      1   0.0  50000 100.0        -  (LAMBDA (SB-PCL::|.P0.|))
+ 341      0   0.0      1   0.0  50000 100.0        -  LEARN
+ 342      0   0.0      1   0.0  50000 100.0        -  FUEL
+ 343      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD ALISP:INFORM-PART-PROG-TERMINATED (ALISP-HORDQ:<HORDQ> T))
+ 344      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD ALISP::FINISH-EPISODE (ALISP::<RLM>))
+ 345      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD PROBABILITY:SAMPLE (PROBABILITY::<NUMBERED-SET-DIST>))
+ 346      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD GRID-WORLD:UNIF-GRID-DIST-SAMPLER (GRID-WORLD:<GRID-WORLD>))
+ 347      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD ENV:SAMPLE-INIT (<WASTE-ENV>))
+ 348      0   0.0      1   0.0  50000 100.0        -  (SB-PCL::FAST-METHOD ENV:RESET (ENV:<ENV>))
+ 349      0   0.0      1   0.0  50000 100.0        -  ALISP::INITIALIZE-EPISODE
+ 350      0   0.0      1   0.0  50000 100.0        -  ALISP-HORDQ::QR-BACKUP
+ 351      0   0.0      1   0.0  50000 100.0        -  (FLET #:CLEANUP-FUN-1364 :IN "/Users/tc/Prog/Lisp/Hacking/WasteRemoval/Sources/waste-prog.lisp")
+ 352      0   0.0      1   0.0  50000 100.0        -  FIND-RESTART
+ 353      0   0.0      1   0.0  50000 100.0        -  SB-INT:FIND-RESTART-OR-CONTROL-ERROR
+ 354      0   0.0      1   0.0  50000 100.0        -  INVOKE-RESTART
+ 355      0   0.0      1   0.0  50000 100.0        -  (LAMBDA NIL :IN SET:ITERATOR)
+ 356      0   0.0      1   0.0  50000 100.0        -  ALISP-HORDQ::QE-BACKUP
+ 357      0   0.0      1   0.0  50000 100.0        -  (LABELS SB-KERNEL::FLOATIT :IN SB-KERNEL::FLOAT-RATIO)
+ 358      0   0.0      1   0.0  50000 100.0        -  (LABELS SB-KERNEL::FLOAT-AND-SCALE :IN SB-KERNEL::FLOAT-RATIO)
+------------------------------------------------------------------------
+          0   0.0                                     elsewhere
