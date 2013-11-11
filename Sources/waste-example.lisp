@@ -102,28 +102,28 @@
          (list 'hordq-a-0 
                :algorithm (make-instance 'ahq:<hordq>
                             :features *waste-featurizer-0*
-                            :learning-rate hordq-learning-rate
+                            :lrate hordq-learning-rate
                             :discount hordq-discount)
                :bucket-function *waste-bucket-function-0*
                :test #'equalp)
          (list 'hordq-a-1 
                :algorithm (make-instance 'ahq:<hordq>
                             :features *waste-featurizer-1*
-                            :learning-rate hordq-learning-rate
+                            :lrate hordq-learning-rate
                             :discount hordq-discount)
                :bucket-function *waste-bucket-function-1*
                :test #'equalp)
          (list 'hordq-a-2 
                :algorithm (make-instance 'ahq:<hordq>
                             :features *waste-featurizer-2*
-                            :learning-rate hordq-learning-rate
+                            :lrate hordq-learning-rate
                             :discount hordq-discount)
                :bucket-function *waste-bucket-function-2*
                :test #'equalp)
          (list 'hordq-a-3 
                :algorithm (make-instance 'ahq:<hordq>
                             :features *waste-featurizer-3*
-                            :learning-rate hordq-learning-rate
+                            :lrate hordq-learning-rate
                             :discount hordq-discount)
                :bucket-function *waste-bucket-function-3*
                :test #'equalp)))
@@ -203,8 +203,8 @@
                    :hist-length 100 :step-print-inc 1000 :episode-print-inc 250))
           (algorithm-descriptions)))))
 
-(defparameter *evaluation-steps* 100)
-(defparameter *evaluation-trials* 100)
+(defparameter *evaluation-steps* 200)
+(defparameter *evaluation-trials* 250)
 
 (defun evaluation-for (name)
   (evaluate *program* *environment* (get-policy-hist (algorithm-for name))
